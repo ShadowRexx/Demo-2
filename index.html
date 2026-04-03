@@ -53,7 +53,7 @@
     <!-- CENTER — Logo -->
     <a href="index.html" class="nav-logo">
       <div class="nav-logo-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+        <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
       </div>
       <div class="nav-logo-text">
         <span class="brand-top">Prime Shoe</span>
@@ -67,9 +67,8 @@
       <nav class="nav-links" id="desktop-nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="shop.html" class="nav-link">Shop</a>
-        <a href="shop.html?cat=jersey" class="nav-link">Jerseys</a>
-        <a href="shop.html?cat=shoes" class="nav-link">Studs</a>
-        <a href="tracking.html" class="nav-link">Track Order</a>
+        <a href="#about-section" class="nav-link">About</a>
+        <a href="#contact-section" class="nav-link">Contact</a>
       </nav>
       <!-- Search toggle (desktop) -->
       <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
@@ -91,13 +90,10 @@
 <!-- Mobile Nav Dropdown -->
 <div id="mobile-nav">
   <div class="mobile-nav-links">
-    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
-    <a href="shop.html" class="mobile-nav-link">🛍️ Shop All</a>
-    <a href="shop.html?cat=jersey" class="mobile-nav-link">👕 Jerseys</a>
-    <a href="shop.html?cat=shoes" class="mobile-nav-link">👟 Studs & Shoes</a>
-    <a href="shop.html?cat=accessories" class="mobile-nav-link">⚽ Accessories</a>
-    <a href="tracking.html" class="mobile-nav-link">📦 Track Order</a>
-    <a href="admin.html" class="mobile-nav-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
+    <a href="index.html" class="mobile-nav-link"> Home</a>
+    <a href="shop.html" class="mobile-nav-link"> Shop</a>
+      <a href="#about-section" class="mobile-nav-link">About</a>
+    <a href="#contact-section" class="mobile-nav-link">Contact</a>
   </div>
   <!-- Mobile Search -->
   <div style="padding:12px 0 0;">
@@ -159,6 +155,55 @@
   <div class="hero-dots" id="hero-dots"></div>
 </section>
 
+<!-- ============ SHOP BY CATEGORY ============ -->
+<section class="section-pad" id="brand-categories">
+  <div class="container">
+    <div style="margin-bottom:48px;">
+      <div class="section-label reveal">Collections</div>
+      <h2 class="section-title reveal" style="margin-top:12px;">SHOP BY<br/>BRAND</h2>
+    </div>
+
+    <div class="category-grid">
+      <a href="shop.html?cat=adidas" class="category-card category-card-brand category-brand-adidas reveal">
+        <div class="category-brand-bg" aria-hidden="true">
+          <img src="assets/images/adidas_logo3.png" alt="adidas">
+          <span class="category-brand-word">ADIDAS</span>
+        </div>
+        <div class="category-card-overlay">
+          <div class="category-name">Adidas</div>
+          <div class="category-count">4 premium picks available</div>
+          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+
+      <a href="shop.html?cat=nike" class="category-card category-card-brand category-brand-nike reveal delay-1">
+        <div class="category-brand-bg" aria-hidden="true" >
+          <img src="assets/images/nike_logo4.jpg" alt="nike">
+        </div>
+        <div class="category-card-overlay">
+          <div class="category-name">Nike</div>
+          <div class="category-count">4 premium picks available</div>
+          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+
+      <a href="shop.html?cat=mizuno" class="category-card category-card-brand category-brand-mizuno reveal delay-2">
+        <div class="category-brand-bg" aria-hidden="true">
+          <img src="assets/images/mizuno_logo2.png" alt="mizuno">
+        </div>
+        <div class="category-card-overlay">
+          <div class="category-name">Mizuno</div>
+          <div class="category-count">1 premium pick available</div>
+          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TRUST BAR ============ -->
 <div class="trust-bar">
   <div class="container">
@@ -187,47 +232,6 @@
   </div>
 </div>
 
-<!-- ============ SHOP BY CATEGORY ============ -->
-<section class="section-pad">
-  <div class="container">
-    <div style="margin-bottom:48px;">
-      <div class="section-label reveal">Collections</div>
-      <h2 class="section-title reveal" style="margin-top:12px;">SHOP BY<br/>CATEGORY</h2>
-    </div>
-    <div class="category-grid">
-      <!-- Jerseys (large) -->
-      <a href="shop.html?cat=jersey" class="category-card reveal">
-        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80" alt="Jerseys" loading="lazy" />
-        <div class="category-card-overlay">
-          <div class="category-name">JERSEYS</div>
-          <div class="category-count">6 Styles Available</div>
-          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-      <!-- Studs -->
-      <a href="shop.html?cat=shoes" class="category-card reveal delay-1">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Football Studs" loading="lazy" />
-        <div class="category-card-overlay">
-          <div class="category-name">STUDS</div>
-          <div class="category-count">5 Models Available</div>
-          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-      <!-- Accessories -->
-      <a href="shop.html?cat=accessories" class="category-card reveal delay-2">
-        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80" alt="Accessories" loading="lazy" />
-        <div class="category-card-overlay">
-          <div class="category-name">GEAR</div>
-          <div class="category-count">3 Items Available</div>
-          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ============ FEATURED PRODUCTS ============ -->
 <section class="section-pad" style="padding-top:0;">
@@ -315,22 +319,48 @@
   <div class="container">
     <div style="text-align:center;margin-bottom:24px;">
       <div class="section-label reveal" style="justify-content:center;">Social</div>
-      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">@PRIMESHOEJERSEYH</h2>
-      <p style="color:var(--silver);font-size:14px;margin-top:8px;" class="reveal">Follow us for daily drops, styling inspo & exclusive deals</p>
+      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">@PRIMESHOEJERSEYHUB</h2>
+      <p style="color:var(--silver);font-size:14px;margin-top:8px;" class="reveal">Players of the Indian football team have also bought our products and given reviews.</p>
     </div>
     <div class="insta-grid reveal">
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1556906781-9a412961a28b?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review1.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review2.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review3.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review4.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review5.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="assets/images/reviews/review6.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
     </div>
     <div style="text-align:center;margin-top:24px;">
-      <a href="https://instagram.com" target="_blank" class="btn btn-outline reveal">Follow on Instagram →</a>
+      <a href="https://www.instagram.com/primeshoejerseyhub/" target="_blank" class="btn btn-outline reveal">Follow on Instagram →</a>
     </div>
   </div>
 </section>
+
+<!-- ============ PAYMENT ICONS ============ -->
+<section class="payment-section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="section-label reveal" style="justify-content:center;">Payments</div>
+      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">SAFE &amp; FLEXIBLE<br/>CHECKOUT</h2>
+    </div>
+
+    <div class="payment-logos-row reveal">
+      <div class="payment-logo-card">
+          <img src="assets/images/PhonePe-Logo.wine.png" alt="phonepe" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
+      </div>
+      <div class="payment-logo-card">
+        <img src="assets/images/UPI.png" alt="UPI" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
+      </div>
+      <div class="payment-logo-card">
+        <img src="assets/images/VISA.svg" alt="VISA" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
+      </div>
+      <div class="payment-logo-card">
+        <img src="assets/images/Google_Pay_Logo.svg.png" alt="Google Pay" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -340,37 +370,20 @@
       <div>
         <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
           <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
-            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--dark);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+             <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
           </div>
           <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
         </a>
-        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear. Authentic quality, unbeatable prices.</p>
-        <div class="footer-social">
-          <a href="https://instagram.com" target="_blank" class="footer-social-btn" title="Instagram">📷</a>
-          <a href="https://wa.me/919876543210" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
-          <a href="mailto:prime@jerseyhub.in" class="footer-social-btn" title="Email">✉️</a>
-        </div>
-      </div>
-      <!-- Quick Links -->
-      <div>
-        <div class="footer-col-title">Quick Links</div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <a href="shop.html" class="footer-link">Shop All</a>
-          <a href="shop.html?cat=jersey" class="footer-link">Jerseys</a>
-          <a href="shop.html?cat=shoes" class="footer-link">Studs & Shoes</a>
-          <a href="shop.html?cat=accessories" class="footer-link">Accessories</a>
-          <a href="tracking.html" class="footer-link">Track Order</a>
-        </div>
       </div>
       <!-- Policies -->
       <div>
         <div class="footer-col-title">Support</div>
         <div class="footer-links">
           <a href="#" class="footer-link">Privacy Policy</a>
-          <a href="#" class="footer-link">Return Policy</a>
-          <a href="#" class="footer-link">Size Guide</a>
-          <a href="#" class="footer-link">FAQs</a>
+          <a href="#" class="footer-link">Refund Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">About Us</a>
+          <a href="#" class="footer-link">Shipping policy</a>
           <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
         </div>
       </div>
@@ -390,13 +403,6 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved. | India's Trusted Football Store</div>
-      <div class="footer-payments">
-        <div class="payment-badge">PhonePe</div>
-        <div class="payment-badge">UPI</div>
-        <div class="payment-badge">Visa</div>
-        <div class="payment-badge">Mastercard</div>
-        <div class="payment-badge">COD</div>
-      </div>
     </div>
   </div>
 </footer>
