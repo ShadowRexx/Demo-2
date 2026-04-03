@@ -226,7 +226,7 @@
       <div>
         <div class="footer-col-title">Contact Us</div>
         <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff8f8d96929abf959a8d8c9a86978a9dd19691">[email&#160;protected]</a></span></div>
         <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Mumbai, Maharashtra, India</span></div>
         <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
         <div style="margin-top:16px;">
@@ -242,7 +242,7 @@
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
@@ -266,13 +266,6 @@ function getFilteredProducts() {
       result = result.filter(p => p.category === activeFilter);
     }
   }
-
-  // Search toggle
-document.getElementById('search-toggle').addEventListener('click', () => {
-  const wrap = document.getElementById('nav-search-wrap');
-  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
-});
 
 
   // Brands (sidebar checkboxes)
@@ -382,12 +375,21 @@ if (qParam) {
   document.getElementById('nav-search-input').value = qParam;
 }
 
+// Search toggle
+document.getElementById('search-toggle').addEventListener('click', () => {
+  const wrap = document.getElementById('nav-search-wrap');
+  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
+});
+
 // Make filter toggle visible on mobile
 const filterToggle = document.getElementById('filter-toggle-btn');
-if (window.innerWidth < 1024) filterToggle.style.display = 'inline-flex';
+if (filterToggle && window.innerWidth < 1024) {
+  filterToggle.style.display = 'flex';
+}
 
+// Initial render
 renderShop();
-document.getElementById('sort-select').addEventListener('change', () => { sortMode = document.getElementById('sort-select').value; renderShop(); });
 </script>
 </body>
 </html>
