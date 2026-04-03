@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Your Order — Prime Shoe Jersey Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ===== TRACKING PAGE STYLES ===== */
+
+    .tracking-hero {
+      background: var(--dark-2);
+      border-bottom: 1px solid var(--border);
+      padding: 64px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tracking-hero::before {
+      content: 'TRACK';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 20vw;
+      color: rgba(200,244,0,0.03);
+      right: -2%;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* ===== SEARCH BOX ===== */
+    .track-search-box {
+      background: var(--dark-3);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      max-width: 600px;
+      margin: 0 auto 48px;
+      position: relative;
+    }
+
+    .track-search-box::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(200,244,0,0.2), transparent 50%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .track-search-box:focus-within::before { opacity: 1; }
+
+    .track-input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .track-input {
+      flex: 1;
+      background: var(--dark);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      color: var(--white);
+      padding: 16px 20px;
+      font-size: 15px;
+      font-family: var(--font-cond);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .track-input::placeholder {
+      color: var(--silver);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .track-input:focus {
+      outline: none;
+      border-color: var(--neon);
+      box-shadow: 0 0 0 3px rgba(200,244,0,0.12);
+    }
+
+    /* ===== RESULT AREA ===== */
+    .track-result {
+      max-width: 760px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .track-result.visible { display: block; }
+
+    /* ===== STATUS CARD ===== */
+    .track-status-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .track-order-id {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: var(--neon);
+      line-height: 1;
+    }
+
+    .track-order-meta {
+      font-family: var(--font-cond);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: 4px;
+    }
+
+    .track-current-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .track-status-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .track-status-icon.pending { background: rgba(255,140,0,0.15); }
+    .track-status-icon.packed { background: rgba(96,165,250,0.15); }
+    .track-status-icon.shipped { background: rgba(200,244,0,0.15); animation: pulse-neon 2s infinite; }
+    .track-status-icon.out-for-delivery { background: rgba(200,244,0,0.2); animation: pulse-neon 1.5s infinite; }
+    .track-status-icon.delivered { background: rgba(37,211,102,0.15); }
+    .track-status-icon.cancelled { background: rgba(255,68,68,0.1); }
+
+    @keyframes pulse-neon {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200,244,0,0.3); }
+      50% { box-shadow: 0 0 0 8px rgba(200,244,0,0); }
+    }
+
+    .track-status-text {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .track-status-desc {
+      font-family: var(--font-cond);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--silver);
+      margin-top: 3px;
+    }
+
+    /* ===== PROGRESS TIMELINE ===== */
+    .timeline-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 20px;
+      animation: slideUp 0.5s ease 0.1s both;
+    }
+
+    .timeline-title {
+      font-family: var(--font-cond);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 28px;
+    }
+
+    .track-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .track-step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .track-step:not(:last-child) .step-connector {
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      width: 2px;
+      height: calc(100% - 10px);
+      background: var(--border);
+    }
+
+    .track-step.done:not(:last-child) .step-connector { background: var(--neon); }
+    .track-step.active:not(:last-child) .step-connector {
+      background: linear-gradient(to bottom, var(--neon), var(--border));
+    }
+
+    .step-dot-wrap {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 28px;
+    }
+
+    .track-step:last-child .step-dot-wrap { padding-bottom: 0; }
+
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--dark-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.4s;
+    }
+
+    .track-step.done .step-dot {
+      background: var(--neon);
+      border-color: var(--neon);
+      color: var(--dark);
+      font-size: 14px;
+    }
+
+    .track-step.active .step-dot {
+      border-color: var(--neon);
+      box-shadow: 0 0 0 4px rgba(200,244,0,0.15), 0 0 20px rgba(200,244,0,0.2);
+      animation: step-pulse 2s infinite;
+    }
+
+    @keyframes step-pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(200,244,0,0.15), 0 0 20px rgba(200,244,0,0.15); }
+      50% { box-shadow: 0 0 0 8px rgba(200,244,0,0.08), 0 0 30px rgba(200,244,0,0.25); }
+    }
+
+    .step-body { flex: 1; padding-bottom: 28px; }
+    .track-step:last-child .step-body { padding-bottom: 0; }
+
+    .step-name {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: var(--silver);
+      transition: color 0.3s;
+    }
+
+    .track-step.done .step-name,
+    .track-step.active .step-name { color: var(--white); }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--silver);
+      line-height: 1.5;
+    }
+
+    .track-step.done .step-desc,
+    .track-step.active .step-desc { color: rgba(255,255,255,0.65); }
+
+    .step-time {
+      font-family: var(--font-cond);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--neon);
+      margin-top: 4px;
+    }
+
+    /* ===== ORDER INFO CARD ===== */
+    .order-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      animation: slideUp 0.5s ease 0.2s both;
+    }
+
+    .order-info-item {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .order-info-item:first-child { border-radius: var(--radius) 0 0 0; }
+    .order-info-item:nth-child(2) { border-radius: 0 var(--radius) 0 0; border-left: none; }
+    .order-info-item:nth-last-child(2) { border-radius: 0 0 0 var(--radius); border-top: none; }
+    .order-info-item:last-child { border-radius: 0 0 var(--radius) 0; border-top: none; border-left: none; }
+
+    .order-info-label {
+      font-family: var(--font-cond);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 6px;
+    }
+
+    .order-info-val {
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    /* ===== DELIVERY ESTIMATE ===== */
+    .eta-card {
+      background: linear-gradient(135deg, rgba(200,244,0,0.08), rgba(200,244,0,0.03));
+      border: 1px solid rgba(200,244,0,0.2);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: slideUp 0.5s ease 0.3s both;
+    }
+
+    .eta-icon { font-size: 2rem; }
+
+    .eta-label {
+      font-family: var(--font-cond);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--neon);
+      margin-bottom: 3px;
+    }
+
+    .eta-val {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== NOT FOUND ===== */
+    .track-not-found {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+      animation: slideUp 0.4s ease;
+    }
+
+    .track-not-found.visible { display: block; }
+
+    /* ===== LOADING ===== */
+    .track-loading {
+      display: none;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    .track-loading.visible { display: flex; }
+
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border);
+      border-top-color: var(--neon);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== DEMO ORDERS HELPER ===== */
+    .demo-orders {
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+
+    .demo-orders-title {
+      font-family: var(--font-cond);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .demo-order-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .demo-chip {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-family: var(--font-cond);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--silver);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .demo-chip:hover {
+      border-color: var(--neon);
+      color: var(--neon);
+      background: rgba(200,244,0,0.06);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .track-search-box { padding: 20px; }
+      .track-input-row { flex-direction: column; }
+      .track-status-card { flex-direction: column; align-items: flex-start; }
+      .order-info-grid { grid-template-columns: 1fr; }
+      .order-info-item:nth-child(2) { border-radius: 0; border-left: 1px solid var(--border); border-top: none; }
+      .order-info-item:nth-last-child(2) { border-radius: 0; }
+      .order-info-item:last-child { border-radius: 0 0 var(--radius) var(--radius); border-left: 1px solid var(--border); }
+      .timeline-card { padding: 20px; }
+      .track-current-status { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">🚚 Fast Delivery PAN India</span>
+    <span class="ticker-item">📦 COD Available</span>
+    <span class="ticker-item">✅ 5000+ Orders Delivered</span>
+    <span class="ticker-item">⚡ 2–5 Working Days</span>
+    <span class="ticker-item">🚚 Fast Delivery PAN India</span>
+    <span class="ticker-item">📦 COD Available</span>
+    <span class="ticker-item">✅ 5000+ Orders Delivered</span>
+    <span class="ticker-item">⚡ 2–5 Working Days</span>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <button id="hamburger" class="nav-icon-btn" aria-label="Menu">
+        <div class="hamburger-lines"><span></span><span></span><span></span></div>
+      </button>
+    </div>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="brand-top">Prime Shoe</span>
+        <span class="brand-sub">Jersey Hub</span>
+      </div>
+    </a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="tracking.html" class="nav-link active">Track Order</a>
+      </nav>
+      <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+        <span class="cart-badge" style="display:none;">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div id="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="shop.html" class="mobile-nav-link">🛍️ Shop All</a>
+    <a href="shop.html?cat=jersey" class="mobile-nav-link">👕 Jerseys</a>
+    <a href="shop.html?cat=shoes" class="mobile-nav-link">👟 Studs & Shoes</a>
+    <a href="tracking.html" class="mobile-nav-link">📦 Track Order</a>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="tracking-hero">
+  <div class="container" style="text-align:center;position:relative;z-index:2;">
+    <div class="section-label reveal" style="justify-content:center;">Order Tracking</div>
+    <h1 class="section-title reveal" style="margin-top:12px;font-size:clamp(2.5rem,8vw,5rem);">
+      TRACK YOUR<br/>ORDER
+    </h1>
+    <p style="color:var(--silver);font-size:15px;margin-top:16px;max-width:480px;margin-left:auto;margin-right:auto;" class="reveal">
+      Enter your Order ID below to get real-time updates on your delivery status.
+    </p>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="container section-pad" style="padding-top:48px;">
+
+  <!-- Search Box -->
+  <div class="track-search-box reveal">
+    <label style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver);display:block;margin-bottom:16px;">
+      Enter Your Order ID
+    </label>
+    <div class="track-input-row">
+      <input
+        class="track-input"
+        type="text"
+        id="track-input"
+        placeholder="e.g. PSJH12345"
+        maxlength="12"
+        autocomplete="off"
+      />
+      <button class="btn btn-neon ripple-btn" style="padding:16px 28px;flex-shrink:0;" onclick="trackOrder()">
+        Track →
+      </button>
+    </div>
+    <p style="font-size:12px;color:var(--silver);margin-top:12px;font-family:var(--font-cond);letter-spacing:0.05em;">
+      💡 Your Order ID was sent via SMS / shown on order confirmation page
+    </p>
+  </div>
+
+  <!-- Demo Orders -->
+  <div class="demo-orders reveal" id="demo-orders-section">
+    <div class="demo-orders-title">📋 Demo — Click to track a sample order</div>
+    <div class="demo-order-chips" id="demo-chips"></div>
+  </div>
+
+  <!-- Loading -->
+  <div class="track-loading" id="track-loading">
+    <div style="text-align:center;">
+      <div class="loading-spinner" style="margin:0 auto 16px;"></div>
+      <div style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);">
+        Fetching order details...
+      </div>
+    </div>
+  </div>
+
+  <!-- Not Found -->
+  <div class="track-not-found" id="track-not-found">
+    <div style="font-size:4rem;margin-bottom:16px;">🔍</div>
+    <h2 style="font-family:var(--font-display);font-size:2rem;letter-spacing:0.05em;margin-bottom:12px;">ORDER NOT FOUND</h2>
+    <p style="color:var(--silver);font-size:14px;max-width:400px;margin:0 auto 24px;">
+      We couldn't find an order with that ID. Please double-check and try again, or contact us on WhatsApp.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20tracking%20my%20order" target="_blank"
+        class="btn btn-neon ripple-btn" style="display:flex;align-items:center;gap:8px;">
+        💬 Contact Support
+      </a>
+      <a href="shop.html" class="btn btn-outline ripple-btn">Browse Shop</a>
+    </div>
+  </div>
+
+  <!-- Result Area -->
+  <div class="track-result" id="track-result">
+
+    <!-- Status Banner -->
+    <div class="track-status-card" id="result-status-card">
+      <div>
+        <div class="track-order-id" id="result-order-id">PSJH00000</div>
+        <div class="track-order-meta" id="result-order-meta">Placed on —</div>
+      </div>
+      <div class="track-current-status">
+        <div class="track-status-icon" id="result-status-icon">📦</div>
+        <div>
+          <div class="track-status-text" id="result-status-text">Processing</div>
+          <div class="track-status-desc" id="result-status-desc">Your order is being processed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ETA Card -->
+    <div class="eta-card" id="result-eta-card">
+      <div class="eta-icon">🗓️</div>
+      <div>
+        <div class="eta-label">Estimated Delivery</div>
+        <div class="eta-val" id="result-eta">3–5 Working Days</div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-card">
+      <div class="timeline-title">📍 Delivery Progress</div>
+      <div class="track-timeline" id="result-timeline"></div>
+    </div>
+
+    <!-- Order Info -->
+    <div class="order-info-grid" id="result-order-info">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;animation:slideUp 0.5s ease 0.4s both;">
+      <a href="https://wa.me/919876543210?text=Hi%2C%20I%20need%20help%20with%20my%20order" target="_blank"
+        class="btn ripple-btn" style="background:var(--green);color:white;flex:1;min-width:160px;padding:14px;justify-content:center;">
+        💬 Contact Support
+      </a>
+      <a href="shop.html" class="btn btn-outline ripple-btn" style="flex:1;min-width:160px;padding:14px;justify-content:center;">
+        Continue Shopping →
+      </a>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar" style="margin-top:40px;">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="trust-icon">⚡</div>
+        <div class="trust-title">2–5 Day Delivery</div>
+        <div class="trust-desc">Fast shipping PAN India</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">💳</div>
+        <div class="trust-title">COD Available</div>
+        <div class="trust-desc">Pay when you receive</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">↩️</div>
+        <div class="trust-title">Easy Returns</div>
+        <div class="trust-desc">7-day hassle-free policy</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">💬</div>
+        <div class="trust-title">WhatsApp Support</div>
+        <div class="trust-desc">Mon–Sat, 10am–8pm IST</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
+          <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--dark);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+          </div>
+          <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
+        </a>
+        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" class="footer-social-btn">📷</a>
+          <a href="https://wa.me/919876543210" target="_blank" class="footer-social-btn">💬</a>
+          <a href="mailto:prime@jerseyhub.in" class="footer-social-btn">✉️</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="shop.html" class="footer-link">Shop All</a>
+          <a href="shop.html?cat=jersey" class="footer-link">Jerseys</a>
+          <a href="shop.html?cat=shoes" class="footer-link">Studs & Shoes</a>
+          <a href="tracking.html" class="footer-link">Track Order</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Return Policy</a>
+          <a href="#" class="footer-link">Size Guide</a>
+          <a href="#" class="footer-link">FAQs</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
+        <div style="margin-top:16px;">
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-sm ripple-btn" style="background:var(--green);color:white;">
+            💬 Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved.</div>
+      <div class="footer-payments">
+        <div class="payment-badge">PhonePe</div>
+        <div class="payment-badge">UPI</div>
+        <div class="payment-badge">Visa</div>
+        <div class="payment-badge">Mastercard</div>
+        <div class="payment-badge">COD</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+// ============================================
+// ORDER TRACKING — JavaScript
+// ============================================
+
+const STAGES = [
+  {
+    key: 'pending',
+    name: 'Order Placed',
+    icon: '📋',
+    desc: 'We have received your order and are verifying payment.',
+    statusText: 'Order Placed',
+    statusDesc: 'Your order has been received',
+    statusIconClass: 'pending',
+    eta: '3–5 Working Days',
+  },
+  {
+    key: 'packed',
+    name: 'Order Packed',
+    icon: '📦',
+    desc: 'Your items have been packed and labelled for dispatch.',
+    statusText: 'Being Packed',
+    statusDesc: 'Your order is being packed',
+    statusIconClass: 'packed',
+    eta: '2–4 Working Days',
+  },
+  {
+    key: 'shipped',
+    name: 'Shipped',
+    icon: '🚚',
+    desc: 'Your parcel is on its way! In transit via our delivery partner.',
+    statusText: 'Shipped',
+    statusDesc: 'Your order is in transit',
+    statusIconClass: 'shipped',
+    eta: '1–2 Working Days',
+  },
+  {
+    key: 'out-for-delivery',
+    name: 'Out for Delivery',
+    icon: '🛵',
+    desc: 'Your delivery partner is on the way to your address today!',
+    statusText: 'Out for Delivery',
+    statusDesc: 'Arriving today — keep your phone handy!',
+    statusIconClass: 'out-for-delivery',
+    eta: 'Today',
+  },
+  {
+    key: 'delivered',
+    name: 'Delivered',
+    icon: '✅',
+    desc: 'Your order has been delivered. Enjoy your gear! 🏆',
+    statusText: 'Delivered',
+    statusDesc: 'Your order was delivered successfully',
+    statusIconClass: 'delivered',
+    eta: 'Delivered',
+  },
+];
+
+const CANCELLED_STAGE = {
+  key: 'cancelled',
+  name: 'Cancelled',
+  icon: '❌',
+  desc: 'This order has been cancelled. Contact support for help.',
+  statusText: 'Cancelled',
+  statusDesc: 'This order has been cancelled',
+  statusIconClass: 'cancelled',
+  eta: '—',
+};
+
+// Generate dummy demo orders
+const DEMO_ORDERS = [
+  { id: 'PSJHDEMO1', name: 'Arjun Mehta', phone: '+91 98765 43210', address: 'Andheri West, Mumbai - 400053', payment: 'COD', amount: 1299, items: 'Real Madrid Home Kit 2025 (L)', date: '01 Apr 2025, 11:20 AM', status: 'shipped', stage: 2 },
+  { id: 'PSJHDEMO2', name: 'Priya Sharma', phone: '+91 87654 32109', address: 'Koramangala, Bangalore - 560034', payment: 'UPI', amount: 3499, items: 'Nike Mercurial Vapor 15 FG (UK 9)', date: '02 Apr 2025, 3:15 PM', status: 'pending', stage: 0 },
+  { id: 'PSJHDEMO3', name: 'Rohit Singh', phone: '+91 76543 21098', address: 'Sector 18, Noida - 201301', payment: 'COD', amount: 1499, items: 'PSG Black Edition Kit (M), Pro Shin Guards (M)', date: '30 Mar 2025, 9:45 AM', status: 'delivered', stage: 4 },
+  { id: 'PSJHDEMO4', name: 'Sneha Patel', phone: '+91 65432 10987', address: 'Navrangpura, Ahmedabad - 380009', payment: 'UPI', amount: 1199, items: 'Barcelona Away Jersey 2025 (S)', date: '03 Apr 2025, 6:00 PM', status: 'packed', stage: 1 },
+];
+
+function getAllOrders() {
+  const saved = JSON.parse(localStorage.getItem('psjh_orders') || '[]');
+  return [...saved, ...DEMO_ORDERS];
+}
+
+function loadDemoChips() {
+  const chips = document.getElementById('demo-chips');
+  const statusColors = { pending:'#ff8c00', packed:'#60a5fa', shipped:'#C8F400', delivered:'#25D366', cancelled:'#FF4444' };
+  chips.innerHTML = DEMO_ORDERS.map(o => `
+    <div class="demo-chip" onclick="trackById('${o.id}')">
+      <span style="color:${statusColors[o.status]||'var(--silver)'};margin-right:4px;">●</span>
+      ${o.id}
+    </div>
+  `).join('');
+}
+
+function trackOrder() {
+  const val = document.getElementById('track-input').value.trim().toUpperCase();
+  if (!val) {
+    document.getElementById('track-input').focus();
+    return;
+  }
+  trackById(val);
+}
+
+function trackById(id) {
+  document.getElementById('track-input').value = id;
+  hideAll();
+  document.getElementById('track-loading').classList.add('visible');
+  document.getElementById('demo-orders-section').style.display = 'none';
+
+  setTimeout(() => {
+    const orders = getAllOrders();
+    const order = orders.find(o => o.id.toUpperCase() === id.toUpperCase());
+    document.getElementById('track-loading').classList.remove('visible');
+
+    if (!order) {
+      document.getElementById('track-not-found').classList.add('visible');
+    } else {
+      renderResult(order);
+    }
+  }, 900);
+}
+
+function hideAll() {
+  document.getElementById('track-result').classList.remove('visible');
+  document.getElementById('track-not-found').classList.remove('visible');
+  document.getElementById('track-loading').classList.remove('visible');
+}
+
+function renderResult(order) {
+  const isCancelled = order.status === 'cancelled';
+  const stage = isCancelled ? -1 : (order.stage || 0);
+  const currentStage = isCancelled ? CANCELLED_STAGE : STAGES[Math.min(stage, STAGES.length - 1)];
+
+  // Status card
+  document.getElementById('result-order-id').textContent = order.id;
+  document.getElementById('result-order-meta').textContent = `Placed on ${order.date || '—'}`;
+  document.getElementById('result-status-text').textContent = currentStage.statusText;
+  document.getElementById('result-status-desc').textContent = currentStage.statusDesc;
+  document.getElementById('result-eta').textContent = isCancelled ? 'Order Cancelled' : currentStage.eta;
+
+  const iconEl = document.getElementById('result-status-icon');
+  iconEl.className = `track-status-icon ${currentStage.statusIconClass}`;
+  iconEl.textContent = currentStage.icon;
+
+  // ETA card color
+  const etaCard = document.getElementById('result-eta-card');
+  if (isCancelled) {
+    etaCard.style.background = 'rgba(255,68,68,0.06)';
+    etaCard.style.borderColor = 'rgba(255,68,68,0.2)';
+    document.getElementById('result-eta').style.color = 'var(--red)';
+  } else if (stage >= 4) {
+    etaCard.style.background = 'rgba(37,211,102,0.06)';
+    etaCard.style.borderColor = 'rgba(37,211,102,0.2)';
+    document.getElementById('result-eta').style.color = 'var(--green)';
+  }
+
+  // Timeline
+  const timeline = document.getElementById('result-timeline');
+  if (isCancelled) {
+    timeline.innerHTML = STAGES.slice(0, order.stage + 1 || 1).map((s, i) => `
+      <div class="track-step done">
+        <div class="step-connector"></div>
+        <div class="step-dot-wrap"><div class="step-dot">✓</div></div>
+        <div class="step-body">
+          <div class="step-name">${s.name}</div>
+          <div class="step-desc">${s.desc}</div>
+          <div class="step-time">Completed</div>
+        </div>
+      </div>
+    `).join('') + `
+      <div class="track-step active">
+        <div class="step-dot-wrap"><div class="step-dot" style="border-color:var(--red);background:rgba(255,68,68,0.1);">❌</div></div>
+        <div class="step-body">
+          <div class="step-name" style="color:var(--red);">Order Cancelled</div>
+          <div class="step-desc">This order was cancelled. Please contact support if you need help.</div>
+        </div>
+      </div>
+    `;
+  } else {
+    // Build delivery stages (add out-for-delivery between shipped and delivered)
+    const displayStages = STAGES;
+    timeline.innerHTML = displayStages.map((s, i) => {
+      const done = i < stage;
+      const active = i === stage;
+      const upcoming = i > stage;
+
+      // Timestamps (simulate realistic times)
+      let timeText = '';
+      if (done) {
+        const hoursAgo = (stage - i) * 18 + Math.floor(Math.random() * 6 + 2);
+        timeText = hoursAgo < 24 ? `${hoursAgo}h ago` : `${Math.floor(hoursAgo/24)}d ago`;
+      }
+      if (active) timeText = i === 4 ? 'Just delivered!' : 'In progress...';
+
+      return `
+        <div class="track-step ${done?'done':active?'active':''}">
+          <div class="step-connector"></div>
+          <div class="step-dot-wrap">
+            <div class="step-dot">${done ? '✓' : s.icon}</div>
+          </div>
+          <div class="step-body">
+            <div class="step-name">${s.name}</div>
+            <div class="step-desc">${upcoming ? 'Pending...' : s.desc}</div>
+            ${timeText ? `<div class="step-time">${timeText}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Order Info Grid
+  document.getElementById('result-order-info').innerHTML = `
+    <div class="order-info-item">
+      <div class="order-info-label">Customer</div>
+      <div class="order-info-val">${order.name}</div>
+    </div>
+    <div class="order-info-item">
+      <div class="order-info-label">Phone</div>
+      <div class="order-info-val">${order.phone || '—'}</div>
+    </div>
+    <div class="order-info-item">
+      <div class="order-info-label">Payment</div>
+      <div class="order-info-val">${(order.payment || 'COD').toUpperCase()}</div>
+    </div>
+    <div class="order-info-item">
+      <div class="order-info-label">Order Total</div>
+      <div class="order-info-val" style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">₹${(order.amount||0).toLocaleString('en-IN')}</div>
+    </div>
+    <div class="order-info-item" style="grid-column:span 2;border-radius:0 0 var(--radius) var(--radius);">
+      <div class="order-info-label">Delivery Address</div>
+      <div class="order-info-val">${order.address || '—'}</div>
+    </div>
+  `;
+
+  document.getElementById('track-result').classList.add('visible');
+
+  // Scroll to result
+  setTimeout(() => {
+    document.getElementById('track-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Enter key to track
+document.getElementById('track-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') trackOrder();
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  loadDemoChips();
+
+  // Auto-fill from URL param
+  const params = new URLSearchParams(window.location.search);
+  const idParam = params.get('id');
+  if (idParam) {
+    // Also check last order
+    const lastOrder = localStorage.getItem('psjh_last_order');
+    const id = idParam !== 'last' ? idParam : (lastOrder || '');
+    if (id) {
+      document.getElementById('track-input').value = id;
+      setTimeout(() => trackById(id), 400);
+    }
+  } else {
+    // Check if last order exists
+    const lastOrder = localStorage.getItem('psjh_last_order');
+    if (lastOrder) {
+      document.getElementById('track-input').value = lastOrder;
+      document.getElementById('demo-orders-section').innerHTML = `
+        <div style="text-align:center;background:rgba(200,244,0,0.06);border:1px solid rgba(200,244,0,0.2);border-radius:var(--radius);padding:16px 20px;max-width:600px;margin:0 auto;">
+          <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--neon);margin-bottom:8px;">Your Last Order</div>
+          <div style="font-family:var(--font-display);font-size:1.3rem;letter-spacing:0.05em;margin-bottom:10px;">${lastOrder}</div>
+          <button class="btn btn-neon btn-sm ripple-btn" onclick="trackById('${lastOrder}')">Track This Order →</button>
+        </div>
+        <div style="margin-top:20px;"><div class="demo-orders-title">Or try a demo order</div><div class="demo-order-chips" id="demo-chips"></div></div>
+      `;
+      loadDemoChips();
+    }
+  }
+});
+</script>
+</body>
+</html>

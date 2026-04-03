@@ -3,1467 +3,423 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prime Shoe Jersey Hub – India's Trusted Football Store</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet" />
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            neon: '#C8F400',
-            neonDark: '#a8cc00',
-            dark: '#0A0A0A',
-            darkCard: '#111111',
-            darkBorder: '#1E1E1E',
-            mid: '#1A1A1A',
-            surface: '#141414',
-            smoke: '#2A2A2A',
-            silver: '#A0A0A0',
-          },
-          fontFamily: {
-            display: ['"Bebas Neue"', 'sans-serif'],
-            condensed: ['"Barlow Condensed"', 'sans-serif'],
-            body: ['"Barlow"', 'sans-serif'],
-          },
-        },
-      },
-    };
-  </script>
-
-  <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Barlow', sans-serif; background: #0A0A0A; color: #FFFFFF; overflow-x: hidden; }
-
-    /* ---- CUSTOM SCROLLBAR ---- */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #0A0A0A; }
-    ::-webkit-scrollbar-thumb { background: #C8F400; border-radius: 2px; }
-
-    /* ---- NOISE TEXTURE ---- */
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: 0.4;
-    }
-    body > * { position: relative; z-index: 1; }
-
-    /* ---- HERO ---- */
-    .hero-bg {
-      background-image:
-        linear-gradient(to right, rgba(10,10,10,0.95) 40%, rgba(10,10,10,0.6) 100%),
-        url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80');
-      background-size: cover; background-position: center;
-    }
-
-    /* ---- NEON GLOW ---- */
-    .neon-glow { text-shadow: 0 0 30px rgba(200,244,0,0.5), 0 0 60px rgba(200,244,0,0.2); }
-
-    /* ---- PRODUCT CARD ---- */
-    .product-card {
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
-      background: #111111; border: 1px solid #1E1E1E;
-    }
-    .product-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,244,0,0.2);
-    }
-    .product-card:hover .card-img { transform: scale(1.06); }
-    .card-img { transition: transform 0.5s ease; }
-
-    /* ---- BUTTONS ---- */
-    .btn-neon {
-      background: #C8F400; color: #0A0A0A;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700; letter-spacing: 0.08em; transition: all 0.2s ease;
-    }
-    .btn-neon:hover { background: #d4ff0a; box-shadow: 0 0 24px rgba(200,244,0,0.5); transform: translateY(-1px); }
-    .btn-neon:active { transform: scale(0.97); }
-    .btn-outline {
-      border: 1.5px solid #C8F400; color: #C8F400;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700; letter-spacing: 0.08em; transition: all 0.2s ease; background: transparent;
-    }
-    .btn-outline:hover { background: #C8F400; color: #0A0A0A; box-shadow: 0 0 20px rgba(200,244,0,0.3); }
-    .btn-dark {
-      background: #1A1A1A; color: #fff; border: 1px solid #2A2A2A;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700; letter-spacing: 0.08em; transition: all 0.2s ease;
-    }
-    .btn-dark:hover { border-color: #C8F400; color: #C8F400; }
-
-    /* ---- CART SIDEBAR ---- */
-    #cart-sidebar { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
-    #cart-sidebar.open { transform: translateX(0); }
-    #cart-overlay { opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
-    #cart-overlay.open { opacity: 1; pointer-events: all; }
-
-    /* ---- PAGE TRANSITIONS ---- */
-    .page { display: none; }
-    .page.active { display: block; animation: pageIn 0.4s ease forwards; }
-    @keyframes pageIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
-    /* ---- FADE-UP ---- */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-    .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
-
-    /* ---- TOAST ---- */
-    #toast { transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    #toast.show { transform: translateY(0); opacity: 1; }
-
-    /* ---- HERO HEADLINE ---- */
-    .hero-headline {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 12vw, 9rem);
-      line-height: 0.9; letter-spacing: 0.01em;
-    }
-    .text-outline { -webkit-text-stroke: 2px #C8F400; color: transparent; }
-
-    /* ---- BADGES ---- */
-    .badge-bestseller { background: #C8F400; color: #0A0A0A; }
-    .badge-new { background: #ffffff; color: #0A0A0A; }
-    .badge-sale { background: #FF4444; color: #ffffff; }
-
-    /* ---- MISC ---- */
-    .neon-line { width: 60px; height: 3px; background: #C8F400; }
-    .form-input { background: #141414; border: 1px solid #2A2A2A; color: white; transition: border-color 0.2s ease; }
-    .form-input:focus { outline: none; border-color: #C8F400; box-shadow: 0 0 0 3px rgba(200,244,0,0.1); }
-    .form-input::placeholder { color: #555; }
-
-    /* ---- TICKER ---- */
-    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .ticker-track { display:flex; width:max-content; animation: ticker 20s linear infinite; }
-
-    /* ---- NAV LINK ---- */
-    .nav-link { position: relative; }
-    .nav-link::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:2px; background:#C8F400; transition: width 0.2s ease; }
-    .nav-link:hover::after { width: 100%; }
-
-    /* ---- CART QTY BTNS ---- */
-    .qty-btn { width:28px; height:28px; border:1px solid #2A2A2A; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.15s; border-radius:4px; }
-    .qty-btn:hover { border-color:#C8F400; color:#C8F400; }
-
-    /* ---- SUCCESS ANIMATION ---- */
-    @keyframes successPop { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.15)} 100%{transform:scale(1);opacity:1} }
-    .success-pop { animation: successPop 0.5s ease forwards; }
-
-    /* ===================== PRODUCT DETAIL PAGE STYLES ===================== */
-
-    /* Main image zoom wrapper */
-    .pdp-main-img-wrap { overflow: hidden; border-radius: 16px; background: #0D0D0D; }
-    .pdp-main-img-wrap img { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: zoom-in; }
-    .pdp-main-img-wrap:hover img { transform: scale(1.06); }
-
-    /* Thumbnail active state */
-    .pdp-thumb { transition: all 0.2s ease; cursor: pointer; border: 2px solid transparent; border-radius: 12px; overflow: hidden; }
-    .pdp-thumb:hover { border-color: rgba(200,244,0,0.5); }
-    .pdp-thumb.active { border-color: #C8F400; box-shadow: 0 0 12px rgba(200,244,0,0.3); }
-
-    /* Size button */
-    .size-btn {
-      border: 1.5px solid #2A2A2A; color: #A0A0A0;
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
-      transition: all 0.18s ease; border-radius: 10px; padding: 8px 16px;
-      font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase;
-      background: #111;
-    }
-    .size-btn:hover { border-color: rgba(200,244,0,0.5); color: #C8F400; }
-    .size-btn.selected { border-color: #C8F400; background: #C8F400; color: #0A0A0A; box-shadow: 0 0 12px rgba(200,244,0,0.3); }
-
-    /* PDP quantity input */
-    .pdp-qty-btn {
-      width: 38px; height: 38px; border: 1px solid #2A2A2A; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; color: #A0A0A0; cursor: pointer; transition: all 0.15s;
-      background: #111;
-    }
-    .pdp-qty-btn:hover { border-color: #C8F400; color: #C8F400; }
-
-    /* Star rating */
-    .star-filled { color: #C8F400; }
-    .star-half { color: #C8F400; }
-    .star-empty { color: #333; }
-
-    /* Trust badge pill */
-    .trust-pill {
-      display: flex; align-items: center; gap: 8px;
-      background: #111; border: 1px solid #1E1E1E; border-radius: 10px;
-      padding: 10px 14px; transition: border-color 0.2s;
-    }
-    .trust-pill:hover { border-color: rgba(200,244,0,0.3); }
-
-    /* Review card */
-    .review-card { background: #111; border: 1px solid #1E1E1E; border-radius: 16px; padding: 20px; }
-    .review-card:hover { border-color: rgba(200,244,0,0.15); }
-
-    /* Stock urgency bar */
-    .stock-bar-fill { height: 4px; border-radius: 2px; background: #C8F400; transition: width 0.5s ease; }
-
-    /* Breadcrumb */
-    .breadcrumb-sep { color: #333; }
-
-    /* Sticky add-to-cart on mobile */
-    .pdp-sticky-cta {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
-      background: rgba(10,10,10,0.97); border-top: 1px solid #1E1E1E;
-      padding: 12px 16px; backdrop-filter: blur(10px);
-    }
-    @media(min-width: 768px) { .pdp-sticky-cta { display: none !important; } }
-
-    /* Related product card — smaller version */
-    .related-card { transition: transform 0.25s ease, box-shadow 0.25s ease; background: #111; border: 1px solid #1E1E1E; border-radius: 16px; overflow: hidden; cursor: pointer; }
-    .related-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,244,0,0.15); }
-    .related-card:hover .related-img { transform: scale(1.05); }
-    .related-img { transition: transform 0.4s ease; }
-
-    /* Urgency pulse */
-    @keyframes urgencyPulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
-    .urgency-pulse { animation: urgencyPulse 2s ease infinite; }
-
-    /* Specs table */
-    .spec-row { display: flex; border-bottom: 1px solid #1A1A1A; padding: 10px 0; }
-    .spec-row:last-child { border-bottom: none; }
-    .spec-label { color: #A0A0A0; font-size: 13px; width: 140px; flex-shrink: 0; }
-    .spec-value { color: #fff; font-size: 13px; font-weight: 500; }
-  </style>
+  <title>Prime Shoe Jersey Hub — India's Trusted Football Store</title>
+  <meta name="description" content="Premium football jerseys, studs & gear. Authentic quality, fast delivery, COD available." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+<body>
 
-<body class="antialiased">
-
-<!-- ===================== TOAST ===================== -->
-<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] flex items-center gap-3 bg-[#1a1a1a] border border-neon/30 px-5 py-3 rounded-full shadow-2xl text-sm font-body font-semibold text-white whitespace-nowrap">
-  <span class="w-5 h-5 bg-neon rounded-full flex items-center justify-center flex-shrink-0">
-    <svg class="w-3 h-3 text-dark" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-  </span>
-  <span id="toast-msg">Added to cart!</span>
+<!-- ============ TICKER / ANNOUNCEMENT ============ -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item">Season 2025 Drop — Shop Now</span>
+    <span class="ticker-item">Cash on Delivery Available</span>
+    <span class="ticker-item">Free Shipping on Orders ₹999+</span>
+    <span class="ticker-item">Authentic Gear Only</span>
+    <span class="ticker-item">5000+ Happy Customers</span>
+    <span class="ticker-item">Fast Delivery Across India</span>
+    <span class="ticker-item">Season 2025 Drop — Shop Now</span>
+    <span class="ticker-item">Cash on Delivery Available</span>
+    <span class="ticker-item">Free Shipping on Orders ₹999+</span>
+    <span class="ticker-item">Authentic Gear Only</span>
+    <span class="ticker-item">5000+ Happy Customers</span>
+    <span class="ticker-item">Fast Delivery Across India</span>
+  </div>
 </div>
 
-<!-- ===================== CART OVERLAY ===================== -->
-<div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[80]" onclick="closeCart()"></div>
+<!-- ============ NAVBAR ============ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <!-- LEFT -->
+    <div class="nav-left">
+      <!-- Hamburger (mobile) -->
+      <button id="hamburger" class="nav-icon-btn" aria-label="Menu">
+        <div class="hamburger-lines">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <!-- Search -->
+      <div class="nav-search" style="display:none;" id="nav-search-wrap">
+        <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off" />
+        <div id="search-results-dropdown"></div>
+      </div>
+    </div>
 
-<!-- ===================== CART SIDEBAR ===================== -->
-<aside id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-[400px] bg-[#111] border-l border-[#1E1E1E] z-[90] flex flex-col">
-  <div class="flex items-center justify-between px-6 py-5 border-b border-[#1E1E1E]">
-    <div>
-      <h2 class="font-condensed text-2xl font-bold tracking-wider text-white uppercase">Your Cart</h2>
-      <p class="text-silver text-xs mt-0.5" id="cart-header-count">0 items</p>
-    </div>
-    <button onclick="closeCart()" class="w-9 h-9 border border-[#2A2A2A] rounded-lg flex items-center justify-center text-silver hover:border-neon hover:text-neon transition-all">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-  </div>
-  <div id="cart-items" class="flex-1 overflow-y-auto px-6 py-4 space-y-4"></div>
-  <div class="border-t border-[#1E1E1E] px-6 py-5 space-y-4">
-    <div class="flex justify-between items-center">
-      <span class="text-silver font-body">Subtotal</span>
-      <span class="font-condensed text-2xl font-bold text-white">₹<span id="cart-total">0</span></span>
-    </div>
-    <button onclick="goToCheckout()" class="btn-neon w-full py-4 rounded-xl text-base uppercase tracking-wider">Proceed to Checkout →</button>
-    <button onclick="closeCart()" class="btn-outline w-full py-3 rounded-xl text-sm uppercase tracking-wider">Continue Shopping</button>
-  </div>
-</aside>
+    <!-- CENTER — Logo -->
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="brand-top">Prime Shoe</span>
+        <span class="brand-sub">Jersey Hub</span>
+      </div>
+    </a>
 
-<!-- ===================== NAVBAR ===================== -->
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 md:px-10 py-4 border-b border-[#1A1A1A] bg-dark/95 backdrop-blur">
-  <button onclick="showPage('home')" class="flex items-center gap-3 group">
-    <div class="w-9 h-9 bg-neon rounded-lg flex items-center justify-center flex-shrink-0">
-      <svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    <!-- RIGHT -->
+    <div class="nav-right">
+      <!-- Desktop nav links -->
+      <nav class="nav-links" id="desktop-nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="shop.html?cat=jersey" class="nav-link">Jerseys</a>
+        <a href="shop.html?cat=shoes" class="nav-link">Studs</a>
+        <a href="tracking.html" class="nav-link">Track Order</a>
+      </nav>
+      <!-- Search toggle (desktop) -->
+      <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </button>
+      <!-- Cart -->
+      <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+        <span class="cart-badge" style="display:none;">0</span>
+      </button>
     </div>
-    <div class="leading-none">
-      <div class="font-condensed font-900 text-white text-sm tracking-widest uppercase leading-tight">Prime Shoe</div>
-      <div class="font-condensed font-700 text-neon text-xs tracking-[0.2em] uppercase">Jersey Hub</div>
-    </div>
-  </button>
-  <!-- Tagline (desktop only) -->
-  <div class="hidden lg:flex items-center gap-2 text-[11px] text-silver/60 font-condensed uppercase tracking-[0.2em]">
-    <span class="text-neon">★</span> India's Trusted Football Store <span class="text-neon">★</span>
-  </div>
-  <ul class="hidden md:flex gap-8 text-sm font-body font-500 text-silver tracking-wider uppercase">
-    <li><button onclick="showPage('home')" class="nav-link hover:text-white transition-colors">Home</button></li>
-    <li><button onclick="showPage('shop')" class="nav-link hover:text-white transition-colors">Shop</button></li>
-    <li><button onclick="openCart()" class="nav-link hover:text-white transition-colors">Cart</button></li>
-  </ul>
-  <div class="flex items-center gap-3">
-    <div class="md:hidden flex gap-4 text-xs text-silver uppercase tracking-wider">
-      <button onclick="showPage('shop')" class="hover:text-neon transition-colors">Shop</button>
-    </div>
-    <button onclick="openCart()" class="relative flex items-center gap-2 bg-[#1A1A1A] hover:bg-[#222] border border-[#2A2A2A] hover:border-neon/50 px-4 py-2.5 rounded-xl transition-all group">
-      <svg class="w-4 h-4 text-silver group-hover:text-neon transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-      </svg>
-      <span class="text-xs font-condensed font-700 text-silver group-hover:text-white transition-colors hidden sm:inline uppercase tracking-wider">Cart</span>
-      <span id="cart-count" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-neon text-dark text-[10px] font-bold rounded-full flex items-center justify-center leading-none">0</span>
-    </button>
   </div>
 </nav>
 
-<!-- ===================== PAGES CONTAINER ===================== -->
-<div class="pt-16">
-
-  <!-- ==================== PAGE: HOME ==================== -->
-  <div id="page-home" class="page active">
-    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
-      <div class="absolute top-20 right-10 w-72 h-72 rounded-full border border-neon/5 hidden lg:block"></div>
-      <div class="absolute top-32 right-24 w-48 h-48 rounded-full border border-neon/10 hidden lg:block"></div>
-      <div class="absolute bottom-20 right-16 w-32 h-32 rounded-full bg-neon/5 blur-2xl hidden lg:block"></div>
-      <div class="px-6 md:px-16 lg:px-24 max-w-6xl py-24">
-        <div class="fade-up flex items-center gap-3 mb-6">
-          <div class="neon-line"></div>
-          <span class="font-condensed text-neon text-sm tracking-[0.3em] uppercase font-semibold">Season 2025 Drop</span>
-        </div>
-        <h1 class="fade-up delay-1 hero-headline text-white leading-none mb-4">
-          UPGRADE<br/><span class="text-outline">YOUR</span><br/>GAME
-        </h1>
-        <p class="fade-up delay-2 font-body text-silver text-lg md:text-xl max-w-md mb-10 leading-relaxed">
-          Premium Jerseys, Studs & Football Gear. Worn by champions. Made for you.
-        </p>
-        <div class="fade-up delay-3 flex flex-wrap gap-4">
-          <button onclick="showPage('shop')" class="btn-neon px-10 py-4 rounded-xl text-base uppercase tracking-widest">Shop Now →</button>
-          <button onclick="showPage('shop')" class="btn-outline px-8 py-4 rounded-xl text-base uppercase tracking-widest">View Collection</button>
-        </div>
-        <div class="fade-up delay-4 flex flex-wrap gap-8 mt-14">
-          <div><div class="font-display text-4xl text-neon">500+</div><div class="text-silver text-xs uppercase tracking-widest mt-1">Products</div></div>
-          <div class="w-px bg-[#2A2A2A]"></div>
-          <div><div class="font-display text-4xl text-neon">10K+</div><div class="text-silver text-xs uppercase tracking-widest mt-1">Orders Shipped</div></div>
-          <div class="w-px bg-[#2A2A2A]"></div>
-          <div><div class="font-display text-4xl text-neon">4.9★</div><div class="text-silver text-xs uppercase tracking-widest mt-1">Rating</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- TICKER -->
-    <div class="bg-neon py-3 overflow-hidden">
-      <div class="ticker-track text-dark font-condensed font-700 text-sm tracking-[0.15em] uppercase">
-        <span class="mx-8">⚽ New Arrivals</span><span class="mx-8">★ Best Sellers</span><span class="mx-8">⚡ Fast Delivery</span><span class="mx-8">🔒 Secure Checkout</span><span class="mx-8">⚽ Premium Quality</span><span class="mx-8">★ Free Returns</span><span class="mx-8">⚡ COD Available</span><span class="mx-8">🔥 Trending Now</span>
-        <span class="mx-8">⚽ New Arrivals</span><span class="mx-8">★ Best Sellers</span><span class="mx-8">⚡ Fast Delivery</span><span class="mx-8">🔒 Secure Checkout</span><span class="mx-8">⚽ Premium Quality</span><span class="mx-8">★ Free Returns</span><span class="mx-8">⚡ COD Available</span><span class="mx-8">🔥 Trending Now</span>
-      </div>
-    </div>
-
-    <!-- CATEGORIES -->
-    <section class="px-6 md:px-16 py-20">
-      <div class="flex items-center gap-4 mb-12">
-        <div class="neon-line"></div>
-        <h2 class="font-condensed text-3xl md:text-4xl font-bold tracking-wider text-white uppercase">Shop by Category</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <button onclick="filterAndGo('jersey')" class="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=600&q=80" alt="Jerseys" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          <div class="absolute inset-0 border border-transparent group-hover:border-neon/40 rounded-2xl transition-all duration-300"></div>
-          <div class="absolute bottom-0 left-0 p-6"><div class="font-display text-3xl text-white mb-1">JERSEYS</div><div class="text-neon text-xs font-condensed font-700 tracking-[0.2em] uppercase flex items-center gap-2">Shop Now <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></div></div>
-        </button>
-        <button onclick="filterAndGo('shoes')" class="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Shoes" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          <div class="absolute inset-0 border border-transparent group-hover:border-neon/40 rounded-2xl transition-all duration-300"></div>
-          <div class="absolute bottom-0 left-0 p-6"><div class="font-display text-3xl text-white mb-1">STUDS</div><div class="text-neon text-xs font-condensed font-700 tracking-[0.2em] uppercase flex items-center gap-2">Shop Now <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></div></div>
-        </button>
-        <button onclick="filterAndGo('accessories')" class="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          <div class="absolute inset-0 border border-transparent group-hover:border-neon/40 rounded-2xl transition-all duration-300"></div>
-          <div class="absolute bottom-0 left-0 p-6"><div class="font-display text-3xl text-white mb-1">GEAR</div><div class="text-neon text-xs font-condensed font-700 tracking-[0.2em] uppercase flex items-center gap-2">Shop Now <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></div></div>
-        </button>
-      </div>
-    </section>
-
-    <!-- FEATURED PRODUCTS -->
-    <section class="px-6 md:px-16 pb-20">
-      <div class="flex items-center justify-between mb-10">
-        <div class="flex items-center gap-4">
-          <div class="neon-line"></div>
-          <h2 class="font-condensed text-3xl md:text-4xl font-bold tracking-wider text-white uppercase">Best Sellers</h2>
-        </div>
-        <button onclick="showPage('shop')" class="btn-outline px-5 py-2.5 rounded-lg text-xs uppercase tracking-wider hidden md:block">View All →</button>
-      </div>
-      <div id="featured-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-      <div class="text-center mt-8">
-        <button onclick="showPage('shop')" class="btn-neon px-10 py-3.5 rounded-xl text-sm uppercase tracking-widest">Shop All Products →</button>
-      </div>
-    </section>
-
-    <!-- TRUST BAR -->
-    <section class="border-y border-[#1E1E1E] py-10 px-6 md:px-16 bg-[#0D0D0D]">
-      <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-        <div class="flex flex-col items-center text-center gap-2"><div class="w-10 h-10 bg-neon/10 rounded-xl flex items-center justify-center text-neon text-xl">🚀</div><div class="font-condensed font-700 text-white text-sm uppercase tracking-wider">Fast Delivery</div><div class="text-silver text-xs">2–5 working days</div></div>
-        <div class="flex flex-col items-center text-center gap-2"><div class="w-10 h-10 bg-neon/10 rounded-xl flex items-center justify-center text-neon text-xl">🛡️</div><div class="font-condensed font-700 text-white text-sm uppercase tracking-wider">Authentic Gear</div><div class="text-silver text-xs">100% genuine products</div></div>
-        <div class="flex flex-col items-center text-center gap-2"><div class="w-10 h-10 bg-neon/10 rounded-xl flex items-center justify-center text-neon text-xl">💳</div><div class="font-condensed font-700 text-white text-sm uppercase tracking-wider">COD Available</div><div class="text-silver text-xs">Pay on delivery</div></div>
-        <div class="flex flex-col items-center text-center gap-2"><div class="w-10 h-10 bg-neon/10 rounded-xl flex items-center justify-center text-neon text-xl">↩️</div><div class="font-condensed font-700 text-white text-sm uppercase tracking-wider">Easy Returns</div><div class="text-silver text-xs">7-day return policy</div></div>
-      </div>
-    </section>
-  </div><!-- /page-home -->
-
-  <!-- ==================== PAGE: SHOP ==================== -->
-  <div id="page-shop" class="page min-h-screen px-6 md:px-16 py-12">
-    <div class="flex items-center gap-4 mb-4">
-      <div class="neon-line"></div>
-      <h2 class="font-condensed text-4xl font-bold tracking-wider text-white uppercase">All Products</h2>
-    </div>
-    <p class="text-silver text-sm mb-8">Showing <span id="product-count">0</span> products</p>
-    <div class="flex flex-wrap gap-2 mb-10">
-      <button onclick="filterProducts('all')" id="filter-all" class="filter-btn px-5 py-2 rounded-full text-xs font-condensed font-700 uppercase tracking-wider border border-neon bg-neon text-dark transition-all">All</button>
-      <button onclick="filterProducts('jersey')" id="filter-jersey" class="filter-btn px-5 py-2 rounded-full text-xs font-condensed font-700 uppercase tracking-wider border border-[#2A2A2A] text-silver hover:border-neon hover:text-neon transition-all">Jerseys</button>
-      <button onclick="filterProducts('shoes')" id="filter-shoes" class="filter-btn px-5 py-2 rounded-full text-xs font-condensed font-700 uppercase tracking-wider border border-[#2A2A2A] text-silver hover:border-neon hover:text-neon transition-all">Studs & Shoes</button>
-      <button onclick="filterProducts('accessories')" id="filter-accessories" class="filter-btn px-5 py-2 rounded-full text-xs font-condensed font-700 uppercase tracking-wider border border-[#2A2A2A] text-silver hover:border-neon hover:text-neon transition-all">Accessories</button>
-    </div>
-    <div id="shop-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5"></div>
+<!-- Mobile Nav Dropdown -->
+<div id="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="shop.html" class="mobile-nav-link">🛍️ Shop All</a>
+    <a href="shop.html?cat=jersey" class="mobile-nav-link">👕 Jerseys</a>
+    <a href="shop.html?cat=shoes" class="mobile-nav-link">👟 Studs & Shoes</a>
+    <a href="shop.html?cat=accessories" class="mobile-nav-link">⚽ Accessories</a>
+    <a href="tracking.html" class="mobile-nav-link">📦 Track Order</a>
+    <a href="admin.html" class="mobile-nav-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
   </div>
-
-  <!-- ==================== PAGE: PRODUCT DETAIL ==================== -->
-  <div id="page-product" class="page min-h-screen pb-32 md:pb-0">
-
-    <!-- Breadcrumb -->
-    <div class="px-6 md:px-16 py-4 border-b border-[#1A1A1A] flex items-center gap-2 text-xs text-silver">
-      <button onclick="showPage('home')" class="hover:text-neon transition-colors">Home</button>
-      <span class="breadcrumb-sep">/</span>
-      <button onclick="showPage('shop')" class="hover:text-neon transition-colors">Shop</button>
-      <span class="breadcrumb-sep">/</span>
-      <span id="pdp-breadcrumb" class="text-white/70 truncate max-w-[200px]">Product</span>
-    </div>
-
-    <div class="px-6 md:px-16 py-8 md:py-12 max-w-7xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-10 xl:gap-16">
-
-        <!-- ===== LEFT: IMAGE GALLERY ===== -->
-        <div class="space-y-3">
-          <!-- Main Image -->
-          <div class="pdp-main-img-wrap aspect-square md:aspect-[4/5] relative">
-            <img id="pdp-main-img" src="" alt="Product" class="w-full h-full object-cover" />
-            <!-- Badge overlay -->
-            <span id="pdp-badge" class="absolute top-4 left-4 text-xs font-condensed font-700 px-3 py-1.5 rounded-full uppercase tracking-wider"></span>
-            <!-- Discount pill -->
-            <span id="pdp-discount-pill" class="absolute top-4 right-4 bg-black/80 text-neon text-xs font-condensed font-700 px-3 py-1.5 rounded-xl border border-neon/20"></span>
-          </div>
-          <!-- Thumbnails -->
-          <div id="pdp-thumbs" class="flex gap-3 overflow-x-auto pb-1"></div>
-        </div>
-
-        <!-- ===== RIGHT: PRODUCT INFO ===== -->
-        <div class="flex flex-col gap-5">
-
-          <!-- Category tag + Stock status -->
-          <div class="flex items-center justify-between">
-            <span id="pdp-category-tag" class="text-neon text-xs font-condensed font-700 uppercase tracking-[0.2em] bg-neon/10 px-3 py-1 rounded-full"></span>
-            <span id="pdp-stock-status" class="text-xs font-condensed font-700 uppercase tracking-wider px-3 py-1 rounded-full"></span>
-          </div>
-
-          <!-- Product Name -->
-          <div>
-            <h1 id="pdp-name" class="font-condensed text-3xl md:text-4xl xl:text-5xl font-900 text-white leading-tight tracking-wide uppercase"></h1>
-            <!-- Tagline -->
-            <p class="text-silver/50 text-xs font-condensed uppercase tracking-[0.25em] mt-1">India's Trusted Football Store</p>
-          </div>
-
-          <!-- RATINGS -->
-          <div class="flex items-center gap-3">
-            <div class="flex gap-0.5" id="pdp-stars"></div>
-            <span id="pdp-rating-val" class="text-white font-condensed font-700 text-sm"></span>
-            <span class="text-silver text-xs" id="pdp-review-count"></span>
-            <span class="w-1 h-1 rounded-full bg-[#333]"></span>
-            <span class="text-neon text-xs font-600">Verified Reviews</span>
-          </div>
-
-          <!-- Price Block -->
-          <div class="flex items-end gap-4 py-4 border-y border-[#1A1A1A]">
-            <div class="font-display text-5xl text-neon neon-glow" id="pdp-price"></div>
-            <div class="mb-1">
-              <div class="text-silver text-sm line-through" id="pdp-original-price"></div>
-              <div class="text-green-400 text-sm font-condensed font-700" id="pdp-savings"></div>
-            </div>
-          </div>
-
-          <!-- Urgency / Stock alert -->
-          <div id="pdp-urgency" class="hidden">
-            <div class="flex items-center justify-between mb-2">
-              <span class="urgency-pulse text-orange-400 text-xs font-condensed font-700 uppercase tracking-wider flex items-center gap-1.5">
-                <span class="w-2 h-2 bg-orange-400 rounded-full inline-block"></span>
-                <span id="pdp-urgency-text">Only 5 left in stock!</span>
-              </span>
-              <span class="text-silver text-xs" id="pdp-stock-pct"></span>
-            </div>
-            <div class="h-1 bg-[#1A1A1A] rounded-full overflow-hidden">
-              <div class="stock-bar-fill" id="pdp-stock-bar" style="width:30%"></div>
-            </div>
-          </div>
-
-          <!-- Short Description -->
-          <p id="pdp-desc" class="text-silver text-sm leading-7"></p>
-
-          <!-- SIZE SELECTION (shown for jerseys only) -->
-          <div id="pdp-size-section" class="hidden">
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-white font-condensed font-700 text-sm uppercase tracking-wider">Select Size</span>
-              <button class="text-neon text-xs hover:underline font-condensed font-700 uppercase tracking-wider">Size Guide →</button>
-            </div>
-            <div class="flex flex-wrap gap-2" id="pdp-sizes"></div>
-          </div>
-
-          <!-- QUANTITY + ADD TO CART -->
-          <div class="flex flex-col sm:flex-row gap-3">
-            <!-- Qty Selector -->
-            <div class="flex items-center gap-3 bg-[#111] border border-[#2A2A2A] rounded-xl px-4 py-2 w-fit">
-              <button class="pdp-qty-btn" onclick="pdpChangeQty(-1)">−</button>
-              <span id="pdp-qty-display" class="text-white font-condensed font-700 text-lg w-8 text-center">1</span>
-              <button class="pdp-qty-btn" onclick="pdpChangeQty(1)">+</button>
-            </div>
-            <!-- Add to Cart -->
-            <button id="pdp-atc-btn" onclick="pdpAddToCart()" class="btn-neon flex-1 py-4 rounded-xl text-sm uppercase tracking-widest flex items-center justify-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              Add to Cart
-            </button>
-          </div>
-
-          <!-- BUY NOW -->
-          <button onclick="pdpBuyNow()" class="btn-outline w-full py-4 rounded-xl text-sm uppercase tracking-widest">
-            ⚡ Buy Now — Direct Checkout
-          </button>
-
-          <!-- TRUST BADGES -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
-            <div class="trust-pill">
-              <span class="text-neon text-base">💳</span>
-              <span class="text-white text-xs font-600">Cash on Delivery</span>
-            </div>
-            <div class="trust-pill">
-              <span class="text-neon text-base">🚀</span>
-              <span class="text-white text-xs font-600">Fast Delivery</span>
-            </div>
-            <div class="trust-pill">
-              <span class="text-neon text-base">↩️</span>
-              <span class="text-white text-xs font-600">Easy Returns</span>
-            </div>
-          </div>
-
-          <!-- PRODUCT SPECS (accordion style) -->
-          <div class="border border-[#1E1E1E] rounded-2xl overflow-hidden">
-            <button onclick="toggleSpecs()" class="w-full flex items-center justify-between px-5 py-4 hover:bg-[#111] transition-colors">
-              <span class="font-condensed font-700 text-white text-sm uppercase tracking-wider">Product Details</span>
-              <svg id="specs-chevron" class="w-4 h-4 text-silver transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div id="specs-body" class="hidden px-5 pb-4">
-              <div id="pdp-specs" class="space-y-0"></div>
-            </div>
-          </div>
-
-        </div><!-- /right col -->
-      </div><!-- /grid -->
-
-      <!-- ===== CUSTOMER REVIEWS ===== -->
-      <div class="mt-16">
-        <div class="flex items-center gap-4 mb-8">
-          <div class="neon-line"></div>
-          <h3 class="font-condensed text-3xl font-bold tracking-wider text-white uppercase">Customer Reviews</h3>
-        </div>
-        <!-- Rating summary -->
-        <div class="flex flex-col sm:flex-row gap-8 mb-8 bg-[#111] border border-[#1E1E1E] rounded-2xl p-6">
-          <div class="flex flex-col items-center justify-center sm:border-r sm:border-[#1E1E1E] sm:pr-8 min-w-[120px]">
-            <div class="font-display text-6xl text-neon" id="pdp-review-score">4.8</div>
-            <div class="flex gap-0.5 my-2" id="pdp-review-stars-big"></div>
-            <div class="text-silver text-xs" id="pdp-review-total"></div>
-          </div>
-          <div class="flex-1 space-y-2">
-            <div class="flex items-center gap-3"><span class="text-xs text-silver w-8 text-right">5★</span><div class="flex-1 h-2 bg-[#1A1A1A] rounded-full overflow-hidden"><div class="h-full bg-neon rounded-full" style="width:72%"></div></div><span class="text-xs text-silver w-8">72%</span></div>
-            <div class="flex items-center gap-3"><span class="text-xs text-silver w-8 text-right">4★</span><div class="flex-1 h-2 bg-[#1A1A1A] rounded-full overflow-hidden"><div class="h-full bg-neon/60 rounded-full" style="width:18%"></div></div><span class="text-xs text-silver w-8">18%</span></div>
-            <div class="flex items-center gap-3"><span class="text-xs text-silver w-8 text-right">3★</span><div class="flex-1 h-2 bg-[#1A1A1A] rounded-full overflow-hidden"><div class="h-full bg-neon/40 rounded-full" style="width:7%"></div></div><span class="text-xs text-silver w-8">7%</span></div>
-            <div class="flex items-center gap-3"><span class="text-xs text-silver w-8 text-right">2★</span><div class="flex-1 h-2 bg-[#1A1A1A] rounded-full overflow-hidden"><div class="h-full bg-neon/20 rounded-full" style="width:2%"></div></div><span class="text-xs text-silver w-8">2%</span></div>
-            <div class="flex items-center gap-3"><span class="text-xs text-silver w-8 text-right">1★</span><div class="flex-1 h-2 bg-[#1A1A1A] rounded-full overflow-hidden"><div class="h-full bg-neon/10 rounded-full" style="width:1%"></div></div><span class="text-xs text-silver w-8">1%</span></div>
-          </div>
-        </div>
-        <!-- Review cards -->
-        <div id="pdp-reviews" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-      </div>
-
-      <!-- ===== RELATED PRODUCTS ===== -->
-      <div class="mt-16">
-        <div class="flex items-center justify-between mb-8">
-          <div class="flex items-center gap-4">
-            <div class="neon-line"></div>
-            <h3 class="font-condensed text-3xl font-bold tracking-wider text-white uppercase">You May Also Like</h3>
-          </div>
-        </div>
-        <div id="pdp-related" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
-      </div>
-
-      <!-- Demo Note -->
-      <div class="mt-12 text-center border-t border-[#1A1A1A] pt-6">
-        <p class="text-[#333] text-xs italic">Demo store for Prime Shoe Jersey Hub · All features are functional for demonstration purposes</p>
-      </div>
-
-    </div><!-- /container -->
-
-    <!-- Mobile sticky CTA -->
-    <div class="pdp-sticky-cta">
-      <div class="flex gap-3">
-        <button onclick="pdpAddToCart()" class="btn-neon flex-1 py-3.5 rounded-xl text-sm uppercase tracking-widest">Add to Cart</button>
-        <button onclick="pdpBuyNow()" class="btn-outline px-5 py-3.5 rounded-xl text-sm uppercase tracking-widest">Buy Now</button>
-      </div>
-    </div>
-
-  </div><!-- /page-product -->
-
-  <!-- ==================== PAGE: CHECKOUT ==================== -->
-  <div id="page-checkout" class="page min-h-screen px-6 md:px-16 py-12 max-w-5xl mx-auto">
-    <div id="checkout-form-section">
-      <div class="flex items-center gap-4 mb-10">
-        <div class="neon-line"></div>
-        <h2 class="font-condensed text-4xl font-bold tracking-wider text-white uppercase">Checkout</h2>
-      </div>
-      <div class="grid md:grid-cols-5 gap-10">
-        <div class="md:col-span-3 space-y-5">
-          <h3 class="font-condensed text-xl font-700 text-white uppercase tracking-wider mb-4">Delivery Details</h3>
-          <div>
-            <label class="text-xs text-silver uppercase tracking-wider font-condensed font-600 block mb-1.5">Full Name</label>
-            <input id="co-name" type="text" placeholder="e.g. Rahul Sharma" class="form-input w-full px-4 py-3.5 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="text-xs text-silver uppercase tracking-wider font-condensed font-600 block mb-1.5">Phone Number</label>
-            <input id="co-phone" type="tel" placeholder="+91 98765 43210" class="form-input w-full px-4 py-3.5 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="text-xs text-silver uppercase tracking-wider font-condensed font-600 block mb-1.5">Delivery Address</label>
-            <textarea id="co-address" rows="3" placeholder="House no., Street, City, State, PIN" class="form-input w-full px-4 py-3.5 rounded-xl text-sm resize-none"></textarea>
-          </div>
-          <div>
-            <label class="text-xs text-silver uppercase tracking-wider font-condensed font-600 block mb-1.5">Payment Method</label>
-            <div class="grid grid-cols-2 gap-3">
-              <label class="flex items-center gap-3 bg-[#141414] border border-[#2A2A2A] rounded-xl px-4 py-3 cursor-pointer hover:border-neon/50 transition-all"><input type="radio" name="payment" value="cod" checked class="accent-neon" /><span class="text-sm text-white font-body">Cash on Delivery</span></label>
-              <label class="flex items-center gap-3 bg-[#141414] border border-[#2A2A2A] rounded-xl px-4 py-3 cursor-pointer hover:border-neon/50 transition-all"><input type="radio" name="payment" value="upi" class="accent-neon" /><span class="text-sm text-white font-body">UPI / Online</span></label>
-            </div>
-          </div>
-          <button onclick="placeOrder()" class="btn-neon w-full py-4 rounded-xl text-base uppercase tracking-widest mt-4">Place Order →</button>
-          <p class="text-silver text-xs text-center">🔒 Secure checkout · Demo store for Prime Shoe Jersey Hub</p>
-        </div>
-        <div class="md:col-span-2">
-          <h3 class="font-condensed text-xl font-700 text-white uppercase tracking-wider mb-4">Order Summary</h3>
-          <div id="checkout-items" class="space-y-3 mb-5"></div>
-          <div class="border-t border-[#1E1E1E] pt-4 space-y-2">
-            <div class="flex justify-between text-silver text-sm"><span>Subtotal</span><span>₹<span id="co-subtotal">0</span></span></div>
-            <div class="flex justify-between text-silver text-sm"><span>Delivery</span><span class="text-neon font-semibold">FREE</span></div>
-            <div class="flex justify-between text-white font-condensed font-700 text-xl pt-2 border-t border-[#1E1E1E] mt-2"><span>Total</span><span>₹<span id="co-total">0</span></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="order-success" class="hidden text-center py-24">
-      <div class="success-pop w-24 h-24 bg-neon rounded-full flex items-center justify-center mx-auto mb-8">
-        <svg class="w-12 h-12 text-dark" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-      </div>
-      <h2 class="font-display text-5xl md:text-7xl text-white mb-4">ORDER PLACED!</h2>
-      <p class="text-neon font-condensed text-xl font-700 tracking-wider uppercase mb-3">Order Placed Successfully (Demo)</p>
-      <p class="text-silver text-sm max-w-sm mx-auto mb-3">Thank you! In a live store, you'd receive a confirmation SMS and your gear would be on its way. 🚀</p>
-      <p class="text-[#333] text-xs mb-10 italic">Demo store for Prime Shoe Jersey Hub</p>
-      <button onclick="continueShopping()" class="btn-neon px-10 py-4 rounded-xl text-sm uppercase tracking-widest">Continue Shopping →</button>
+  <!-- Mobile Search -->
+  <div style="padding:12px 0 0;">
+    <div class="nav-search" style="max-width:100%;">
+      <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input type="text" placeholder="Search products..." class="form-input" style="padding-left:40px;border-radius:100px;font-size:14px;"
+        oninput="window.location='shop.html?q='+this.value" />
     </div>
   </div>
+</div>
 
-</div><!-- /pages container -->
+<!-- ============ HERO SECTION ============ -->
+<section class="hero" id="hero">
+  <div id="hero-slider" class="hero-slider"></div>
+  <div class="hero-overlay"></div>
 
-<!-- ===================== FOOTER ===================== -->
-<footer class="bg-[#080808] border-t border-[#1A1A1A] px-6 md:px-16 py-14">
-  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-10 mb-10">
-    <div>
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-9 h-9 bg-neon rounded-lg flex items-center justify-center"><svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
-        <div><div class="font-condensed font-900 text-white text-sm tracking-widest uppercase">Prime Shoe</div><div class="font-condensed font-700 text-neon text-xs tracking-[0.2em] uppercase">Jersey Hub</div></div>
+  <!-- Decorative circles -->
+  <div style="position:absolute;top:15%;right:8%;width:320px;height:320px;border-radius:50%;border:1px solid rgba(200,244,0,0.06);z-index:1;pointer-events:none;"></div>
+  <div style="position:absolute;top:25%;right:12%;width:200px;height:200px;border-radius:50%;border:1px solid rgba(200,244,0,0.1);z-index:1;pointer-events:none;"></div>
+
+  <div class="container" style="width:100%;">
+    <div class="hero-content animate-fade-up">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        <span class="hero-eyebrow-text">New Season · 2025 Drop</span>
       </div>
-      <p class="text-silver text-sm leading-relaxed mb-1">Premium football jerseys, studs & gear.</p>
-      <p class="text-neon/60 text-xs font-condensed uppercase tracking-widest">India's Trusted Football Store</p>
-      <p class="text-[#444] text-xs mt-4 italic">Demo website for Prime Shoe Jersey Hub</p>
-    </div>
-    <div>
-      <h4 class="font-condensed text-white font-700 uppercase tracking-widest text-sm mb-4">Quick Links</h4>
-      <ul class="space-y-2 text-sm text-silver">
-        <li><button onclick="showPage('home')" class="hover:text-neon transition-colors">Home</button></li>
-        <li><button onclick="showPage('shop')" class="hover:text-neon transition-colors">Shop All</button></li>
-        <li><button onclick="filterAndGo('jersey')" class="hover:text-neon transition-colors">Jerseys</button></li>
-        <li><button onclick="filterAndGo('shoes')" class="hover:text-neon transition-colors">Studs & Shoes</button></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-condensed text-white font-700 uppercase tracking-widest text-sm mb-4">Contact</h4>
-      <ul class="space-y-2 text-sm text-silver">
-        <li>📱 +91 98765 43210</li>
-        <li>📧 prime@jerseyhub.in</li>
-        <li>📍 Mumbai, India</li>
-        <li>⏰ Mon–Sat, 10am–8pm</li>
-      </ul>
+      <h1 class="hero-title">
+        UPGRADE<br/>
+        <span class="outline">YOUR</span><br/>
+        GAME
+      </h1>
+      <p class="hero-subtitle">Premium Jerseys, Studs &amp; Football Gear — Worn by Champions, Built for You</p>
+      <div class="hero-ctas">
+        <a href="shop.html" class="btn btn-neon btn-lg ripple-btn">Shop Now →</a>
+        <a href="shop.html?cat=jersey" class="btn btn-outline btn-lg">View Jerseys</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">500+</div>
+          <div class="hero-stat-label">Products</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">10K+</div>
+          <div class="hero-stat-label">Orders Shipped</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">4.9★</div>
+          <div class="hero-stat-label">Avg Rating</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">COD</div>
+          <div class="hero-stat-label">Available</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="border-t border-[#1A1A1A] pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#444]">
-    <span>© 2025 Prime Shoe Jersey Hub. All rights reserved.</span>
-    <span class="text-neon/50">Demo website — India's Trusted Football Store</span>
+  <div class="hero-dots" id="hero-dots"></div>
+</section>
+
+<!-- ============ TRUST BAR ============ -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="trust-icon">🚀</div>
+        <div class="trust-title">Fast Delivery</div>
+        <div class="trust-desc">2–5 working days PAN India</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">🛡️</div>
+        <div class="trust-title">100% Authentic</div>
+        <div class="trust-desc">Genuine premium gear only</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">💳</div>
+        <div class="trust-title">Cash on Delivery</div>
+        <div class="trust-desc">Pay when you receive</div>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">↩️</div>
+        <div class="trust-title">Easy Returns</div>
+        <div class="trust-desc">7-day hassle-free returns</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SHOP BY CATEGORY ============ -->
+<section class="section-pad">
+  <div class="container">
+    <div style="margin-bottom:48px;">
+      <div class="section-label reveal">Collections</div>
+      <h2 class="section-title reveal" style="margin-top:12px;">SHOP BY<br/>CATEGORY</h2>
+    </div>
+    <div class="category-grid">
+      <!-- Jerseys (large) -->
+      <a href="shop.html?cat=jersey" class="category-card reveal">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80" alt="Jerseys" loading="lazy" />
+        <div class="category-card-overlay">
+          <div class="category-name">JERSEYS</div>
+          <div class="category-count">6 Styles Available</div>
+          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+      <!-- Studs -->
+      <a href="shop.html?cat=shoes" class="category-card reveal delay-1">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Football Studs" loading="lazy" />
+        <div class="category-card-overlay">
+          <div class="category-name">STUDS</div>
+          <div class="category-count">5 Models Available</div>
+          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+      <!-- Accessories -->
+      <a href="shop.html?cat=accessories" class="category-card reveal delay-2">
+        <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80" alt="Accessories" loading="lazy" />
+        <div class="category-card-overlay">
+          <div class="category-name">GEAR</div>
+          <div class="category-count">3 Items Available</div>
+          <div class="category-cta">Shop Now <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="category-card-border"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PRODUCTS ============ -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label reveal">Top Picks</div>
+        <h2 class="section-title reveal" style="margin-top:12px;">BEST<br/>SELLERS</h2>
+      </div>
+      <a href="shop.html" class="btn btn-outline reveal">View All Products →</a>
+    </div>
+    <div class="grid-products" id="featured-products-grid">
+      <!-- Skeleton loading -->
+      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRANDS ============ -->
+<section style="padding:64px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--dark-2);">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-label reveal" style="justify-content:center;">Our Brands</div>
+      <h2 class="section-title reveal" style="margin-top:10px;font-size:clamp(1.5rem,4vw,2.5rem);">TRUSTED BY TOP<br/>FOOTBALL BRANDS</h2>
+    </div>
+    <div class="brands-grid">
+      <div class="brand-item reveal"><div class="brand-logo">ADIDAS</div></div>
+      <div class="brand-item reveal delay-1"><div class="brand-logo">NIKE</div></div>
+      <div class="brand-item reveal delay-2"><div class="brand-logo">PUMA</div></div>
+      <div class="brand-item reveal delay-3"><div class="brand-logo">MIZUNO</div></div>
+      <div class="brand-item reveal delay-4"><div class="brand-logo">JORDAN</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL PROOF / REVIEWS ============ -->
+<section class="section-pad">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label reveal" style="justify-content:center;">Customer Love</div>
+      <h2 class="section-title reveal" style="margin-top:12px;">5,000+ HAPPY<br/>CUSTOMERS</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;" class="reveal">
+        <span style="color:var(--neon);font-size:1.2rem;">★★★★★</span>
+        <span style="font-family:var(--font-cond);font-weight:700;font-size:1rem;">4.9 / 5</span>
+        <span style="color:var(--silver);font-size:13px;">average rating</span>
+      </div>
+    </div>
+    <div class="review-grid">
+      <div class="review-card reveal">
+        <div class="review-header">
+          <div class="review-avatar">A</div>
+          <div><div class="review-name">Arjun Mehta</div><div class="review-loc">Mumbai · ✓ Verified</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Got the Real Madrid kit in 2 days! Absolutely premium quality — the badge stitching is perfect. Best football store in India. 🔥"</div>
+        <div class="review-verified">✓ Verified Purchase · Real Madrid Kit</div>
+      </div>
+      <div class="review-card reveal delay-1">
+        <div class="review-header">
+          <div class="review-avatar" style="background:#60a5fa;">S</div>
+          <div><div class="review-name">Sneha Patel</div><div class="review-loc">Bangalore · ✓ Verified</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Finally a store that delivers what they promise. PSG jersey quality is amazing and fits perfectly. Will definitely order again!"</div>
+        <div class="review-verified">✓ Verified Purchase · PSG Black Edition</div>
+      </div>
+      <div class="review-card reveal delay-2">
+        <div class="review-header">
+          <div class="review-avatar" style="background:#f97316;">R</div>
+          <div><div class="review-name">Raj Kumar</div><div class="review-loc">Delhi · ✓ Verified</div></div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Nike Mercurial studs — quality is top class. COD made it super easy. Packed super well, arrived in 3 days. 100% recommend! ⚽"</div>
+        <div class="review-verified">✓ Verified Purchase · Nike Mercurial Vapor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM GRID ============ -->
+<section style="padding:0 0 80px;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div class="section-label reveal" style="justify-content:center;">Social</div>
+      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">@PRIMESHOEJERSEYH</h2>
+      <p style="color:var(--silver);font-size:14px;margin-top:8px;" class="reveal">Follow us for daily drops, styling inspo & exclusive deals</p>
+    </div>
+    <div class="insta-grid reveal">
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1556906781-9a412961a28b?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+      <div class="insta-tile"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=300&q=70" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <a href="https://instagram.com" target="_blank" class="btn btn-outline reveal">Follow on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
+          <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--dark);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 1.5c4.69 0 8.5 3.81 8.5 8.5S16.69 20.5 12 20.5 3.5 16.69 3.5 12 7.31 3.5 12 3.5zM9 16.5v-9l7 4.5-7 4.5z"/></svg>
+          </div>
+          <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
+        </a>
+        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear. Authentic quality, unbeatable prices.</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" class="footer-social-btn" title="Instagram">📷</a>
+          <a href="https://wa.me/919876543210" target="_blank" class="footer-social-btn" title="WhatsApp">💬</a>
+          <a href="mailto:prime@jerseyhub.in" class="footer-social-btn" title="Email">✉️</a>
+        </div>
+      </div>
+      <!-- Quick Links -->
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="shop.html" class="footer-link">Shop All</a>
+          <a href="shop.html?cat=jersey" class="footer-link">Jerseys</a>
+          <a href="shop.html?cat=shoes" class="footer-link">Studs & Shoes</a>
+          <a href="shop.html?cat=accessories" class="footer-link">Accessories</a>
+          <a href="tracking.html" class="footer-link">Track Order</a>
+        </div>
+      </div>
+      <!-- Policies -->
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Return Policy</a>
+          <a href="#" class="footer-link">Size Guide</a>
+          <a href="#" class="footer-link">FAQs</a>
+          <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
+        </div>
+      </div>
+      <!-- Contact -->
+      <div>
+        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Mumbai, Maharashtra, India</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
+        <div style="margin-top:16px;">
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-sm ripple-btn" style="background:var(--green);color:white;display:inline-flex;align-items:center;gap:6px;">
+            💬 Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved. | India's Trusted Football Store</div>
+      <div class="footer-payments">
+        <div class="payment-badge">PhonePe</div>
+        <div class="payment-badge">UPI</div>
+        <div class="payment-badge">Visa</div>
+        <div class="payment-badge">Mastercard</div>
+        <div class="payment-badge">COD</div>
+      </div>
+    </div>
   </div>
 </footer>
 
-<!-- ===================== JAVASCRIPT ===================== -->
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/app.js"></script>
 <script>
+// Search toggle
+document.getElementById('search-toggle').addEventListener('click', () => {
+  const wrap = document.getElementById('nav-search-wrap');
+  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
+});
 
-  // ======================== PRODUCT DATA ========================
-  // Extended with pdp-specific fields: desc, sizes, specs, stock, reviews, thumbs
-  const products = [
-    {
-      id:1, category:'jersey', name:'Real Madrid Home Kit 2025',
-      price:1299, originalPrice:1799,
-      image:'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800&q=85',
-      badge:'bestseller', featured:true,
-      stock: 5, stockPct: 28,
-      rating: 4.9, reviewCount: 312,
-      desc: 'Gear up in the legendary white of Real Madrid. Crafted with Adidas AeroReady technology for breathability and comfort on the pitch. Official 2025 home kit with authentic badge and sponsor detailing.',
-      sizes: ['S','M','L','XL','XXL'],
-      specs: [['Club', 'Real Madrid'], ['Season', '2025/26'], ['Type', 'Home Kit'], ['Material', 'AeroReady Polyester'], ['Fit', 'Regular'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=70',
-        'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Arjun M.', city:'Mumbai', rating:5, text:'Amazing quality jersey, totally worth it 🔥 The fabric feels premium and the badge is perfectly stitched. Just like the original!', date:'2 days ago' },
-        { name:'Rohit S.', city:'Delhi', rating:5, text:'Fast delivery and perfect fitting! Ordered L size and it fits like a glove. My go-to shop for football gear now 🙌', date:'1 week ago' },
-        { name:'Priya K.', city:'Bangalore', rating:4, text:'Great product overall. The printing quality is excellent. Delivered in 3 days which was faster than expected. Highly recommended.', date:'2 weeks ago' },
-      ]
-    },
-    {
-      id:2, category:'jersey', name:'Barcelona Away Jersey',
-      price:1199, originalPrice:1599,
-      image:'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=85',
-      badge:'new', featured:true,
-      stock: 12, stockPct: 60,
-      rating: 4.7, reviewCount: 187,
-      desc: "Show your Barça pride with the stunning 2025 away jersey. Designed with Nike Dri-FIT technology to keep you cool and focused. The iconic Blaugrana club crest printed with precision — turn heads on and off the pitch.",
-      sizes: ['S','M','L','XL'],
-      specs: [['Club', 'FC Barcelona'], ['Season', '2025/26'], ['Type', 'Away Kit'], ['Material', 'Dri-FIT Polyester'], ['Fit', 'Slim'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=70',
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Karan P.', city:'Pune', rating:5, text:'Mes que un club! Got this for my birthday and absolutely love it. The colour is vibrant and it washes well too 💙❤️', date:'3 days ago' },
-        { name:'Suresh N.', city:'Chennai', rating:4, text:'Good quality jersey. The stitching is clean and the logo looks authentic. Delivery was fast. Will buy again.', date:'10 days ago' },
-        { name:'Amit R.', city:'Hyderabad', rating:5, text:'Ordered for my son and he was over the moon! Perfect gift for any Barca fan. Quality is excellent for the price.', date:'3 weeks ago' },
-      ]
-    },
-    {
-      id:3, category:'jersey', name:'Manchester City Blue Kit',
-      price:1349, originalPrice:1799,
-      image:'https://images.unsplash.com/photo-1516567727497-f3bfe2b4a1f0?w=800&q=85',
-      badge:'sale', featured:false,
-      stock: 3, stockPct: 15,
-      rating: 4.8, reviewCount: 94,
-      desc: "Represent the sky blues with Manchester City's iconic home kit. Featuring Puma DryCELL technology for moisture management. A must-have for every City fan — crafted for champions.",
-      sizes: ['S','M','L','XL','XXL'],
-      specs: [['Club', 'Manchester City'], ['Season', '2025/26'], ['Type', 'Home Kit'], ['Material', 'DryCELL Polyester'], ['Fit', 'Regular'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1516567727497-f3bfe2b4a1f0?w=200&q=70',
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Vijay T.', city:'Kolkata', rating:5, text:'Great jersey! The sky blue colour is exactly as shown. Fabric is breathable — wore it for a 90-minute match, stayed comfortable.', date:'5 days ago' },
-        { name:'Deepak L.', city:'Jaipur', rating:5, text:'Fast delivery and perfect fitting! Only 3 left when I ordered — glad I ordered on time. Worth every rupee! 🔵', date:'1 week ago' },
-        { name:'Nikhil B.', city:'Ahmedabad', rating:4, text:'Good product but slight delay in shipping. Quality is nice though — my City fan friends loved it too.', date:'2 weeks ago' },
-      ]
-    },
-    {
-      id:4, category:'jersey', name:'PSG Classic Black Edition',
-      price:1499, originalPrice:1999,
-      image:'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=800&q=85',
-      badge:'bestseller', featured:true,
-      stock: 8, stockPct: 40,
-      rating: 4.9, reviewCount: 246,
-      desc: "Paris Saint-Germain's stunning black edition — where fashion meets football. This limited edition kit features premium Jordan branding and the iconic PSG Eiffel Tower logo. Stand out from the crowd.",
-      sizes: ['S','M','L','XL','XXL'],
-      specs: [['Club', 'Paris Saint-Germain'], ['Season', '2024/25'], ['Type', 'Special Edition'], ['Material', 'Jordan Dri-FIT'], ['Fit', 'Regular'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1556906781-9a412961a28b?w=200&q=70',
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Sahil M.', city:'Delhi', rating:5, text:'Hands down the best jersey I own. The black edition looks fire 🖤❤️💙 Everyone at the match asked where I got it!', date:'1 day ago' },
-        { name:'Rahul K.', city:'Mumbai', rating:5, text:'Amazing quality and fast shipping. The Jordan collab makes it extra special. Fabric is top class. 10/10 product!', date:'4 days ago' },
-        { name:'Aditya S.', city:'Pune', rating:5, text:'Perfect gift for my PSG fan brother. He was absolutely thrilled! Quality is even better than expected for this price.', date:'2 weeks ago' },
-      ]
-    },
-    {
-      id:5, category:'jersey', name:'Brazil National Team Jersey',
-      price:1099, originalPrice:1499,
-      image:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=85',
-      badge:'new', featured:false,
-      stock: 20, stockPct: 80,
-      rating: 4.6, reviewCount: 128,
-      desc: "The iconic Canary Yellow of Brazil — the most loved football nation. Wear the colours of Pelé, Ronaldo and Neymar. Premium polyester with moisture-wicking finish, perfect for the Indian summer.",
-      sizes: ['S','M','L','XL'],
-      specs: [['Team', 'Brazil National'], ['Season', '2025/26'], ['Type', 'Home Kit'], ['Material', 'Nike Dri-FIT'], ['Fit', 'Regular'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&q=70',
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Varun G.', city:'Bangalore', rating:5, text:'Brazil jersey at this price is unbeatable! Colour is vibrant yellow and fits perfectly. Arrived in 2 days. Brilliant! 🇧🇷', date:'6 days ago' },
-        { name:'Chirag P.', city:'Surat', rating:4, text:'Good jersey, fabric is comfortable for playing in. Slightly thin but good for warm weather. Would recommend.', date:'2 weeks ago' },
-        { name:'Manish D.', city:'Indore', rating:5, text:'Perfect product! Got matching one for me and my friend. We wore them for 5-a-side and got compliments all game!', date:'3 weeks ago' },
-      ]
-    },
-    {
-      id:6, category:'jersey', name:'Argentina World Cup 2022',
-      price:1249, originalPrice:1699,
-      image:'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&q=85',
-      badge:'sale', featured:false,
-      stock: 7, stockPct: 35,
-      rating: 4.8, reviewCount: 394,
-      desc: "The legendary shirt that won the World Cup 2022 — Messi's crowning glory. The Albiceleste stripes are recreated in premium quality fabric. Own a piece of football history.",
-      sizes: ['S','M','L','XL','XXL'],
-      specs: [['Team', 'Argentina National'], ['Season', '2022 World Cup'], ['Type', 'Home Kit'], ['Material', 'AeroReady'], ['Fit', 'Regular'], ['Care', 'Machine Wash 30°C']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=200&q=70',
-        'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=200&q=70',
-        'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Siddharth V.', city:'Mumbai', rating:5, text:"World Cup winning jersey! 🏆 The best purchase I've made. Wearing this for my 5-a-side team every weekend. Love it!", date:'2 days ago' },
-        { name:'Rohan T.', city:'Delhi', rating:5, text:'Fast delivery and perfect fitting! Messi fans NEED this. Quality is superb. Stripes look exactly like the real thing.', date:'1 week ago' },
-        { name:'Anshul M.', city:'Chandigarh', rating:4, text:'Great jersey. Bought it after watching the World Cup final. The quality is better than I expected for this price point.', date:'1 month ago' },
-      ]
-    },
-    {
-      id:7, category:'shoes', name:'Nike Mercurial Vapor Pro',
-      price:3499, originalPrice:4599,
-      image:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=85',
-      badge:'bestseller', featured:true,
-      stock: 4, stockPct: 20,
-      rating: 4.9, reviewCount: 203,
-      desc: "Built for speed. The Nike Mercurial Vapor Pro features a one-piece Vaporposite upper for a sock-like fit and Acc technology for All Conditions Control. Dominate every surface.",
-      sizes: ['UK 6','UK 7','UK 8','UK 9','UK 10','UK 11'],
-      specs: [['Brand', 'Nike'], ['Model', 'Mercurial Vapor Pro'], ['Surface', 'Firm Ground (FG)'], ['Upper', 'Vaporposite'], ['Sole', 'Conical studs'], ['Weight', '180g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70',
-        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&q=70',
-        'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Akash N.', city:'Bangalore', rating:5, text:'Incredible studs! Lightweight and fits like a glove. My first touch improved instantly. Worth every rupee 🔥⚽', date:'3 days ago' },
-        { name:'Tarun R.', city:'Pune', rating:5, text:'Best football shoes I have owned. The grip on grass is unbelievable. Got it for my weekend league — massive upgrade!', date:'1 week ago' },
-        { name:'Karan D.', city:'Mumbai', rating:5, text:'Fast delivery, perfect fitting! Only size 9 was left and luckily it fit. Packaging was premium too. Great experience.', date:'2 weeks ago' },
-      ]
-    },
-    {
-      id:8, category:'shoes', name:'Adidas Predator Edge FG',
-      price:3299, originalPrice:4299,
-      image:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=85',
-      badge:'new', featured:true,
-      stock: 9, stockPct: 45,
-      rating: 4.7, reviewCount: 156,
-      desc: "Control the game with the Predator Edge. Zone Skin technology creates rough zones for enhanced ball control. Strap system for a locked-in feel. Designed for the player who dominates midfield.",
-      sizes: ['UK 6','UK 7','UK 8','UK 9','UK 10','UK 11'],
-      specs: [['Brand', 'Adidas'], ['Model', 'Predator Edge FG'], ['Surface', 'Firm Ground (FG)'], ['Upper', 'Zone Skin + Strap'], ['Sole', 'Hybrid studs'], ['Weight', '220g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&q=70',
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70',
-        'https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Harish V.', city:'Chennai', rating:5, text:'The Predator strap is a game changer! No more loose boots mid-game. Superb control and passing accuracy improved too.', date:'1 day ago' },
-        { name:'Mayur J.', city:'Ahmedabad', rating:4, text:'Good studs. Takes a couple of sessions to break in but after that they feel fantastic. Highly recommend for midfielders!', date:'2 weeks ago' },
-        { name:'Saurabh M.', city:'Nagpur', rating:5, text:'Amazing quality jersey- wait, SHOES! 😄 These are fire. Grip is excellent on grass. Delivery in 2 days. Love this shop!', date:'3 weeks ago' },
-      ]
-    },
-    {
-      id:9, category:'shoes', name:'Puma Future Z Cleats',
-      price:2899, originalPrice:3799,
-      image:'https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=800&q=85',
-      badge:'sale', featured:false,
-      stock: 6, stockPct: 30,
-      rating: 4.6, reviewCount: 89,
-      desc: "Instinct meets innovation. The Puma Future Z features an FUZIONFIT+ compression bandage for adaptive support. Unique asymmetric lacing for a wider strike zone. Made for agile, creative players.",
-      sizes: ['UK 6','UK 7','UK 8','UK 9','UK 10'],
-      specs: [['Brand', 'Puma'], ['Model', 'Future Z'], ['Surface', 'Firm Ground (FG)'], ['Upper', 'FUZIONFIT+ Bandage'], ['Sole', 'GripControl studs'], ['Weight', '195g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1608231387042-66d1773d3028?w=200&q=70',
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70',
-        'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Yash P.', city:'Rajkot', rating:5, text:'Puma Future Z is so comfortable! The bandage wraps perfectly. Great for my position as a winger — lots of quick direction changes.', date:'4 days ago' },
-        { name:'Ravi S.', city:'Lucknow', rating:4, text:'Good cleats for the price. Well-made and delivered on time. The colourway is super vibrant too — gets lots of attention!', date:'2 weeks ago' },
-        { name:'Anand K.', city:'Coimbatore', rating:5, text:'Best purchase from Prime Jersey Hub so far! Second pair of shoes from here. Never disappointed. Keep it up! 🏆', date:'1 month ago' },
-      ]
-    },
-    {
-      id:10, category:'shoes', name:'Nike Phantom GT2 FG',
-      price:3799, originalPrice:4999,
-      image:'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=800&q=85',
-      badge:'bestseller', featured:false,
-      stock: 3, stockPct: 15,
-      rating: 4.8, reviewCount: 178,
-      desc: "The striker's secret weapon. Nike Phantom GT2 features a textured upper for enhanced first touch and Ghost Lace system for uninterrupted strike zones. Clinical finishing starts with the right boots.",
-      sizes: ['UK 7','UK 8','UK 9','UK 10','UK 11'],
-      specs: [['Brand', 'Nike'], ['Model', 'Phantom GT2 FG'], ['Surface', 'Firm Ground (FG)'], ['Upper', 'Ghost Lace System'], ['Sole', 'Bladed studs'], ['Weight', '210g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=200&q=70',
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70',
-        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Abhishek G.', city:'Delhi', rating:5, text:'Ghost Lace is a masterpiece! Clean striking surface is exactly what a striker needs. These helped me score a hat-trick last week! ⚽⚽⚽', date:'2 days ago' },
-        { name:'Sandeep M.', city:'Hyderabad', rating:5, text:'Premium boots at a great price. Fast delivery. Fits true to size. The phantom range never disappoints. My 3rd pair!', date:'10 days ago' },
-        { name:'Gautam R.', city:'Kolkata', rating:4, text:'Excellent boots. Took a while to arrive (5 days) but worth the wait. Quality is top notch and very comfortable from day 1.', date:'3 weeks ago' },
-      ]
-    },
-    {
-      id:11, category:'shoes', name:'Adidas Copa Mundial Stud',
-      price:2799, originalPrice:3599,
-      image:'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=800&q=85',
-      badge:'new', featured:false,
-      stock: 15, stockPct: 70,
-      rating: 4.7, reviewCount: 112,
-      desc: "A classic reborn. The Copa Mundial is the most iconic football boot ever made. Premium kangaroo leather upper for unmatched touch and comfort. Worn by legends across generations.",
-      sizes: ['UK 6','UK 7','UK 8','UK 9','UK 10','UK 11'],
-      specs: [['Brand', 'Adidas'], ['Model', 'Copa Mundial'], ['Surface', 'Firm Ground (FG)'], ['Upper', 'Premium Leather'], ['Sole', 'Conical studs'], ['Weight', '280g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=200&q=70',
-        'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=200&q=70',
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Sameer A.', city:'Mumbai', rating:5, text:'The Copa Mundial is a legend and this is a great version. Classic look, premium feel. Leather moulds to your foot perfectly.', date:'1 week ago' },
-        { name:'Dinesh P.', city:'Pune', rating:4, text:'Solid boots. Old school design but timeless. Touch on the ball is incredible — far better than synthetic uppers.', date:'2 weeks ago' },
-        { name:'Rakesh B.', city:'Nashik', rating:5, text:'My grandfather had the original Copa Mundials! Bought these to carry on the tradition. Prime Jersey Hub delivered perfectly 🙏', date:'1 month ago' },
-      ]
-    },
-    {
-      id:12, category:'accessories', name:'Pro Football Training Gloves',
-      price:699, originalPrice:999,
-      image:'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800&q=85',
-      badge:'new', featured:false,
-      stock: 25, stockPct: 90,
-      rating: 4.5, reviewCount: 67,
-      desc: "Professional goalkeeper gloves with negative cut for a tight, responsive feel. Latex palm for superior grip in all weather conditions. Pre-curved finger design for natural ball-handling position.",
-      sizes: ['Size 7','Size 8','Size 9','Size 10'],
-      specs: [['Type', 'Goalkeeper Gloves'], ['Cut', 'Negative Cut'], ['Palm', 'Flat Latex'], ['Backhand', 'Foam padding'], ['Closure', 'Adjustable wrist strap'], ['Use', 'Training / Match']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=200&q=70',
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&q=70',
-        'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Arun G.', city:'Kerala', rating:4, text:'Good gloves for training. Grip is solid and the latex holds up well. Great value for the price — better than expected!', date:'1 week ago' },
-        { name:'Venkat S.', city:'Chennai', rating:5, text:'These are brilliant for my weekend league. Catches everything! Wrist strap is very secure. Will buy another pair soon.', date:'2 weeks ago' },
-        { name:'Harsh V.', city:'Surat', rating:4, text:'Nice gloves. Comfortable fit and decent grip. Delivery was fast. Would have liked more colour options but quality is good.', date:'1 month ago' },
-      ]
-    },
-    {
-      id:13, category:'accessories', name:'Premium Match Football',
-      price:1499, originalPrice:1999,
-      image:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&q=85',
-      badge:'bestseller', featured:false,
-      stock: 18, stockPct: 75,
-      rating: 4.8, reviewCount: 214,
-      desc: "Match-grade football with 32-panel thermally bonded construction for consistent flight and bounce. FIFA approved size 5. Waterproof outer coating for all-weather performance.",
-      sizes: ['Size 4', 'Size 5'],
-      specs: [['Type', 'Match Football'], ['Panels', '32-panel thermally bonded'], ['Size', '5 (Match standard)'], ['Material', 'PU Outer + Latex bladder'], ['Approval', 'FIFA Inspected'], ['Weight', '410–450g']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&q=70',
-        'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=200&q=70',
-        'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Praful M.', city:'Nagpur', rating:5, text:'Best football I have bought. The bounce is perfect and holds air really well. Used it for 3 months now — still going strong! ⚽', date:'2 days ago' },
-        { name:'Suraj T.', city:'Aurangabad', rating:5, text:'Great match ball. Flight is consistent and the waterproof coat helps during monsoon matches. Fast delivery. Very happy!', date:'1 week ago' },
-        { name:'Rajan K.', city:'Bhopal', rating:4, text:'Good ball for the price. Does not feel like a cheap training ball at all. Very close to professional match ball quality.', date:'3 weeks ago' },
-      ]
-    },
-    {
-      id:14, category:'accessories', name:'Shin Guards – Pro Series',
-      price:499, originalPrice:699,
-      image:'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&q=85',
-      badge:'sale', featured:false,
-      stock: 30, stockPct: 95,
-      rating: 4.4, reviewCount: 43,
-      desc: "Full-protection shin guards for the serious player. High-density PE shell absorbs impact. Internal foam backing for comfort. Lightweight and low-profile — won't slow you down.",
-      sizes: ['S (25–35kg)', 'M (35–50kg)', 'L (50–70kg)', 'XL (70kg+)'],
-      specs: [['Type', 'Shin Guards'], ['Shell', 'High-Density PE'], ['Backing', 'EVA Foam'], ['Closure', 'Ankle straps'], ['Profile', 'Low-profile'], ['Weight', '120g/pair']],
-      thumbs: [
-        'https://images.unsplash.com/photo-1517649763962-0c623066013b?w=200&q=70',
-        'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=200&q=70',
-        'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=200&q=70',
-      ],
-      reviews: [
-        { name:'Dev P.', city:'Rajkot', rating:4, text:'Good shin guards for the price. Lightweight and fit well under socks. Comfortable for 90+ minutes. Recommended for casual to club level.', date:'5 days ago' },
-        { name:'Manan S.', city:'Vadodara', rating:5, text:'Great value! Much better than the ones from local sports shops at double the price. Fast delivery too. Will order more gear soon.', date:'3 weeks ago' },
-        { name:'Piyush A.', city:'Jaipur', rating:4, text:'Decent quality shin guards. Do the job well. Only wish they had more cushioning at the ankle but overall worth buying at this price.', date:'1 month ago' },
-      ]
-    },
-  ];
-
-  // ======================== CART STATE ========================
-  let cart = [];
-  let currentFilter = 'all';
-  let currentProductId = null;
-  let pdpQty = 1;
-  let pdpSelectedSize = null;
-
-  const badges = {
-    bestseller: { label: 'Best Seller', cls: 'badge-bestseller' },
-    new: { label: 'New', cls: 'badge-new' },
-    sale: { label: 'Sale', cls: 'badge-sale' },
-  };
-
-  // ======================== PRODUCT CARD HTML ========================
-  function productCardHTML(p) {
-    const discount = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
-    const badge = badges[p.badge];
-    return `
-      <div class="product-card rounded-2xl overflow-hidden group cursor-pointer" onclick="openProductPage(${p.id})">
-        <div class="relative overflow-hidden aspect-square bg-[#0D0D0D]">
-          <img src="${p.image}" alt="${p.name}" class="card-img w-full h-full object-cover" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-          <span class="absolute top-3 left-3 ${badge.cls} text-[10px] font-condensed font-700 px-2.5 py-1 rounded-full uppercase tracking-wider">${badge.label}</span>
-          <span class="absolute top-3 right-3 bg-black/80 text-neon text-[10px] font-condensed font-700 px-2 py-1 rounded-lg">-${discount}%</span>
-          <div class="absolute inset-x-0 bottom-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <button onclick="event.stopPropagation(); addToCart(${p.id})" class="btn-neon w-full py-2.5 rounded-xl text-xs uppercase tracking-widest">+ Add to Cart</button>
-          </div>
-        </div>
-        <div class="p-4">
-          <h3 class="font-body font-600 text-white text-sm leading-snug mb-2 line-clamp-2">${p.name}</h3>
-          <div class="flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2">
-              <span class="font-condensed font-700 text-neon text-xl">₹${p.price.toLocaleString()}</span>
-              <span class="text-silver text-xs line-through">₹${p.originalPrice.toLocaleString()}</span>
-            </div>
-            <button onclick="event.stopPropagation(); addToCart(${p.id})"
-              class="w-9 h-9 bg-neon/10 hover:bg-neon text-neon hover:text-dark border border-neon/30 hover:border-neon rounded-lg flex items-center justify-center transition-all duration-200 flex-shrink-0" title="Add to Cart">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>`;
+// Render featured products after skeleton delay
+setTimeout(() => {
+  const grid = document.getElementById('featured-products-grid');
+  if (grid) {
+    const featured = getFeaturedProducts().slice(0, 8);
+    grid.innerHTML = featured.map(p => buildProductCard(p)).join('');
   }
-
-  // ======================== RENDER GRIDS ========================
-  function renderFeatured() {
-    const featured = products.filter(p => p.featured).slice(0, 4);
-    document.getElementById('featured-grid').innerHTML = featured.map(productCardHTML).join('');
-  }
-
-  function renderShop(filter = 'all') {
-    const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
-    document.getElementById('product-count').textContent = filtered.length;
-    document.getElementById('shop-grid').innerHTML = filtered.map(productCardHTML).join('');
-  }
-
-  // ======================== FILTER ========================
-  function filterProducts(cat) {
-    currentFilter = cat;
-    renderShop(cat);
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.classList.remove('bg-neon', 'text-dark', 'border-neon');
-      btn.classList.add('border-[#2A2A2A]', 'text-silver');
-    });
-    const active = document.getElementById('filter-' + cat);
-    active.classList.add('bg-neon', 'text-dark', 'border-neon');
-    active.classList.remove('border-[#2A2A2A]', 'text-silver');
-  }
-
-  function filterAndGo(cat) {
-    currentFilter = cat;
-    showPage('shop');
-    setTimeout(() => filterProducts(cat), 50);
-  }
-
-  // ======================== OPEN PRODUCT PAGE ========================
-  function openProductPage(productId) {
-    const p = products.find(x => x.id === productId);
-    if (!p) return;
-    currentProductId = productId;
-    pdpQty = 1;
-    pdpSelectedSize = null;
-
-    // Breadcrumb
-    document.getElementById('pdp-breadcrumb').textContent = p.name;
-
-    // Main image + thumbs
-    document.getElementById('pdp-main-img').src = p.image;
-    const thumbsContainer = document.getElementById('pdp-thumbs');
-    thumbsContainer.innerHTML = p.thumbs.map((src, i) => `
-      <div class="pdp-thumb ${i===0?'active':''} w-20 h-24 md:w-24 md:h-28 flex-shrink-0" onclick="pdpSetImage('${src}', this)">
-        <img src="${src}" alt="view ${i+1}" class="w-full h-full object-cover" />
-      </div>`).join('');
-
-    // Badge
-    const badgeEl = document.getElementById('pdp-badge');
-    const b = badges[p.badge];
-    badgeEl.textContent = b.label;
-    badgeEl.className = `absolute top-4 left-4 text-xs font-condensed font-700 px-3 py-1.5 rounded-full uppercase tracking-wider ${b.cls}`;
-
-    // Discount pill
-    const disc = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
-    document.getElementById('pdp-discount-pill').textContent = `-${disc}% OFF`;
-
-    // Category tag
-    const catLabels = { jersey:'Football Jersey', shoes:'Football Studs', accessories:'Sports Gear' };
-    document.getElementById('pdp-category-tag').textContent = catLabels[p.category] || p.category;
-
-    // Stock status
-    const stockEl = document.getElementById('pdp-stock-status');
-    if (p.stock <= 5) {
-      stockEl.textContent = '⚡ Limited Stock';
-      stockEl.className = 'text-xs font-condensed font-700 uppercase tracking-wider px-3 py-1 rounded-full bg-orange-500/15 text-orange-400 border border-orange-500/30';
-    } else {
-      stockEl.textContent = '✓ In Stock';
-      stockEl.className = 'text-xs font-condensed font-700 uppercase tracking-wider px-3 py-1 rounded-full bg-green-500/15 text-green-400 border border-green-500/30';
-    }
-
-    // Name, desc
-    document.getElementById('pdp-name').textContent = p.name;
-    document.getElementById('pdp-desc').textContent = p.desc;
-
-    // Rating stars
-    renderStars('pdp-stars', p.rating, 'w-4 h-4');
-    document.getElementById('pdp-rating-val').textContent = p.rating.toFixed(1) + '/5';
-    document.getElementById('pdp-review-count').textContent = `(${p.reviewCount} reviews)`;
-
-    // Price
-    document.getElementById('pdp-price').textContent = `₹${p.price.toLocaleString()}`;
-    document.getElementById('pdp-original-price').textContent = `₹${p.originalPrice.toLocaleString()}`;
-    const saved = p.originalPrice - p.price;
-    document.getElementById('pdp-savings').textContent = `You save ₹${saved.toLocaleString()}`;
-
-    // Urgency
-    const urgencyEl = document.getElementById('pdp-urgency');
-    if (p.stock <= 8) {
-      urgencyEl.classList.remove('hidden');
-      document.getElementById('pdp-urgency-text').textContent = `Only ${p.stock} left in stock — order soon!`;
-      document.getElementById('pdp-stock-bar').style.width = `${p.stockPct}%`;
-      document.getElementById('pdp-stock-pct').textContent = `${p.stockPct}% sold`;
-    } else {
-      urgencyEl.classList.add('hidden');
-    }
-
-    // Sizes
-    const sizeSection = document.getElementById('pdp-size-section');
-    const sizesContainer = document.getElementById('pdp-sizes');
-    if (p.sizes && p.sizes.length > 0) {
-      sizeSection.classList.remove('hidden');
-      sizesContainer.innerHTML = p.sizes.map((s, i) => `
-        <button class="size-btn ${i===0?'selected':''}" onclick="pdpSelectSize(this, '${s}')">${s}</button>`).join('');
-      pdpSelectedSize = p.sizes[0];
-    } else {
-      sizeSection.classList.add('hidden');
-    }
-
-    // Qty reset
-    document.getElementById('pdp-qty-display').textContent = '1';
-
-    // Specs
-    const specsContainer = document.getElementById('pdp-specs');
-    specsContainer.innerHTML = p.specs.map(([label, val]) => `
-      <div class="spec-row"><span class="spec-label">${label}</span><span class="spec-value">${val}</span></div>`).join('');
-
-    // Reviews
-    renderReviews(p);
-
-    // Related products
-    renderRelated(p);
-
-    showPage('product');
-  }
-
-  // ======================== STAR RENDERER ========================
-  function renderStars(containerId, rating, sizeClass = 'w-4 h-4') {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    let html = '';
-    for (let i = 1; i <= 5; i++) {
-      if (rating >= i) {
-        html += `<svg class="${sizeClass} text-neon fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
-      } else if (rating >= i - 0.5) {
-        html += `<svg class="${sizeClass} text-neon fill-current" viewBox="0 0 24 24"><path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4V6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/></svg>`;
-      } else {
-        html += `<svg class="${sizeClass} text-[#333] fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
-      }
-    }
-    container.innerHTML = html;
-  }
-
-  // ======================== REVIEWS ========================
-  function renderReviews(p) {
-    // Big star summary
-    renderStars('pdp-review-stars-big', p.rating, 'w-5 h-5');
-    document.getElementById('pdp-review-score').textContent = p.rating.toFixed(1);
-    document.getElementById('pdp-review-total').textContent = `${p.reviewCount} verified reviews`;
-
-    // Individual review cards
-    document.getElementById('pdp-reviews').innerHTML = p.reviews.map(r => `
-      <div class="review-card transition-colors">
-        <div class="flex items-start justify-between mb-3">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-neon/10 border border-neon/20 flex items-center justify-center font-condensed font-700 text-neon text-base flex-shrink-0">
-              ${r.name.charAt(0)}
-            </div>
-            <div>
-              <div class="text-white font-600 text-sm">${r.name}</div>
-              <div class="text-silver text-xs">${r.city} · ${r.date}</div>
-            </div>
-          </div>
-          <span class="text-[10px] font-condensed font-700 text-green-400 bg-green-400/10 border border-green-400/20 px-2 py-0.5 rounded-full uppercase tracking-wide">✓ Verified</span>
-        </div>
-        <div class="flex gap-0.5 mb-2">
-          ${Array.from({length:5}, (_, i) => `<svg class="w-3.5 h-3.5 ${i < r.rating ? 'text-neon' : 'text-[#333]'} fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`).join('')}
-        </div>
-        <p class="text-silver text-sm leading-6">${r.text}</p>
-      </div>`).join('');
-  }
-
-  // ======================== RELATED PRODUCTS ========================
-  function renderRelated(p) {
-    const related = products
-      .filter(x => x.id !== p.id && x.category === p.category)
-      .slice(0, 4);
-    const grid = document.getElementById('pdp-related');
-    grid.innerHTML = related.map(r => {
-      const disc = Math.round(((r.originalPrice - r.price) / r.originalPrice) * 100);
-      const b = badges[r.badge];
-      return `
-        <div class="related-card" onclick="openProductPage(${r.id})">
-          <div class="relative overflow-hidden aspect-square bg-[#0D0D0D]">
-            <img src="${r.image}" alt="${r.name}" class="related-img w-full h-full object-cover" loading="lazy" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-            <span class="absolute top-2.5 left-2.5 ${b.cls} text-[9px] font-condensed font-700 px-2 py-0.5 rounded-full uppercase tracking-wider">${b.label}</span>
-            <span class="absolute top-2.5 right-2.5 bg-black/80 text-neon text-[9px] font-condensed font-700 px-1.5 py-0.5 rounded-md">-${disc}%</span>
-          </div>
-          <div class="p-3">
-            <h4 class="text-white text-xs font-600 leading-snug mb-2 line-clamp-2">${r.name}</h4>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="text-neon font-condensed font-700 text-base">₹${r.price.toLocaleString()}</span>
-                <span class="text-silver text-xs line-through">₹${r.originalPrice.toLocaleString()}</span>
-              </div>
-              <button onclick="event.stopPropagation(); addToCart(${r.id})"
-                class="w-7 h-7 bg-neon/10 hover:bg-neon text-neon hover:text-dark border border-neon/30 hover:border-neon rounded-lg flex items-center justify-center transition-all text-xs font-bold">+</button>
-            </div>
-          </div>
-        </div>`;
-    }).join('');
-  }
-
-  // ======================== PDP ACTIONS ========================
-  function pdpSetImage(src, thumbEl) {
-    document.getElementById('pdp-main-img').src = src;
-    document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
-    thumbEl.classList.add('active');
-  }
-
-  function pdpSelectSize(btn, size) {
-    pdpSelectedSize = size;
-    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  }
-
-  function pdpChangeQty(delta) {
-    pdpQty = Math.max(1, Math.min(10, pdpQty + delta));
-    document.getElementById('pdp-qty-display').textContent = pdpQty;
-  }
-
-  function pdpAddToCart() {
-    if (!currentProductId) return;
-    const p = products.find(x => x.id === currentProductId);
-    if (!p) return;
-    // Check size selected if product has sizes
-    if (p.sizes && p.sizes.length > 0 && !pdpSelectedSize) {
-      showToast('Please select a size first!');
-      return;
-    }
-    const existing = cart.find(item => item.id === currentProductId && item.size === pdpSelectedSize);
-    if (existing) {
-      existing.qty += pdpQty;
-    } else {
-      cart.push({ ...p, qty: pdpQty, size: pdpSelectedSize });
-    }
-    updateCartUI();
-    showToast(`${p.name.split(' ').slice(0,3).join(' ')} added!`);
-  }
-
-  function pdpBuyNow() {
-    if (!currentProductId) return;
-    const p = products.find(x => x.id === currentProductId);
-    if (!p) return;
-    if (p.sizes && p.sizes.length > 0 && !pdpSelectedSize) {
-      showToast('Please select a size first!');
-      return;
-    }
-    // Add to cart if not already in, then go to checkout
-    const existing = cart.find(item => item.id === currentProductId && item.size === pdpSelectedSize);
-    if (!existing) {
-      cart.push({ ...p, qty: pdpQty, size: pdpSelectedSize });
-      updateCartUI();
-    }
-    goToCheckout();
-  }
-
-  function toggleSpecs() {
-    const body = document.getElementById('specs-body');
-    const chevron = document.getElementById('specs-chevron');
-    const isHidden = body.classList.contains('hidden');
-    body.classList.toggle('hidden', !isHidden);
-    chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
-  }
-
-  // ======================== CART LOGIC ========================
-  function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-    const existing = cart.find(item => item.id === productId && !item.size);
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({ ...product, qty: 1, size: null });
-    }
-    updateCartUI();
-    showToast(`${product.name.split(' ').slice(0,3).join(' ')} added!`);
-  }
-
-  function removeFromCart(productId, size) {
-    cart = cart.filter(item => !(item.id === productId && item.size === size));
-    updateCartUI();
-    renderCartItems();
-  }
-
-  function updateQty(productId, size, delta) {
-    const item = cart.find(i => i.id === productId && i.size === size);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) removeFromCart(productId, size);
-    else { updateCartUI(); renderCartItems(); }
-  }
-
-  function getCartTotal() { return cart.reduce((sum, item) => sum + item.price * item.qty, 0); }
-  function getCartCount() { return cart.reduce((sum, item) => sum + item.qty, 0); }
-
-  function updateCartUI() {
-    const count = getCartCount();
-    document.getElementById('cart-count').textContent = count;
-    document.getElementById('cart-total').textContent = getCartTotal().toLocaleString();
-    document.getElementById('cart-header-count').textContent = `${count} item${count !== 1 ? 's' : ''}`;
-  }
-
-  function renderCartItems() {
-    const container = document.getElementById('cart-items');
-    if (cart.length === 0) {
-      container.innerHTML = `
-        <div class="flex flex-col items-center justify-center h-48 text-center">
-          <div class="text-4xl mb-3">🛒</div>
-          <p class="text-silver font-condensed font-700 uppercase tracking-wider text-sm">Your cart is empty</p>
-          <button onclick="closeCart(); showPage('shop')" class="text-neon text-xs mt-2 hover:underline">Browse Products →</button>
-        </div>`;
-      return;
-    }
-    container.innerHTML = cart.map(item => `
-      <div class="flex gap-3 bg-[#0D0D0D] border border-[#1E1E1E] rounded-xl p-3">
-        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0" />
-        <div class="flex-1 min-w-0">
-          <h4 class="text-white text-xs font-600 leading-snug line-clamp-1 mb-0.5">${item.name}</h4>
-          ${item.size ? `<div class="text-silver text-[11px] mb-1">Size: ${item.size}</div>` : ''}
-          <div class="text-neon font-condensed font-700 text-sm mb-2">₹${item.price.toLocaleString()}</div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <button onclick="updateQty(${item.id}, ${JSON.stringify(item.size)}, -1)" class="qty-btn text-silver hover:text-neon text-base font-bold">−</button>
-              <span class="text-white text-sm font-600 w-5 text-center">${item.qty}</span>
-              <button onclick="updateQty(${item.id}, ${JSON.stringify(item.size)}, 1)" class="qty-btn text-silver hover:text-neon text-base font-bold">+</button>
-            </div>
-            <button onclick="removeFromCart(${item.id}, ${JSON.stringify(item.size)})" class="text-[#555] hover:text-red-400 transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-            </button>
-          </div>
-        </div>
-      </div>`).join('');
-  }
-
-  // ======================== CART OPEN/CLOSE ========================
-  function openCart() {
-    renderCartItems();
-    document.getElementById('cart-sidebar').classList.add('open');
-    document.getElementById('cart-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCart() {
-    document.getElementById('cart-sidebar').classList.remove('open');
-    document.getElementById('cart-overlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  // ======================== CHECKOUT ========================
-  function goToCheckout() {
-    if (cart.length === 0) { showToast('Your cart is empty!'); return; }
-    closeCart();
-    showPage('checkout');
-    renderCheckoutItems();
-  }
-
-  function renderCheckoutItems() {
-    const container = document.getElementById('checkout-items');
-    const subtotal = getCartTotal();
-    container.innerHTML = cart.map(item => `
-      <div class="flex gap-3 items-center">
-        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-cover rounded-lg flex-shrink-0 border border-[#1E1E1E]" />
-        <div class="flex-1 min-w-0">
-          <div class="text-white text-xs font-600 line-clamp-1">${item.name}</div>
-          <div class="text-silver text-xs">${item.size ? `Size: ${item.size} · ` : ''}Qty: ${item.qty}</div>
-        </div>
-        <div class="text-neon font-condensed font-700 text-sm">₹${(item.price * item.qty).toLocaleString()}</div>
-      </div>`).join('');
-    document.getElementById('co-subtotal').textContent = subtotal.toLocaleString();
-    document.getElementById('co-total').textContent = subtotal.toLocaleString();
-  }
-
-  function placeOrder() {
-    const name = document.getElementById('co-name').value.trim();
-    const phone = document.getElementById('co-phone').value.trim();
-    const address = document.getElementById('co-address').value.trim();
-    if (!name || !phone || !address) { showToast('Please fill in all delivery details!'); return; }
-    document.getElementById('checkout-form-section').style.display = 'none';
-    document.getElementById('order-success').classList.remove('hidden');
-    cart = [];
-    updateCartUI();
-  }
-
-  function continueShopping() {
-    document.getElementById('checkout-form-section').style.display = 'block';
-    document.getElementById('order-success').classList.add('hidden');
-    ['co-name','co-phone','co-address'].forEach(id => document.getElementById(id).value = '');
-    showPage('home');
-  }
-
-  // ======================== PAGE NAV ========================
-  function showPage(pageName) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + pageName).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (pageName === 'shop') renderShop(currentFilter);
-  }
-
-  // ======================== TOAST ========================
-  let toastTimer;
-  function showToast(msg) {
-    clearTimeout(toastTimer);
-    document.getElementById('toast-msg').textContent = msg;
-    document.getElementById('toast').classList.add('show');
-    toastTimer = setTimeout(() => document.getElementById('toast').classList.remove('show'), 2800);
-  }
-
-  // ======================== INIT ========================
-  renderFeatured();
-  renderShop('all');
-  updateCartUI();
-
+}, 500);
 </script>
 </body>
 </html>
