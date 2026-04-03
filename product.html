@@ -717,4 +717,12 @@ if (productId) {
     const p = getProductById(productId);
     if (p) renderProduct(p);
     else {
-      document.getElementById('pdp-layout').innerHTML = `<div style="text-align:center;padding:80px;grid-column:span 2;"><div style="font-size:3rem;margin-bottom:16px;">😕</div><h2 style="font-family:var(--font-cond);font-size:1.5rem;text-transform:uppercase;let
+      document.getElementById('pdp-layout').innerHTML = `<div style="text-align:center;padding:80px;grid-column:span 2;"><div style="font-size:3rem;margin-bottom:16px;">😕</div><h2 style="font-family:var(--font-cond);font-size:1.5rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Product Not Found</h2><a href="shop.html" class="btn btn-neon ripple-btn">Browse Shop</a></div>`;
+    }
+  }, 300);
+} else {
+  window.location.href = 'shop.html';
+}
+</script>
+</body>
+</html>
