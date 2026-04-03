@@ -1,68 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shop — Prime Shoe Jersey Hub</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
-<body>
+<body style="padding-left: 10px; padding-right: 8px;">
 
-<!-- Ticker -->
-<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item">Season 2025 Drop</span><span class="ticker-item">COD Available</span><span class="ticker-item">Free Shipping ₹999+</span><span class="ticker-item">5000+ Happy Customers</span><span class="ticker-item">Season 2025 Drop</span><span class="ticker-item">COD Available</span><span class="ticker-item">Free Shipping ₹999+</span><span class="ticker-item">5000+ Happy Customers</span></div></div>
-
-<!-- Navbar (same as index) -->
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-inner">
-    <!-- LEFT -->
     <div class="nav-left">
-      <!-- Hamburger (mobile) -->
       <button id="hamburger" class="nav-icon-btn" aria-label="Menu">
-        <div class="hamburger-lines">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="hamburger-lines"><span></span><span></span><span></span></div>
       </button>
-      <!-- Search -->
-      <div class="nav-search" style="display:none;" id="nav-search-wrap">
+      <div class="nav-search">
         <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
-        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off" />
+        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off"/>
         <div id="search-results-dropdown"></div>
       </div>
     </div>
 
-    <!-- CENTER — Logo -->
     <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">
-        <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-      </div>
+      <img src="assets/images/logo.png" alt="Logo" class="nav-logo-img" onerror="this.style.display='none'"/>
       <div class="nav-logo-text">
         <span class="brand-top">Prime Shoe</span>
         <span class="brand-sub">Jersey Hub</span>
       </div>
     </a>
 
-    <!-- RIGHT -->
     <div class="nav-right">
-      <!-- Desktop nav links -->
-      <nav class="nav-links" id="desktop-nav-links">
+      <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="shop.html" class="nav-link">Shop</a>
-        <a href="#about-section" class="nav-link">About</a>
-        <a href="#contact-section" class="nav-link">Contact</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
-      <!-- Search toggle (desktop) -->
-      <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </button>
-      <!-- Cart -->
       <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
         </svg>
         <span class="cart-badge" style="display:none;">0</span>
@@ -71,148 +51,121 @@
   </div>
 </nav>
 
-<!-- Mobile Nav Dropdown -->
+<!-- MOBILE NAV -->
 <div id="mobile-nav">
   <div class="mobile-nav-links">
-    <a href="index.html" class="mobile-nav-link"> Home</a>
-    <a href="shop.html" class="mobile-nav-link"> Shop</a>
-      <a href="#about-section" class="mobile-nav-link">About</a>
-    <a href="#contact-section" class="mobile-nav-link">Contact</a>
-  </div>
-  <!-- Mobile Search -->
-  <div style="padding:12px 0 0;">
-    <div class="nav-search" style="max-width:100%;">
-      <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-      </svg>
-      <input type="text" placeholder="Search products..." class="form-input" style="padding-left:40px;border-radius:100px;font-size:14px;"
-        oninput="window.location='shop.html?q='+this.value" />
-    </div>
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="shop.html" class="mobile-nav-link">🛍️ Shop</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact</a>
   </div>
 </div>
 
-<!-- Shop Header -->
-<div class="page-top" style="background:var(--dark-2);border-bottom:1px solid var(--border);padding:40px 0;">
+<!-- Page Header -->
+<div class="page-top">
   <div class="container">
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--silver);margin-bottom:12px;">
-      <a href="index.html" style="color:var(--silver);hover:color:var(--neon); ">Home</a>
-      <span>/</span>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--silver);margin-bottom:10px;">
+      <a href="index.html" style="color:var(--silver);">Home</a> <span>/</span>
       <span id="breadcrumb-cat">All Products</span>
     </div>
-    <h1 class="section-title" id="shop-page-title">ALL PRODUCTS</h1>
+    <h1 class="section-title" id="shop-page-title" style="font-size:clamp(2rem,5vw,3.5rem);">ALL PRODUCTS</h1>
     <p style="color:var(--silver);font-size:14px;margin-top:8px;" id="shop-page-sub">Premium football gear — jerseys, studs & accessories</p>
   </div>
 </div>
 
 <!-- Shop Body -->
 <div class="container section-pad">
-  <!-- Filter chips (mobile) -->
+  <!-- Filter chips -->
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;" id="filter-chips">
-    <button class="filter-chip active" onclick="applyFilter('all', this)">All</button>
-    <button class="filter-chip" onclick="applyFilter('jersey', this)">👕 Jerseys</button>
-    <button class="filter-chip" onclick="applyFilter('shoes', this)">👟 Studs & Shoes</button>
-    <button class="filter-chip" onclick="applyFilter('accessories', this)">⚽ Accessories</button>
-    <button class="filter-chip" onclick="applyFilter('nike', this)">Nike</button>
-    <button class="filter-chip" onclick="applyFilter('adidas', this)">Adidas</button>
-    <button class="filter-chip" onclick="applyFilter('mizuno', this)">Mizuno</button>
+    <button class="filter-chip active" onclick="applyFilter('all',this)">All</button>
+    <button class="filter-chip" onclick="applyFilter('jersey',this)">👕 Jerseys</button>
+    <button class="filter-chip" onclick="applyFilter('shoes',this)">👟 Studs</button>
+    <button class="filter-chip" onclick="applyFilter('accessories',this)">⚽ Accessories</button>
+    <button class="filter-chip" onclick="applyFilter('nike',this)">Nike</button>
+    <button class="filter-chip" onclick="applyFilter('adidas',this)">Adidas</button>
+    <button class="filter-chip" onclick="applyFilter('mizuno',this)">Mizuno</button>
   </div>
 
   <div class="shop-layout">
-    <!-- Filter Sidebar -->
+    <!-- Sidebar -->
     <aside class="filter-sidebar" id="filter-sidebar">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-        <h3 style="font-family:var(--font-cond);font-weight:700;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;">Filters</h3>
-        <button onclick="clearFilters()" style="font-size:12px;color:var(--neon);background:none;font-family:var(--font-cond);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;">Clear All</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <span style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Filters</span>
+        <button onclick="clearFilters()" style="font-size:11px;color:var(--blue);background:none;font-family:var(--font-cond);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;">Clear All</button>
       </div>
-
-      <!-- Category -->
       <div class="filter-section">
         <div class="filter-title">Category</div>
         <div class="filter-options">
-          <label class="filter-option"><input type="radio" name="cat" value="all" checked onchange="applyFromSidebar()"> <span class="filter-option-label">All Products</span><span class="filter-option-count">14</span></label>
-          <label class="filter-option"><input type="radio" name="cat" value="jersey" onchange="applyFromSidebar()"> <span class="filter-option-label">Jerseys</span><span class="filter-option-count">6</span></label>
-          <label class="filter-option"><input type="radio" name="cat" value="shoes" onchange="applyFromSidebar()"> <span class="filter-option-label">Studs & Shoes</span><span class="filter-option-count">5</span></label>
-          <label class="filter-option"><input type="radio" name="cat" value="accessories" onchange="applyFromSidebar()"> <span class="filter-option-label">Accessories</span><span class="filter-option-count">3</span></label>
+          <label class="filter-option"><input type="radio" name="cat" value="all" checked onchange="applyFromSidebar()"><span class="filter-option-label">All</span><span class="filter-option-count">14</span></label>
+          <label class="filter-option"><input type="radio" name="cat" value="jersey" onchange="applyFromSidebar()"><span class="filter-option-label">Jerseys</span><span class="filter-option-count">6</span></label>
+          <label class="filter-option"><input type="radio" name="cat" value="shoes" onchange="applyFromSidebar()"><span class="filter-option-label">Studs & Shoes</span><span class="filter-option-count">5</span></label>
+          <label class="filter-option"><input type="radio" name="cat" value="accessories" onchange="applyFromSidebar()"><span class="filter-option-label">Accessories</span><span class="filter-option-count">3</span></label>
         </div>
       </div>
-
-      <!-- Brand -->
       <div class="filter-section">
         <div class="filter-title">Brand</div>
         <div class="filter-options">
-          <label class="filter-option"><input type="checkbox" value="nike" onchange="applyFromSidebar()"> <span class="filter-option-label">Nike</span><span class="filter-option-count">4</span></label>
-          <label class="filter-option"><input type="checkbox" value="adidas" onchange="applyFromSidebar()"> <span class="filter-option-label">Adidas</span><span class="filter-option-count">4</span></label>
-          <label class="filter-option"><input type="checkbox" value="mizuno" onchange="applyFromSidebar()"> <span class="filter-option-label">mizuno</span><span class="filter-option-count">3</span></label>
-          <label class="filter-option"><input type="checkbox" value="jordan" onchange="applyFromSidebar()"> <span class="filter-option-label">Jordan</span><span class="filter-option-count">1</span></label>
-          <label class="filter-option"><input type="checkbox" value="mizuno" onchange="applyFromSidebar()"> <span class="filter-option-label">Mizuno</span><span class="filter-option-count">1</span></label>
+          <label class="filter-option"><input type="checkbox" value="nike" onchange="applyFromSidebar()"><span class="filter-option-label">Nike</span></label>
+          <label class="filter-option"><input type="checkbox" value="adidas" onchange="applyFromSidebar()"><span class="filter-option-label">Adidas</span></label>
+          <label class="filter-option"><input type="checkbox" value="mizuno" onchange="applyFromSidebar()"><span class="filter-option-label">Mizuno</span></label>
+          <label class="filter-option"><input type="checkbox" value="jordan" onchange="applyFromSidebar()"><span class="filter-option-label">Jordan</span></label>
         </div>
       </div>
-
-      <!-- Price Range -->
       <div class="filter-section">
         <div class="filter-title">Price Range</div>
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
-          <input type="number" id="price-min" placeholder="Min" class="form-input" style="padding:10px;font-size:13px;" value="0" onchange="applyFromSidebar()" />
-          <span style="color:var(--silver);">—</span>
-          <input type="number" id="price-max" placeholder="Max" class="form-input" style="padding:10px;font-size:13px;" value="5000" onchange="applyFromSidebar()" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <input type="number" id="price-min" placeholder="Min ₹" class="form-input" style="padding:9px;" value="0" onchange="applyFromSidebar()"/>
+          <input type="number" id="price-max" placeholder="Max ₹" class="form-input" style="padding:9px;" value="5000" onchange="applyFromSidebar()"/>
         </div>
       </div>
-
-      <!-- Rating -->
       <div class="filter-section">
-        <div class="filter-title">Min Rating</div>
+        <div class="filter-title">Stock</div>
         <div class="filter-options">
-          <label class="filter-option"><input type="radio" name="rating" value="0" checked onchange="applyFromSidebar()"> <span class="filter-option-label">Any Rating</span></label>
-          <label class="filter-option"><input type="radio" name="rating" value="4.5" onchange="applyFromSidebar()"> <span class="filter-option-label" style="color:var(--neon);">★★★★★</span><span class="filter-option-count" style="color:var(--neon);">4.5+</span></label>
-          <label class="filter-option"><input type="radio" name="rating" value="4.0" onchange="applyFromSidebar()"> <span class="filter-option-label" style="color:var(--neon);">★★★★</span><span class="filter-option-count">4.0+</span></label>
+          <label class="filter-option"><input type="radio" name="stock" value="all" checked onchange="applyFromSidebar()"><span class="filter-option-label">All</span></label>
+          <label class="filter-option"><input type="radio" name="stock" value="instock" onchange="applyFromSidebar()"><span class="filter-option-label">In Stock Only</span></label>
         </div>
       </div>
     </aside>
 
-    <!-- Product Grid -->
+    <!-- Grid -->
     <div>
       <div class="shop-toolbar">
-        <span id="product-result-count" style="font-family:var(--font-cond);font-size:14px;font-weight:700;color:var(--silver);letter-spacing:0.05em;text-transform:uppercase;">Loading...</span>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <button onclick="document.getElementById('filter-sidebar').classList.toggle('mobile-open')" class="btn btn-dark btn-sm" style="display:none;" id="filter-toggle-btn">☰ Filters</button>
+        <span id="product-result-count" style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--silver);">Loading...</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <button id="filter-toggle-btn" class="btn btn-ghost btn-sm" style="display:none;" onclick="document.getElementById('filter-sidebar').classList.toggle('mobile-open')">☰ Filters</button>
           <select class="sort-select" id="sort-select" onchange="applyFromSidebar()">
             <option value="featured">Featured</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
             <option value="rating">Best Rated</option>
             <option value="discount">Biggest Discount</option>
           </select>
         </div>
       </div>
-      <div class="grid-products" id="shop-products-grid">
-        <!-- Products rendered by JS -->
-      </div>
-      <div id="no-results" style="display:none;text-align:center;padding:80px 0;">
-        <div style="font-size:3rem;margin-bottom:16px;">🔍</div>
-        <h3 style="font-family:var(--font-cond);font-size:1.5rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">No Products Found</h3>
-        <p style="color:var(--silver);margin-bottom:24px;">Try adjusting your filters</p>
-        <button onclick="clearFilters()" class="btn btn-neon ripple-btn">Clear Filters</button>
+      <div class="grid-products" id="shop-products-grid"></div>
+      <div id="no-results" style="display:none;text-align:center;padding:80px 20px;">
+        <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
+        <h3 style="font-family:var(--font-cond);font-size:1.3rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">No Products Found</h3>
+        <p style="color:var(--silver);margin-bottom:20px;">Try adjusting your filters</p>
+        <button onclick="clearFilters()" class="btn btn-blue">Clear Filters</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Footer (minimal) -->
+<!-- Footer minimal -->
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <!-- Brand -->
       <div>
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
-          <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
-             <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-          </div>
-          <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <img src="assets/images/logo.png" alt="Logo" style="height:32px;width:32px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'"/>
+          <div class="nav-logo-text"><span class="brand-top" style="font-size:14px;">Prime Shoe</span><span class="brand-sub" style="font-size:8px;">Jersey Hub</span></div>
         </a>
+        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear.</p>
       </div>
-      <!-- Policies -->
-      <div>
-        <div class="footer-col-title">Support</div>
+
+      <div class="footer-col-title">Support
         <div class="footer-links">
           <a href="#" class="footer-link">Privacy Policy</a>
           <a href="#" class="footer-link">Refund Policy</a>
@@ -222,173 +175,118 @@
           <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
         </div>
       </div>
-      <!-- Contact -->
+
       <div>
-        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-col-title">Contact</div>
         <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff8f8d96929abf959a8d8c9a86978a9dd19691">[email&#160;protected]</a></span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Mumbai, Maharashtra, India</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
-        <div style="margin-top:16px;">
-          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-sm ripple-btn" style="background:var(--green);color:white;display:inline-flex;align-items:center;gap:6px;">
-            💬 Chat on WhatsApp
-          </a>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm</span></div>
+        <div style="margin-top:14px;">
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-green btn-sm" style="display:inline-flex;">💬 WhatsApp Us</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved. | India's Trusted Football Store</div>
+      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub · All rights reserved</div>
+
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
+<script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
-let activeFilter = 'all';
-let activeBrands = [];
-let activeSearch = '';
-let priceMin = 0;
-let priceMax = 5000;
-let minRating = 0;
-let sortMode = 'featured';
+let activeFilter = 'all', activeBrands = [], activeSearch = '', priceMin = 0, priceMax = 5000, sortMode = 'featured', stockFilter = 'all';
 
-function getFilteredProducts() {
-  let result = [...PRODUCTS];
-  // Category
+function getFiltered() {
+  let r = [...PRODUCTS];
+  const brands = ['nike','adidas','mizuno','jordan'];
   if (activeFilter !== 'all') {
-    // Check if filter is a brand
-    const brands = ['nike','adidas','mizuno','jordan','mizuno'];
-    if (brands.includes(activeFilter)) {
-      result = result.filter(p => p.brand.toLowerCase() === activeFilter);
-    } else {
-      result = result.filter(p => p.category === activeFilter);
-    }
+    if (brands.includes(activeFilter)) r = r.filter(p => p.brand.toLowerCase() === activeFilter);
+    else r = r.filter(p => p.category === activeFilter);
   }
-
-
-  // Brands (sidebar checkboxes)
-  if (activeBrands.length > 0) {
-    result = result.filter(p => activeBrands.includes(p.brand.toLowerCase()));
-  }
-  // Price
-  result = result.filter(p => p.price >= priceMin && p.price <= priceMax);
-  // Rating
-  if (minRating > 0) result = result.filter(p => p.rating >= minRating);
-  // Search
-  if (activeSearch) {
-    const q = activeSearch.toLowerCase();
-    result = result.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
-  }
-  // Sort
-  if (sortMode === 'price-asc') result.sort((a,b) => a.price - b.price);
-  else if (sortMode === 'price-desc') result.sort((a,b) => b.price - a.price);
-  else if (sortMode === 'rating') result.sort((a,b) => b.rating - a.rating);
-  else if (sortMode === 'discount') result.sort((a,b) => getDiscountPct(b) - getDiscountPct(a));
-  return result;
+  if (activeBrands.length) r = r.filter(p => activeBrands.includes(p.brand.toLowerCase()));
+  r = r.filter(p => p.price >= priceMin && p.price <= priceMax);
+  if (stockFilter === 'instock') r = r.filter(p => p.stock > 0);
+  if (activeSearch) { const q = activeSearch.toLowerCase(); r = r.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)); }
+  if (sortMode === 'price-asc') r.sort((a,b) => a.price - b.price);
+  else if (sortMode === 'price-desc') r.sort((a,b) => b.price - a.price);
+  else if (sortMode === 'rating') r.sort((a,b) => b.rating - a.rating);
+  else if (sortMode === 'discount') r.sort((a,b) => getDiscountPct(b) - getDiscountPct(a));
+  return r;
 }
 
 function renderShop() {
-  const filtered = getFilteredProducts();
+  const filtered = getFiltered();
   const grid = document.getElementById('shop-products-grid');
-  const noResults = document.getElementById('no-results');
-  const countEl = document.getElementById('product-result-count');
-
-  countEl.textContent = `${filtered.length} Product${filtered.length !== 1 ? 's' : ''}`;
-
-  if (filtered.length === 0) {
-    grid.innerHTML = '';
-    noResults.style.display = 'block';
-  } else {
-    noResults.style.display = 'none';
-    grid.innerHTML = filtered.map(p => buildProductCard(p)).join('');
-  }
+  const noRes = document.getElementById('no-results');
+  document.getElementById('product-result-count').textContent = `${filtered.length} Product${filtered.length !== 1 ? 's' : ''}`;
+  if (!filtered.length) { grid.innerHTML = ''; noRes.style.display = 'block'; }
+  else { noRes.style.display = 'none'; grid.innerHTML = filtered.map(p => buildProductCard(p)).join(''); }
 }
 
 function applyFilter(val, btn) {
-  activeFilter = val;
-  activeBrands = [];
+  activeFilter = val; activeBrands = [];
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   btn.classList.add('active');
-  // Sync sidebar radio
   const radio = document.querySelector(`input[name="cat"][value="${['jersey','shoes','accessories'].includes(val) ? val : 'all'}"]`);
   if (radio) radio.checked = true;
   renderShop();
 }
 
 function applyFromSidebar() {
-  const cat = document.querySelector('input[name="cat"]:checked')?.value || 'all';
-  activeFilter = cat;
+  activeFilter = document.querySelector('input[name="cat"]:checked')?.value || 'all';
   activeBrands = [...document.querySelectorAll('input[type="checkbox"]:checked')].map(c => c.value);
   priceMin = parseInt(document.getElementById('price-min').value) || 0;
   priceMax = parseInt(document.getElementById('price-max').value) || 5000;
-  minRating = parseFloat(document.querySelector('input[name="rating"]:checked')?.value || 0);
+  stockFilter = document.querySelector('input[name="stock"]:checked')?.value || 'all';
   sortMode = document.getElementById('sort-select').value;
-  // Sync chips
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   document.querySelector('.filter-chip')?.classList.add('active');
   renderShop();
 }
 
 function clearFilters() {
-  activeFilter = 'all';
-  activeBrands = [];
-  priceMin = 0; priceMax = 5000;
-  minRating = 0; activeSearch = '';
+  activeFilter = 'all'; activeBrands = []; priceMin = 0; priceMax = 5000; activeSearch = ''; stockFilter = 'all'; sortMode = 'featured';
   document.querySelector('input[name="cat"][value="all"]').checked = true;
   document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
-  document.getElementById('price-min').value = 0;
-  document.getElementById('price-max').value = 5000;
-  document.querySelector('input[name="rating"][value="0"]').checked = true;
+  document.getElementById('price-min').value = 0; document.getElementById('price-max').value = 5000;
+  document.querySelector('input[name="stock"][value="all"]').checked = true;
+  document.getElementById('sort-select').value = 'featured';
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   document.querySelector('.filter-chip').classList.add('active');
   renderShop();
 }
 
-// Init from URL params
+// URL params
 const params = new URLSearchParams(window.location.search);
 const catParam = params.get('cat');
+const brandParam = params.get('brand');
 const qParam = params.get('q');
-const titleEl = document.getElementById('shop-page-title');
-const subEl = document.getElementById('shop-page-sub');
-const breadEl = document.getElementById('breadcrumb-cat');
 
 if (catParam) {
   activeFilter = catParam;
   const radio = document.querySelector(`input[name="cat"][value="${catParam}"]`);
   if (radio) radio.checked = true;
-  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-  const chip = [...document.querySelectorAll('.filter-chip')].find(c => c.textContent.toLowerCase().includes(catParam));
-  if (chip) chip.classList.add('active');
-  const labels = {jersey:'Jerseys',shoes:'Studs & Shoes',accessories:'Accessories'};
+  const labels = { jersey:'Jerseys', shoes:'Studs & Shoes', accessories:'Accessories' };
   if (labels[catParam]) {
-    titleEl.textContent = labels[catParam].toUpperCase();
-    subEl.textContent = `Premium ${labels[catParam]} for champions`;
-    breadEl.textContent = labels[catParam];
+    document.getElementById('shop-page-title').textContent = labels[catParam].toUpperCase();
+    document.getElementById('breadcrumb-cat').textContent = labels[catParam];
   }
+}
+if (brandParam) {
+  activeFilter = brandParam.toLowerCase();
+  document.getElementById('shop-page-title').textContent = brandParam.toUpperCase();
+  document.getElementById('breadcrumb-cat').textContent = brandParam;
 }
 if (qParam) {
   activeSearch = qParam;
-  titleEl.textContent = `SEARCH: "${qParam}"`;
-  subEl.textContent = 'Showing results for your search';
+  document.getElementById('shop-page-title').textContent = `"${qParam}"`;
   document.getElementById('nav-search-input').value = qParam;
 }
 
-// Search toggle
-document.getElementById('search-toggle').addEventListener('click', () => {
-  const wrap = document.getElementById('nav-search-wrap');
-  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
-});
-
-// Make filter toggle visible on mobile
-const filterToggle = document.getElementById('filter-toggle-btn');
-if (filterToggle && window.innerWidth < 1024) {
-  filterToggle.style.display = 'flex';
-}
-
-// Initial render
+if (window.innerWidth < 1024) document.getElementById('filter-toggle-btn').style.display = 'inline-flex';
 renderShop();
 </script>
 </body>

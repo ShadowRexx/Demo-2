@@ -1,68 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product — Prime Shoe Jersey Hub</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
-<body style="padding-left:10px ;padding-right:10px ;">
+<body style="padding-left: 10px; padding-right: 8px;">
 
-<!-- Ticker -->
-<div class="ticker-wrap"><div class="ticker-track"><span class="ticker-item">Authentic Gear</span><span class="ticker-item">COD Available</span><span class="ticker-item">Fast Delivery</span><span class="ticker-item">Easy Returns</span><span class="ticker-item">Authentic Gear</span><span class="ticker-item">COD Available</span><span class="ticker-item">Fast Delivery</span><span class="ticker-item">Easy Returns</span></div></div>
-
-<!-- Navbar -->
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-inner">
-    <!-- LEFT -->
     <div class="nav-left">
-      <!-- Hamburger (mobile) -->
       <button id="hamburger" class="nav-icon-btn" aria-label="Menu">
-        <div class="hamburger-lines">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="hamburger-lines"><span></span><span></span><span></span></div>
       </button>
-      <!-- Search -->
-      <div class="nav-search" style="display:none;" id="nav-search-wrap">
+      <div class="nav-search">
         <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
-        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off" />
+        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off"/>
         <div id="search-results-dropdown"></div>
       </div>
     </div>
 
-    <!-- CENTER — Logo -->
     <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">
-        <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-      </div>
+      <img src="assets/images/logo.png" alt="Logo" class="nav-logo-img" onerror="this.style.display='none'"/>
       <div class="nav-logo-text">
         <span class="brand-top">Prime Shoe</span>
         <span class="brand-sub">Jersey Hub</span>
       </div>
     </a>
 
-    <!-- RIGHT -->
     <div class="nav-right">
-      <!-- Desktop nav links -->
-      <nav class="nav-links" id="desktop-nav-links">
+      <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="shop.html" class="nav-link">Shop</a>
-        <a href="#about-section" class="nav-link">About</a>
-        <a href="#contact-section" class="nav-link">Contact</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
-      <!-- Search toggle (desktop) -->
-      <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </button>
-      <!-- Cart -->
       <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
         </svg>
         <span class="cart-badge" style="display:none;">0</span>
@@ -71,35 +51,23 @@
   </div>
 </nav>
 
-<!-- Mobile Nav Dropdown -->
+<!-- MOBILE NAV -->
 <div id="mobile-nav">
   <div class="mobile-nav-links">
-    <a href="index.html" class="mobile-nav-link"> Home</a>
-    <a href="shop.html" class="mobile-nav-link"> Shop</a>
-      <a href="#about-section" class="mobile-nav-link">About</a>
-    <a href="#contact-section" class="mobile-nav-link">Contact</a>
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="shop.html" class="mobile-nav-link">🛍️ Shop</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact</a>
   </div>
-  <!-- Mobile Search -->
-  <div style="padding:12px 0 0;">
-    <div class="nav-search" style="max-width:100%;">
-      <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-      </svg>
-      <input type="text" placeholder="Search products..." class="form-input" style="padding-left:40px;border-radius:100px;font-size:14px;"
-        oninput="window.location='shop.html?q='+this.value" />
-    </div>
-  </div>
-</div>>
+</div>
 
 <!-- Breadcrumb -->
-<div class="page-top" style="background:var(--dark-2);border-bottom:1px solid var(--border);padding:14px 0;">
+<div style="background:var(--dark-2);border-bottom:1px solid var(--border-solid);padding:12px 0;">
   <div class="container">
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--silver);">
-      <a href="index.html" style="color:var(--silver);">Home</a>
-      <span>/</span>
-      <a href="shop.html" id="bc-shop" style="color:var(--silver);">Shop</a>
-      <span>/</span>
-      <span id="bc-product" style="color:var(--white);">Product</span>
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--silver);">
+      <a href="index.html" style="color:var(--silver);">Home</a><span>/</span>
+      <a href="shop.html" id="bc-cat" style="color:var(--silver);">Shop</a><span>/</span>
+      <span id="bc-name" style="color:var(--white);">Product</span>
     </div>
   </div>
 </div>
@@ -107,52 +75,98 @@
 <!-- Product Detail -->
 <div class="container section-pad">
   <div class="pdp-layout" id="pdp-layout">
-    <!-- Loading skeleton -->
+    <!-- skeleton -->
     <div>
-      <div class="skeleton" style="aspect-ratio:1;border-radius:20px;margin-bottom:12px;"></div>
-      <div style="display:flex;gap:10px;">
-        <div class="skeleton" style="width:72px;height:72px;border-radius:10px;"></div>
-        <div class="skeleton" style="width:72px;height:72px;border-radius:10px;"></div>
-        <div class="skeleton" style="width:72px;height:72px;border-radius:10px;"></div>
+      <div class="skeleton" style="aspect-ratio:1;border-radius:var(--radius-lg);margin-bottom:10px;"></div>
+      <div style="display:flex;gap:8px;">
+        <div class="skeleton" style="width:72px;height:72px;border-radius:var(--radius-sm);"></div>
+        <div class="skeleton" style="width:72px;height:72px;border-radius:var(--radius-sm);"></div>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <div class="skeleton" style="height:16px;width:30%;border-radius:4px;"></div>
-      <div class="skeleton" style="height:40px;width:90%;border-radius:4px;"></div>
-      <div class="skeleton" style="height:14px;width:50%;border-radius:4px;"></div>
-      <div class="skeleton" style="height:60px;width:100%;border-radius:14px;"></div>
-      <div class="skeleton" style="height:44px;width:100%;border-radius:14px;margin-top:8px;"></div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="skeleton" style="height:14px;width:40%;border-radius:4px;"></div>
+      <div class="skeleton" style="height:36px;width:85%;border-radius:6px;"></div>
+      <div class="skeleton" style="height:60px;width:100%;border-radius:var(--radius);"></div>
+      <div class="skeleton" style="height:44px;width:100%;border-radius:var(--radius);margin-top:8px;"></div>
     </div>
   </div>
 </div>
 
+<!-- Reviews Section -->
+<section class="section-pad" style="padding-top:0;" id="reviews-section" style="display:none;">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="section-label">Reviews</div>
+        <h2 class="section-title" style="margin-top:8px;font-size:clamp(1.8rem,4vw,2.8rem);">CUSTOMER REVIEWS</h2>
+      </div>
+      <div id="reviews-summary" style="text-align:right;"></div>
+    </div>
+    <div class="review-grid" id="reviews-grid"></div>
+
+    <!-- Write a Review -->
+    <div class="review-form" id="review-form-section">
+      <div class="review-form-title">✍️ Write a Review</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="grid-column:span 2;">
+          <label class="form-label">Your Name *</label>
+          <input class="form-input" type="text" id="review-name" placeholder="e.g. Arjun M., Mumbai"/>
+        </div>
+        <div style="grid-column:span 2;">
+          <label class="form-label">Rating *</label>
+          <div class="star-picker" id="star-picker">
+            <button class="star-btn" data-val="1" onclick="setRating(1)">★</button>
+            <button class="star-btn" data-val="2" onclick="setRating(2)">★</button>
+            <button class="star-btn" data-val="3" onclick="setRating(3)">★</button>
+            <button class="star-btn" data-val="4" onclick="setRating(4)">★</button>
+            <button class="star-btn" data-val="5" onclick="setRating(5)">★</button>
+          </div>
+          <div id="rating-hint" style="font-size:12px;color:var(--silver);margin-top:4px;">Tap to rate</div>
+        </div>
+        <div style="grid-column:span 2;">
+          <label class="form-label">Your Review *</label>
+          <textarea class="form-input" id="review-text" placeholder="Share your experience with this product..." rows="3"></textarea>
+        </div>
+        <div style="grid-column:span 2;">
+          <button class="btn btn-blue" onclick="submitReview()">Submit Review →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Related Products -->
 <section class="section-pad" style="padding-top:0;">
   <div class="container">
-    <div style="margin-bottom:32px;">
-      <div class="section-label">Related Products</div>
-      <h2 class="section-title" style="margin-top:10px;font-size:clamp(2rem,5vw,3rem);">YOU MAY ALSO LIKE</h2>
+    <div style="margin-bottom:28px;">
+      <div class="section-label">More Like This</div>
+      <h2 class="section-title" style="margin-top:8px;font-size:clamp(1.8rem,4vw,2.8rem);">YOU MAY ALSO LIKE</h2>
     </div>
     <div class="grid-products" id="related-grid"></div>
   </div>
 </section>
 
-<!-- Footer -->
+<!-- Mobile sticky CTA -->
+<div id="mobile-cta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(8,12,16,0.97);border-top:1px solid var(--border-solid);padding:10px 14px;backdrop-filter:blur(12px);">
+  <div style="display:flex;gap:8px;">
+    <button id="mob-atc" class="btn btn-blue" style="flex:1;padding:14px;">Add to Cart</button>
+    <button id="mob-buy" class="btn btn-outline" style="padding:14px 20px;">Buy Now</button>
+  </div>
+</div>
+
+<!-- ======= FOOTER ======= -->
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <!-- Brand -->
       <div>
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
-          <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
-             <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-          </div>
-          <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <img src="assets/images/logo.png" alt="Logo" style="height:32px;width:32px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'"/>
+          <div class="nav-logo-text"><span class="brand-top" style="font-size:14px;">Prime Shoe</span><span class="brand-sub" style="font-size:8px;">Jersey Hub</span></div>
         </a>
+        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear.</p>
       </div>
-      <!-- Policies -->
-      <div>
-        <div class="footer-col-title">Support</div>
+
+      <div class="footer-col-title">Support
         <div class="footer-links">
           <a href="#" class="footer-link">Privacy Policy</a>
           <a href="#" class="footer-link">Refund Policy</a>
@@ -162,567 +176,312 @@
           <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
         </div>
       </div>
-      <!-- Contact -->
+
       <div>
-        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-col-title">Contact</div>
         <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="017173686c64416b64737264786974632f686f">[email&#160;protected]</a></span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Mumbai, Maharashtra, India</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
-        <div style="margin-top:16px;">
-          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-sm ripple-btn" style="background:var(--green);color:white;display:inline-flex;align-items:center;gap:6px;">
-            💬 Chat on WhatsApp
-          </a>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm</span></div>
+        <div style="margin-top:14px;">
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-green btn-sm" style="display:inline-flex;">💬 WhatsApp Us</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved. | India's Trusted Football Store</div>
+      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub · All rights reserved</div>
+
     </div>
   </div>
 </footer>
 
-<!-- Mobile Sticky CTA -->
-<div id="mobile-cta" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(10,10,10,0.95);border-top:1px solid var(--border);padding:12px 16px;backdrop-filter:blur(10px);">
-  <div style="display:flex;gap:10px;">
-    <button id="mob-atc" class="btn btn-neon ripple-btn" style="flex:1;padding:14px;">Add to Cart</button>
-    <button id="mob-buy" class="btn btn-outline ripple-btn" style="padding:14px 20px;">Buy Now</button>
-  </div>
-</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
+<script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
-let currentProduct = null;
-let selectedSize = null;
-let qty = 1;
-let currentImgIdx = 0;
+let currentProduct = null, selectedSize = null, qty = 1, selectedRating = 0;
 
 function renderProduct(product) {
   currentProduct = product;
   document.title = `${product.name} — Prime Shoe Jersey Hub`;
-
   const disc = getDiscountPct(product);
   const badge = BADGE_CONFIG[product.badge];
-  const stars = '★'.repeat(Math.floor(product.rating));
+  const isOOS = product.stock === 0;
   const savings = product.originalPrice - product.price;
   const stockPct = Math.min(100, (product.stock / 20) * 100);
 
-  // Breadcrumb
-  document.getElementById('bc-shop').href = `shop.html?cat=${product.category}`;
-  document.getElementById('bc-shop').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
-  document.getElementById('bc-product').textContent = product.name;
+  document.getElementById('bc-cat').href = `shop.html?cat=${product.category}`;
+  document.getElementById('bc-cat').textContent = product.category.charAt(0).toUpperCase() + product.category.slice(1);
+  document.getElementById('bc-name').textContent = product.name;
 
   document.getElementById('pdp-layout').innerHTML = `
-    <!-- LEFT: Gallery -->
+    <!-- Gallery -->
     <div class="pdp-gallery">
       <div class="pdp-main-img" id="pdp-main">
+        ${product.images.length > 1 ? `
+          <button class="gallery-arrow prev" onclick="prevImg()">‹</button>
+          <button class="gallery-arrow next" onclick="nextImg()">›</button>
+        ` : ''}
         <img id="pdp-main-img" src="${product.images[0]}" alt="${product.name}"
           onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=70'" />
       </div>
       <div class="pdp-thumbs">
         ${product.images.map((img, i) => `
           <div class="pdp-thumb${i===0?' active':''}" onclick="switchImg(${i})">
-            <img src="${img}" alt="view ${i+1}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70'" />
-          </div>
-        `).join('')}
+            <img src="${img}" alt="view ${i+1}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=60'"/>
+          </div>`).join('')}
       </div>
     </div>
 
-    <!-- RIGHT: Info -->
+    <!-- Info -->
     <div>
       <div class="pdp-category">${product.brand} · ${product.category.toUpperCase()}</div>
       <h1 class="pdp-name">${product.name}</h1>
-
-      <!-- Rating -->
       <div class="pdp-rating">
-        <span style="color:var(--neon);font-size:1rem;letter-spacing:2px;">${stars}</span>
-        <span style="font-family:var(--font-cond);font-weight:700;font-size:14px;">${product.rating}</span>
-        <span style="color:var(--silver);font-size:13px;">(${product.reviews} reviews)</span>
-        <span style="font-family:var(--font-cond);font-weight:700;font-size:11px;color:var(--green);letter-spacing:0.08em;">✓ VERIFIED</span>
+        <span style="color:var(--orange);font-size:1rem;letter-spacing:2px;">${'★'.repeat(Math.floor(product.rating))}</span>
+        <span style="font-family:var(--font-cond);font-weight:700;font-size:13px;">${product.rating}</span>
+        <span style="color:var(--silver);font-size:12px;">(${product.reviews} reviews)</span>
+        ${badge ? `<span class="badge ${badge.cls}">${badge.label}</span>` : ''}
       </div>
 
       <!-- Price -->
       <div class="pdp-price-block">
-        <div>
-          <div class="pdp-price-current">${formatPrice(product.price)}</div>
-        </div>
+        <div class="pdp-price-current">${formatPrice(product.price)}</div>
         <div>
           <div class="pdp-price-original">${formatPrice(product.originalPrice)}</div>
-          <div class="pdp-price-save">You save ${formatPrice(savings)} (${disc}% off)</div>
+          <div class="pdp-price-save">Save ${formatPrice(savings)} · ${disc}% off</div>
         </div>
-        ${badge ? `<span class="badge ${badge.cls}">${badge.label}</span>` : ''}
       </div>
 
-      <!-- Urgency -->
-      ${product.stock <= 8 ? `
-      <div class="pdp-urgency">
-        <div class="pdp-urgency-dot"></div>
-        <div class="pdp-urgency-text">⚡ Only ${product.stock} left in stock — order soon!</div>
-      </div>
+      <!-- Stock -->
+      ${isOOS ? `
+        <div style="background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.25);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);">
+          ❌ Out of Stock
+        </div>` : product.stock <= 8 ? `
+        <div class="pdp-urgency" style="margin-bottom:8px;">
+          <div class="pdp-urgency-dot"></div>
+          <div class="pdp-urgency-text">Only ${product.stock} left in stock — order soon!</div>
+        </div>
+        <div class="stock-bar" style="margin-bottom:16px;"><div class="stock-bar-fill" style="width:${stockPct}%;"></div></div>` : ''}
+
+      <!-- Sizes -->
       <div style="margin-bottom:20px;">
-        <div class="stock-bar"><div class="stock-bar-fill" style="width:${stockPct}%;"></div></div>
-        <div style="font-size:11px;color:var(--silver);font-family:var(--font-cond);font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-top:4px;">${stockPct.toFixed(0)}% Sold · Hurry!</div>
-      </div>` : ''}
-
-      <!-- Size Selection -->
-      <div style="margin-bottom:24px;">
         <div class="pdp-size-label">
-          <span style="font-family:var(--font-cond);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;">
-            Select Size <span id="selected-size-display" style="color:var(--neon);"></span>
+          <span style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">
+            Select Size <span id="selected-size-display" style="color:var(--blue);"></span>
           </span>
-          <span class="pdp-size-guide" onclick="showToast('Size guide coming soon!')">Size Guide →</span>
+          <span class="pdp-size-guide" onclick="showToast('Size guide: S=36-38cm, M=38-40cm, L=40-42cm, XL=42-44cm')">Size Guide →</span>
         </div>
         <div class="size-grid">
-          ${product.sizes.map(s => `
-            <button class="size-btn" onclick="selectSize('${s}', this)">${s}</button>
-          `).join('')}
+          ${product.sizes.map(s => `<button class="size-btn${isOOS ? '" disabled' : '"'} onclick="selectSize('${s}',this)">${s}</button>`).join('')}
         </div>
       </div>
 
       <!-- Qty -->
-      <div class="pdp-qty" style="margin-bottom:24px;">
-        <span style="font-family:var(--font-cond);font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);margin-right:8px;">Quantity:</span>
-        <button class="pdp-qty-btn" onclick="changeQty(-1)">−</button>
-        <span class="pdp-qty-val" id="qty-display">1</span>
-        <button class="pdp-qty-btn" onclick="changeQty(1)">+</button>
+      ${!isOOS ? `
+      <div style="margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);">Qty:</span>
+        <div class="pdp-qty">
+          <button class="pdp-qty-btn" onclick="changeQty(-1)">−</button>
+          <div class="pdp-qty-val" id="qty-display">1</div>
+          <button class="pdp-qty-btn" onclick="changeQty(1)">+</button>
+        </div>
       </div>
 
       <!-- CTAs -->
       <div class="pdp-ctas">
-        <button class="btn btn-neon ripple-btn" style="flex:2;padding:18px;" onclick="addToCartPDP()">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="flex-shrink:0;"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <button class="btn btn-blue btn-lg" style="flex:2;" onclick="addToCartPDP()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           Add to Cart
         </button>
-        <button class="btn btn-outline ripple-btn" style="flex:1;padding:18px;" onclick="buyNowPDP()">Buy Now</button>
-      </div>
+        <button class="btn btn-outline btn-lg" style="flex:1;" onclick="buyNowPDP()">Buy Now</button>
+      </div>` : ''}
 
       <!-- Trust -->
       <div class="pdp-trust">
-        <div class="pdp-trust-item"><div class="pdp-trust-icon">💳</div><div class="pdp-trust-label">Cash on Delivery</div><div class="pdp-trust-sub">Pay on arrival</div></div>
+        <div class="pdp-trust-item"><div class="pdp-trust-icon">📱</div><div class="pdp-trust-label">UPI Payment</div><div class="pdp-trust-sub">GPay · PhonePe</div></div>
         <div class="pdp-trust-item"><div class="pdp-trust-icon">🚀</div><div class="pdp-trust-label">Fast Delivery</div><div class="pdp-trust-sub">2–5 working days</div></div>
         <div class="pdp-trust-item"><div class="pdp-trust-icon">↩️</div><div class="pdp-trust-label">Easy Returns</div><div class="pdp-trust-sub">7-day policy</div></div>
       </div>
 
       <!-- Accordions -->
-      <div>
+      <div style="margin-top:20px;">
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>Product Description</span>
-            <span class="accordion-icon">▾</span>
+            <span>Product Description</span><span class="accordion-icon">▾</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-content">
               <p style="margin-bottom:12px;">${product.description}</p>
               <ul style="display:flex;flex-direction:column;gap:6px;">
-                ${product.features.map(f => `<li style="display:flex;align-items:center;gap:8px;"><span style="color:var(--neon);">✓</span>${f}</li>`).join('')}
+                ${product.features.map(f => `<li style="display:flex;align-items:center;gap:8px;"><span style="color:var(--blue);">✓</span>${f}</li>`).join('')}
               </ul>
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>Product Specifications</span>
-            <span class="accordion-icon">▾</span>
+            <span>Specifications</span><span class="accordion-icon">▾</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-content">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
                 ${Object.entries(product.specs).map(([k,v]) => `
-                  <div style="background:var(--dark-3);border-radius:8px;padding:10px 14px;">
-                    <div style="font-size:10px;font-family:var(--font-cond);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);margin-bottom:4px;">${k}</div>
-                    <div style="font-size:14px;font-weight:600;">${v}</div>
-                  </div>
-                `).join('')}
+                  <div style="background:var(--dark-3);border-radius:var(--radius-sm);padding:8px 12px;">
+                    <div style="font-size:10px;font-family:var(--font-cond);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);margin-bottom:2px;">${k}</div>
+                    <div style="font-size:13px;font-weight:600;">${v}</div>
+                  </div>`).join('')}
               </div>
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>Delivery & Returns</span>
-            <span class="accordion-icon">▾</span>
+            <span>Delivery & Payment</span><span class="accordion-icon">▾</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-content">
-              <p><strong style="color:var(--neon);">Delivery:</strong> 2–5 working days PAN India. Free shipping on orders above ₹999.</p>
-              <p style="margin-top:10px;"><strong style="color:var(--neon);">Cash on Delivery:</strong> Available on all orders.</p>
-              <p style="margin-top:10px;"><strong style="color:var(--neon);">Returns:</strong> 7-day hassle-free returns. Contact us via WhatsApp to initiate a return.</p>
+              <p><strong style="color:var(--blue);">Delivery:</strong> 2–5 working days PAN India. Free shipping on orders above ₹999.</p>
+              <p style="margin-top:10px;"><strong style="color:var(--blue);">Payment:</strong> UPI only — GPay, PhonePe, Paytm, BHIM. Pay after placing order, send screenshot on WhatsApp.</p>
+              <p style="margin-top:10px;"><strong style="color:var(--blue);">Returns:</strong> 7-day hassle-free returns. Contact us via WhatsApp to initiate a return.</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Share -->
-      <div style="margin-top:24px;display:flex;align-items:center;gap:12px;">
-        <span style="font-family:var(--font-cond);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);">Share:</span>
-        <a href="https://wa.me/?text=Check+this+out+${encodeURIComponent(product.name)}+at+Prime+Shoe+Jersey+Hub!" target="_blank" class="btn btn-dark btn-sm">💬 WhatsApp</a>
+      <div style="margin-top:20px;display:flex;align-items:center;gap:10px;">
+        <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);">Share:</span>
+        <a href="https://wa.me/?text=${encodeURIComponent(product.name + ' — Prime Shoe Jersey Hub')}" target="_blank" class="btn btn-ghost btn-sm">💬 WhatsApp</a>
       </div>
     </div>
   `;
 
-  // Search toggle
-document.getElementById('search-toggle').addEventListener('click', () => {
-  const wrap = document.getElementById('nav-search-wrap');
-  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
-});
-
-
-  // Show mobile CTA
   if (window.innerWidth < 768) {
     document.getElementById('mobile-cta').style.display = 'block';
-    document.querySelector('#pdp-layout .pdp-ctas').style.display = 'none';
+    const ctasEl = document.querySelector('#pdp-layout .pdp-ctas');
+    if (ctasEl) ctasEl.style.display = 'none';
     document.getElementById('mob-atc').onclick = addToCartPDP;
     document.getElementById('mob-buy').onclick = buyNowPDP;
   }
 
-  // Reviews section (append after layout)
-  renderReviewsSection(product);
+  renderReviews(product);
 
-  // Related
   const related = getRelatedProducts(product);
-  const relGrid = document.getElementById('related-grid');
-  relGrid.innerHTML = related.length > 0
+  document.getElementById('related-grid').innerHTML = related.length
     ? related.map(p => buildProductCard(p)).join('')
-    : '<p style="color:var(--silver);">No related products found.</p>';
+    : '<p style="color:var(--silver);">No related products.</p>';
+
+  document.getElementById('reviews-section').style.display = 'block';
 }
 
-function renderReviewsSection(product) {
-  const existing = document.getElementById('reviews-section');
-  if (existing) existing.remove();
+function renderReviews(product) {
+  const saved = getReviews(product.id);
+  const all = [...saved];
+  const totalRating = all.length ? (all.reduce((s, r) => s + r.rating, 0) / all.length).toFixed(1) : product.rating;
+  const totalCount = all.length + product.reviews;
 
-  const section = document.createElement('section');
-  section.id = 'reviews-section';
-  section.className = 'section-pad';
-  section.style.paddingTop = '0';
-  section.innerHTML = `
-    <div class="container">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
-        <div>
-          <div class="section-label">Reviews</div>
-          <h2 class="section-title" style="margin-top:10px;font-size:clamp(2rem,4vw,3rem);">CUSTOMER REVIEWS</h2>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-family:var(--font-display);font-size:3rem;color:var(--neon);line-height:1;">${product.rating}</div>
-          <div style="color:var(--neon);font-size:1.2rem;letter-spacing:2px;">★★★★★</div>
-          <div style="color:var(--silver);font-size:13px;margin-top:4px;">${product.reviews} verified reviews</div>
-        </div>
-      </div>
-      <div class="review-grid">
-        ${product.reviewsList.map(r => `
-          <div class="review-card">
-            <div class="review-header">
-              <div class="review-avatar" style="background:${['var(--neon)','#60a5fa','#f97316','#a78bfa'][Math.floor(Math.random()*4)]};color:var(--dark);">${r.name.charAt(0)}</div>
-              <div><div class="review-name">${r.name}</div><div class="review-loc">${r.city} · ${r.date}</div></div>
-            </div>
-            <div class="review-stars">${'★'.repeat(r.rating)}</div>
-            <div class="review-text">"${r.text}"</div>
-            <div class="review-verified">✓ Verified Purchase</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
+  document.getElementById('reviews-summary').innerHTML = `
+    <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--blue);line-height:1;">${totalRating}</div>
+    <div style="color:var(--orange);font-size:1rem;letter-spacing:2px;">★★★★★</div>
+    <div style="color:var(--silver);font-size:12px;margin-top:2px;">${totalCount} reviews</div>`;
 
-  const relSection = document.querySelector('.section-pad:last-of-type');
-  relSection.parentNode.insertBefore(section, relSection);
+  const grid = document.getElementById('reviews-grid');
+  if (!all.length) {
+    grid.innerHTML = `<div style="color:var(--silver);font-size:14px;grid-column:1/-1;">No reviews yet — be the first to review!</div>`;
+    return;
+  }
+  grid.innerHTML = all.map(r => `
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:${['var(--blue)','#60a5fa','#f97316','#a78bfa'][r.rating%4]};color:var(--dark);">${(r.name||'A').charAt(0).toUpperCase()}</div>
+        <div><div class="review-name">${r.name}</div><div class="review-loc">${r.date || 'Recently'}</div></div>
+      </div>
+      <div class="review-stars">${'★'.repeat(r.rating)}</div>
+      <div class="review-text">"${r.text}"</div>
+      <div class="review-verified">✓ Verified Purchase</div>
+    </div>`).join('');
+}
+
+function setRating(val) {
+  selectedRating = val;
+  const labels = ['','Poor','Fair','Good','Very Good','Excellent'];
+  document.getElementById('rating-hint').textContent = labels[val] || '';
+  document.querySelectorAll('.star-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i < val);
+  });
+}
+
+function submitReview() {
+  if (!currentProduct) return;
+  const name = document.getElementById('review-name').value.trim();
+  const text = document.getElementById('review-text').value.trim();
+  if (!name) { showToast('Please enter your name', 'error'); return; }
+  if (!selectedRating) { showToast('Please select a star rating', 'error'); return; }
+  if (!text || text.length < 10) { showToast('Please write at least 10 characters', 'error'); return; }
+
+  const review = { name, rating: selectedRating, text, date: 'Just now', productId: currentProduct.id };
+  saveReview(currentProduct.id, review);
+
+  document.getElementById('review-name').value = '';
+  document.getElementById('review-text').value = '';
+  setRating(0);
+  renderReviews(currentProduct);
+  showToast('Review submitted! Thank you 🙌');
 }
 
 function switchImg(idx) {
-  currentImgIdx = idx;
   document.getElementById('pdp-main-img').src = currentProduct.images[idx];
   document.querySelectorAll('.pdp-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
-  // Update lightbox image if open
-  const lbImg = document.getElementById('lb-main-img');
-  if (lbImg) lbImg.src = currentProduct.images[idx];
+  window._imgIdx = idx;
 }
-
-/* ======== ZOOM / LIGHTBOX ======== */
-function openLightbox(idx) {
-  currentImgIdx = idx;
-  const lb = document.getElementById('img-lightbox');
-  const lbImg = document.getElementById('lb-main-img');
-  lbImg.src = currentProduct.images[idx];
-  renderLbThumbs();
-  lb.classList.add('lb-open');
-  document.body.style.overflow = 'hidden';
-  resetZoom();
-  updateLbCounter();
-}
-
-function closeLightbox() {
-  document.getElementById('img-lightbox').classList.remove('lb-open');
-  document.body.style.overflow = '';
-  resetZoom();
-}
-
-function lbNav(dir) {
-  const total = currentProduct.images.length;
-  currentImgIdx = (currentImgIdx + dir + total) % total;
-  document.getElementById('lb-main-img').src = currentProduct.images[currentImgIdx];
-  document.querySelectorAll('.lb-thumb').forEach((t,i) => t.classList.toggle('lb-thumb-active', i === currentImgIdx));
-  resetZoom();
-  updateLbCounter();
-  document.getElementById('pdp-main-img').src = currentProduct.images[currentImgIdx];
-  document.querySelectorAll('.pdp-thumb').forEach((t,i) => t.classList.toggle('active', i === currentImgIdx));
-}
-
-function renderLbThumbs() {
-  const strip = document.getElementById('lb-thumb-strip');
-  strip.innerHTML = currentProduct.images.map((img, i) => `
-    <div class="lb-thumb${i===currentImgIdx?' lb-thumb-active':''}" onclick="lbThumbClick(${i})">
-      <img src="${img}" alt="thumb ${i+1}" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70'" />
-    </div>
-  `).join('');
-}
-
-function lbThumbClick(idx) {
-  currentImgIdx = idx;
-  document.getElementById('lb-main-img').src = currentProduct.images[idx];
-  document.querySelectorAll('.lb-thumb').forEach((t,i) => t.classList.toggle('lb-thumb-active', i === idx));
-  resetZoom();
-  updateLbCounter();
-}
-
-function updateLbCounter() {
-  const el = document.getElementById('lb-counter');
-  if (el && currentProduct) el.textContent = `Image ${currentImgIdx + 1} of ${currentProduct.images.length}  ·  Click or scroll to zoom`;
-}
-
-// Zoom state
-let lbZoom = 1, lbDragX = 0, lbDragY = 0, lbDragging = false, lbStartX, lbStartY, lbOriginX = 50, lbOriginY = 50;
-
-function resetZoom() {
-  lbZoom = 1; lbDragX = 0; lbDragY = 0; lbOriginX = 50; lbOriginY = 50;
-  const img = document.getElementById('lb-main-img');
-  if (img) { img.style.transform = 'scale(1) translate(0,0)'; img.style.cursor = 'zoom-in'; img.style.transformOrigin = '50% 50%'; }
-}
-
-function applyZoom() {
-  const img = document.getElementById('lb-main-img');
-  if (!img) return;
-  img.style.transformOrigin = `${lbOriginX}% ${lbOriginY}%`;
-  img.style.transform = `scale(${lbZoom}) translate(${lbDragX/lbZoom}px, ${lbDragY/lbZoom}px)`;
-  img.style.cursor = lbZoom > 1 ? 'grab' : 'zoom-in';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Inject lightbox HTML
-  const lb = document.createElement('div');
-  lb.id = 'img-lightbox';
-  lb.innerHTML = `
-    <div class="lb-backdrop" onclick="closeLightbox()"></div>
-    <div class="lb-container">
-      <button class="lb-close" onclick="closeLightbox()">&#10005;</button>
-      <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8249;</button>
-      <button class="lb-nav lb-next" onclick="lbNav(1)">&#8250;</button>
-      <div class="lb-img-wrap" id="lb-img-wrap">
-        <img id="lb-main-img" src="" alt="Product preview" draggable="false" />
-      </div>
-      <div class="lb-counter" id="lb-counter"></div>
-      <div class="lb-thumb-strip" id="lb-thumb-strip"></div>
-    </div>
-  `;
-  document.body.appendChild(lb);
-
-  // Inject lightbox styles
-  const style = document.createElement('style');
-  style.textContent = `
-    #img-lightbox {
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    #img-lightbox.lb-open { opacity: 1; pointer-events: all; }
-    .lb-backdrop {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(12px);
-    }
-    .lb-container {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column; align-items: center;
-      max-width: 90vw; max-height: 92vh; width: 700px;
-    }
-    .lb-close {
-      position: absolute; top: -44px; right: 0;
-      background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4);
-      color: #38BDF8; font-size: 18px; font-weight: bold;
-      width: 36px; height: 36px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; line-height: 1;
-    }
-    .lb-close:hover { background: #38BDF8; color: #0A0A0A; }
-    .lb-img-wrap {
-      width: 100%; aspect-ratio: 1;
-      background: #111; border-radius: 16px;
-      overflow: hidden; border: 1px solid rgba(56,189,248,0.2);
-      position: relative; max-height: 65vh;
-    }
-    .lb-img-wrap img {
-      width: 100%; height: 100%; object-fit: contain;
-      transition: transform 0.15s ease;
-      user-select: none;
-    }
-    .lb-nav {
-      position: absolute; top: 42%; transform: translateY(-50%);
-      background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4);
-      color: #38BDF8; font-size: 2rem; font-weight: bold;
-      width: 44px; height: 44px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; z-index: 3; line-height: 1;
-    }
-    .lb-nav:hover { background: #38BDF8; color: #0A0A0A; }
-    .lb-prev { left: -56px; }
-    .lb-next { right: -56px; }
-    .lb-counter {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.4); margin: 10px 0 8px;
-      text-transform: uppercase;
-    }
-    .lb-thumb-strip {
-      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; max-width: 100%;
-    }
-    .lb-thumb {
-      width: 60px; height: 60px; border-radius: 8px;
-      overflow: hidden; border: 2px solid transparent;
-      cursor: pointer; transition: border-color 0.2s;
-      background: #1A1A1A; flex-shrink: 0;
-    }
-    .lb-thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .lb-thumb:hover { border-color: rgba(56,189,248,0.5); }
-    .lb-thumb.lb-thumb-active { border-color: #38BDF8; box-shadow: 0 0 10px rgba(56,189,248,0.35); }
-    @media (max-width: 600px) {
-      .lb-prev { left: 4px; }
-      .lb-next { right: 4px; }
-      .lb-container { max-width: 98vw; }
-      .lb-thumb { width: 48px; height: 48px; }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Click on main image to open lightbox
-  document.addEventListener('click', (e) => {
-    const mainWrap = document.getElementById('pdp-main');
-    if (mainWrap && mainWrap.contains(e.target) && !e.target.closest('.pdp-thumbs')) {
-      openLightbox(currentImgIdx);
-    }
-  });
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    const lb = document.getElementById('img-lightbox');
-    if (!lb || !lb.classList.contains('lb-open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') lbNav(-1);
-    if (e.key === 'ArrowRight') lbNav(1);
-  });
-
-  // Zoom on click inside lightbox img
-  document.addEventListener('click', (e) => {
-    const wrap = document.getElementById('lb-img-wrap');
-    if (!wrap || !wrap.contains(e.target)) return;
-    const rect = wrap.getBoundingClientRect();
-    lbOriginX = ((e.clientX - rect.left) / rect.width) * 100;
-    lbOriginY = ((e.clientY - rect.top) / rect.height) * 100;
-    if (lbZoom >= 2.5) { resetZoom(); }
-    else { lbZoom = lbZoom < 1.5 ? 2 : 2.5; applyZoom(); }
-  });
-
-  // Scroll to zoom
-  document.addEventListener('wheel', (e) => {
-    const wrap = document.getElementById('lb-img-wrap');
-    if (!wrap || !wrap.contains(e.target)) return;
-    e.preventDefault();
-    const rect = wrap.getBoundingClientRect();
-    lbOriginX = ((e.clientX - rect.left) / rect.width) * 100;
-    lbOriginY = ((e.clientY - rect.top) / rect.height) * 100;
-    lbZoom = Math.max(1, Math.min(4, lbZoom - e.deltaY * 0.003));
-    if (lbZoom <= 1) { resetZoom(); } else { applyZoom(); }
-  }, { passive: false });
-
-  // Drag to pan when zoomed
-  document.addEventListener('mousedown', (e) => {
-    const wrap = document.getElementById('lb-img-wrap');
-    if (!wrap || !wrap.contains(e.target) || lbZoom <= 1) return;
-    lbDragging = true; lbStartX = e.clientX - lbDragX; lbStartY = e.clientY - lbDragY;
-    document.getElementById('lb-main-img').style.cursor = 'grabbing';
-  });
-  document.addEventListener('mousemove', (e) => {
-    if (!lbDragging) return;
-    lbDragX = e.clientX - lbStartX; lbDragY = e.clientY - lbStartY;
-    applyZoom();
-  });
-  document.addEventListener('mouseup', () => {
-    if (lbDragging) { lbDragging = false; if (lbZoom > 1) document.getElementById('lb-main-img').style.cursor = 'grab'; }
-  });
-
-  // Touch swipe in lightbox
-  let touchStartX = 0;
-  document.addEventListener('touchstart', (e) => {
-    const lb = document.getElementById('img-lightbox');
-    if (lb && lb.classList.contains('lb-open')) touchStartX = e.touches[0].clientX;
-  });
-  document.addEventListener('touchend', (e) => {
-    const lb = document.getElementById('img-lightbox');
-    if (!lb || !lb.classList.contains('lb-open')) return;
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
-  });
-});
+function prevImg() { const n = currentProduct.images.length; switchImg(((window._imgIdx||0) - 1 + n) % n); }
+function nextImg() { const n = currentProduct.images.length; switchImg(((window._imgIdx||0) + 1) % n); }
 
 function selectSize(size, btn) {
   selectedSize = size;
   document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  const display = document.getElementById('selected-size-display');
-  if (display) display.textContent = `— ${size}`;
+  const d = document.getElementById('selected-size-display');
+  if (d) d.textContent = `— ${size}`;
 }
-
 function changeQty(delta) {
   qty = Math.max(1, Math.min(10, qty + delta));
-  document.getElementById('qty-display').textContent = qty;
+  const d = document.getElementById('qty-display');
+  if (d) d.textContent = qty;
 }
-
 function addToCartPDP() {
   if (!selectedSize) { showToast('Please select a size first!', 'error'); return; }
-  cartAdd(currentProduct, selectedSize, qty);
-  openCart();
+  if (cartAdd(currentProduct, selectedSize, qty)) openCart();
 }
-
 function buyNowPDP() {
   if (!selectedSize) { showToast('Please select a size first!', 'error'); return; }
   cartAdd(currentProduct, selectedSize, qty);
   window.location.href = 'checkout.html';
 }
-
 function toggleAccordion(header) {
   const body = header.nextElementSibling;
   const icon = header.querySelector('.accordion-icon');
   const isOpen = body.classList.contains('open');
-  // Close all
-  document.querySelectorAll('.accordion-body.open').forEach(b => { b.classList.remove('open'); b.previousElementSibling.querySelector('.accordion-icon').textContent = '▾'; });
+  document.querySelectorAll('.accordion-body.open').forEach(b => {
+    b.classList.remove('open'); b.previousElementSibling.querySelector('.accordion-icon').textContent = '▾';
+  });
   if (!isOpen) { body.classList.add('open'); icon.textContent = '▴'; }
 }
 
-// Init
 const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 if (productId) {
   setTimeout(() => {
     const p = getProductById(productId);
     if (p) renderProduct(p);
-    else {
-      document.getElementById('pdp-layout').innerHTML = `<div style="text-align:center;padding:80px;grid-column:span 2;"><div style="font-size:3rem;margin-bottom:16px;">😕</div><h2 style="font-family:var(--font-cond);font-size:1.5rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Product Not Found</h2><a href="shop.html" class="btn btn-neon ripple-btn">Browse Shop</a></div>`;
-    }
+    else document.getElementById('pdp-layout').innerHTML = `
+      <div style="text-align:center;padding:80px;grid-column:span 2;">
+        <div style="font-size:3rem;margin-bottom:12px;">😕</div>
+        <h2 style="font-family:var(--font-cond);font-size:1.4rem;text-transform:uppercase;margin-bottom:12px;">Product Not Found</h2>
+        <a href="shop.html" class="btn btn-blue">Browse Shop</a>
+      </div>`;
   }, 300);
-} else {
-  window.location.href = 'shop.html';
-}
+} else { window.location.href = 'shop.html'; }
 </script>
 </body>
 </html>

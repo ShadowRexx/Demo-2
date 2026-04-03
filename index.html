@@ -1,84 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prime Shoe Jersey Hub — India's Trusted Football Store</title>
-  <meta name="description" content="Premium football jerseys, studs & gear. Authentic quality, fast delivery, COD available." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prime Shoe Jersey Hub — Premium Football Gear India</title>
+  <meta name="description" content="India's premium football jerseys, studs & gear. Authentic quality, fast delivery, UPI payment."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/style.css"/>
 </head>
 <body>
 
-<!-- ============ TICKER / ANNOUNCEMENT ============ -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker-track">
-    <span class="ticker-item">Season 2025 Drop — Shop Now</span>
-    <span class="ticker-item">Cash on Delivery Available</span>
-    <span class="ticker-item">Free Shipping on Orders ₹999+</span>
-    <span class="ticker-item">Authentic Gear Only</span>
-    <span class="ticker-item">5000+ Happy Customers</span>
-    <span class="ticker-item">Fast Delivery Across India</span>
-    <span class="ticker-item">Season 2025 Drop — Shop Now</span>
-    <span class="ticker-item">Cash on Delivery Available</span>
-    <span class="ticker-item">Free Shipping on Orders ₹999+</span>
-    <span class="ticker-item">Authentic Gear Only</span>
-    <span class="ticker-item">5000+ Happy Customers</span>
-    <span class="ticker-item">Fast Delivery Across India</span>
-  </div>
-</div>
 
-<!-- ============ NAVBAR ============ -->
+
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-inner">
-    <!-- LEFT -->
     <div class="nav-left">
-      <!-- Hamburger (mobile) -->
       <button id="hamburger" class="nav-icon-btn" aria-label="Menu">
-        <div class="hamburger-lines">
-          <span></span><span></span><span></span>
-        </div>
+        <div class="hamburger-lines"><span></span><span></span><span></span></div>
       </button>
-      <!-- Search -->
-      <div class="nav-search" style="display:none;" id="nav-search-wrap">
+      <div class="nav-search">
         <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
-        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off" />
+        <input type="text" id="nav-search-input" placeholder="Search jerseys, studs..." autocomplete="off"/>
         <div id="search-results-dropdown"></div>
       </div>
     </div>
 
-    <!-- CENTER — Logo -->
     <a href="index.html" class="nav-logo">
-      <div class="nav-logo-icon">
-        <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-      </div>
+      <img src="assets/images/logo.png" alt="Logo" class="nav-logo-img" onerror="this.style.display='none'"/>
       <div class="nav-logo-text">
         <span class="brand-top">Prime Shoe</span>
         <span class="brand-sub">Jersey Hub</span>
       </div>
     </a>
 
-    <!-- RIGHT -->
     <div class="nav-right">
-      <!-- Desktop nav links -->
-      <nav class="nav-links" id="desktop-nav-links">
+      <nav class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
         <a href="shop.html" class="nav-link">Shop</a>
-        <a href="#about-section" class="nav-link">About</a>
-        <a href="#contact-section" class="nav-link">Contact</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
-      <!-- Search toggle (desktop) -->
-      <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-      </button>
-      <!-- Cart -->
       <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
-        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
         </svg>
         <span class="cart-badge" style="display:none;">0</span>
@@ -87,36 +54,22 @@
   </div>
 </nav>
 
-<!-- Mobile Nav Dropdown -->
+<!-- MOBILE NAV -->
 <div id="mobile-nav">
   <div class="mobile-nav-links">
-    <a href="index.html" class="mobile-nav-link"> Home</a>
-    <a href="shop.html" class="mobile-nav-link"> Shop</a>
-      <a href="#about-section" class="mobile-nav-link">About</a>
-    <a href="#contact-section" class="mobile-nav-link">Contact</a>
-  </div>
-  <!-- Mobile Search -->
-  <div style="padding:12px 0 0;">
-    <div class="nav-search" style="max-width:100%;">
-      <svg class="nav-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-      </svg>
-      <input type="text" placeholder="Search products..." class="form-input" style="padding-left:40px;border-radius:100px;font-size:14px;"
-        oninput="window.location='shop.html?q='+this.value" />
-    </div>
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="shop.html" class="mobile-nav-link">🛍️ Shop</a>
+    <a href="tracking.html" class="mobile-nav-link">🚚order tracking</a>
+    <a href="about.html" class="mobile-nav-link">ℹ️ About</a>
+    <a href="contact.html" class="mobile-nav-link">📞 Contact</a>
   </div>
 </div>
 
-<!-- ============ HERO SECTION ============ -->
+<!-- ======= HERO ======= -->
 <section class="hero" id="hero">
   <div id="hero-slider" class="hero-slider"></div>
   <div class="hero-overlay"></div>
-
-  <!-- Decorative circles -->
-  <div style="position:absolute;top:15%;right:8%;width:320px;height:320px;border-radius:50%;border:1px solid rgba(200,244,0,0.06);z-index:1;pointer-events:none;"></div>
-  <div style="position:absolute;top:25%;right:12%;width:200px;height:200px;border-radius:50%;border:1px solid rgba(200,244,0,0.1);z-index:1;pointer-events:none;"></div>
-
-  <div class="container" style="width:100%;">
+  <div class="container" style="width:100%;position:relative;z-index:2;">
     <div class="hero-content animate-fade-up">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-dot"></div>
@@ -127,264 +80,149 @@
         <span class="outline">YOUR</span><br/>
         GAME
       </h1>
-      <p class="hero-subtitle">Premium Jerseys, Studs &amp; Football Gear — Worn by Champions, Built for You</p>
+      <p class="hero-subtitle">Premium Jerseys, Studs & Football Gear — Authentic Quality, Delivered Fast Across India</p>
       <div class="hero-ctas">
-        <a href="shop.html" class="btn btn-neon btn-lg ripple-btn">Shop Now →</a>
+        <a href="shop.html" class="btn btn-blue btn-lg">Shop Now →</a>
         <a href="shop.html?cat=jersey" class="btn btn-outline btn-lg">View Jerseys</a>
       </div>
       <div class="hero-stats">
-        <div>
-          <div class="hero-stat-val">500+</div>
-          <div class="hero-stat-label">Products</div>
-        </div>
-        <div>
-          <div class="hero-stat-val">10K+</div>
-          <div class="hero-stat-label">Orders Shipped</div>
-        </div>
-        <div>
-          <div class="hero-stat-val">4.9★</div>
-          <div class="hero-stat-label">Avg Rating</div>
-        </div>
-        <div>
-          <div class="hero-stat-val">COD</div>
-          <div class="hero-stat-label">Available</div>
-        </div>
+        <div class="hero-stat"><div class="hero-stat-val">500+</div><div class="hero-stat-label">Products</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">10K+</div><div class="hero-stat-label">Orders Shipped</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">4.9★</div><div class="hero-stat-label">Avg Rating</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">UPI</div><div class="hero-stat-label">Easy Payment</div></div>
       </div>
     </div>
   </div>
   <div class="hero-dots" id="hero-dots"></div>
 </section>
 
-<!-- ============ SHOP BY CATEGORY ============ -->
-<section class="section-pad" id="brand-categories">
-  <div class="container">
-    <div style="margin-bottom:48px;">
-      <div class="section-label reveal">Collections</div>
-      <h2 class="section-title reveal" style="margin-top:12px;">SHOP BY<br/>BRAND</h2>
-    </div>
-
-    <div class="category-grid">
-      <a href="shop.html?cat=adidas" class="category-card category-card-brand category-brand-adidas reveal">
-        <div class="category-brand-bg" aria-hidden="true">
-          <img src="assets/images/adidas_logo3.png" alt="adidas">
-          <span class="category-brand-word">ADIDAS</span>
-        </div>
-        <div class="category-card-overlay">
-          <div class="category-name">Adidas</div>
-          <div class="category-count">4 premium picks available</div>
-          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-
-      <a href="shop.html?cat=nike" class="category-card category-card-brand category-brand-nike reveal delay-1">
-        <div class="category-brand-bg" aria-hidden="true" >
-          <img src="assets/images/nike_logo4.jpg" alt="nike">
-        </div>
-        <div class="category-card-overlay">
-          <div class="category-name">Nike</div>
-          <div class="category-count">4 premium picks available</div>
-          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-
-      <a href="shop.html?cat=mizuno" class="category-card category-card-brand category-brand-mizuno reveal delay-2">
-        <div class="category-brand-bg" aria-hidden="true">
-          <img src="assets/images/mizuno_logo2.png" alt="mizuno">
-        </div>
-        <div class="category-card-overlay">
-          <div class="category-name">Mizuno</div>
-          <div class="category-count">1 premium pick available</div>
-          <div class="category-cta">Filter Products <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></div>
-        </div>
-        <div class="category-card-border"></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TRUST BAR ============ -->
+<!-- ======= TRUST BAR ======= -->
 <div class="trust-bar">
   <div class="container">
     <div class="trust-grid">
-      <div class="trust-item reveal">
-        <div class="trust-icon">🚀</div>
-        <div class="trust-title">Fast Delivery</div>
-        <div class="trust-desc">2–5 working days PAN India</div>
-      </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">🛡️</div>
-        <div class="trust-title">100% Authentic</div>
-        <div class="trust-desc">Genuine premium gear only</div>
-      </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">💳</div>
-        <div class="trust-title">Cash on Delivery</div>
-        <div class="trust-desc">Pay when you receive</div>
-      </div>
-      <div class="trust-item reveal">
-        <div class="trust-icon">↩️</div>
-        <div class="trust-title">Easy Returns</div>
-        <div class="trust-desc">7-day hassle-free returns</div>
-      </div>
+      <div class="trust-item reveal"><div class="trust-icon">🚀</div><div><div class="trust-title">Fast Delivery</div><div class="trust-desc">2–5 days PAN India</div></div></div>
+      <div class="trust-item reveal"><div class="trust-icon">🛡️</div><div><div class="trust-title">100% Authentic</div><div class="trust-desc">Genuine gear only</div></div></div>
+      <div class="trust-item reveal"><div class="trust-icon">📱</div><div><div class="trust-title">UPI Payment</div><div class="trust-desc">GPay · PhonePe · Paytm</div></div></div>
+      <div class="trust-item reveal"><div class="trust-icon">↩️</div><div><div class="trust-title">Easy Returns</div><div class="trust-desc">7-day policy</div></div></div>
     </div>
   </div>
 </div>
 
-
-<!-- ============ FEATURED PRODUCTS ============ -->
-<section class="section-pad" style="padding-top:0;">
-  <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
-      <div>
-        <div class="section-label reveal">Top Picks</div>
-        <h2 class="section-title reveal" style="margin-top:12px;">BEST<br/>SELLERS</h2>
-      </div>
-      <a href="shop.html" class="btn btn-outline reveal">View All Products →</a>
-    </div>
-    <div class="grid-products" id="featured-products-grid">
-      <!-- Skeleton loading -->
-      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
-      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
-      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
-      <div class="skeleton-card"><div class="skeleton" style="aspect-ratio:1;"></div><div style="padding:16px;gap:8px;display:flex;flex-direction:column;"><div class="skeleton" style="height:12px;width:60%;border-radius:4px;"></div><div class="skeleton" style="height:16px;width:90%;border-radius:4px;"></div><div class="skeleton" style="height:24px;width:50%;border-radius:4px;margin-top:8px;"></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BRANDS ============ -->
-<section style="padding:64px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--dark-2);">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
-      <div class="section-label reveal" style="justify-content:center;">Our Brands</div>
-      <h2 class="section-title reveal" style="margin-top:10px;font-size:clamp(1.5rem,4vw,2.5rem);">TRUSTED BY TOP<br/>FOOTBALL BRANDS</h2>
-    </div>
-    <div class="brands-grid">
-      <div class="brand-item reveal"><div class="brand-logo">ADIDAS</div></div>
-      <div class="brand-item reveal delay-1"><div class="brand-logo">NIKE</div></div>
-      <div class="brand-item reveal delay-2"><div class="brand-logo">PUMA</div></div>
-      <div class="brand-item reveal delay-3"><div class="brand-logo">MIZUNO</div></div>
-      <div class="brand-item reveal delay-4"><div class="brand-logo">JORDAN</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SOCIAL PROOF / REVIEWS ============ -->
+<!-- ======= SHOP BY BRAND ======= -->
 <section class="section-pad">
   <div class="container">
-    <div style="text-align:center;margin-bottom:48px;">
-      <div class="section-label reveal" style="justify-content:center;">Customer Love</div>
-      <h2 class="section-title reveal" style="margin-top:12px;">5,000+ HAPPY<br/>CUSTOMERS</h2>
-      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;" class="reveal">
-        <span style="color:var(--neon);font-size:1.2rem;">★★★★★</span>
-        <span style="font-family:var(--font-cond);font-weight:700;font-size:1rem;">4.9 / 5</span>
-        <span style="color:var(--silver);font-size:13px;">average rating</span>
-      </div>
+    <div style="margin-bottom:40px;">
+      <div class="section-label reveal">Collections</div>
+      <h2 class="section-title reveal" style="margin-top:10px;">SHOP BY<br/>BRAND</h2>
     </div>
-    <div class="review-grid">
-      <div class="review-card reveal">
-        <div class="review-header">
-          <div class="review-avatar">A</div>
-          <div><div class="review-name">Arjun Mehta</div><div class="review-loc">Mumbai · ✓ Verified</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <a href="shop.html?brand=nike" class="brand-cat-card reveal">
+        <div class="brand-cat-logo">
+          <img src="assets/images/nike_logo2.webp" alt="Nike" onerror="this.parentElement.innerHTML='NIKE'"/>
         </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Got the Real Madrid kit in 2 days! Absolutely premium quality — the badge stitching is perfect. Best football store in India. 🔥"</div>
-        <div class="review-verified">✓ Verified Purchase · Real Madrid Kit</div>
-      </div>
-      <div class="review-card reveal delay-1">
-        <div class="review-header">
-          <div class="review-avatar" style="background:#60a5fa;">S</div>
-          <div><div class="review-name">Sneha Patel</div><div class="review-loc">Bangalore · ✓ Verified</div></div>
+        <div class="brand-cat-name">Nike</div>
+        <div class="brand-cat-count">→ Shop Nike</div>
+      </a>
+      <a href="shop.html?brand=adidas" class="brand-cat-card reveal delay-1">
+        <div class="brand-cat-logo">
+          <img src="assets/images/adidas_logo3.png" alt="Adidas" onerror="this.parentElement.innerHTML='ADIDAS'"/>
         </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Finally a store that delivers what they promise. PSG jersey quality is amazing and fits perfectly. Will definitely order again!"</div>
-        <div class="review-verified">✓ Verified Purchase · PSG Black Edition</div>
-      </div>
-      <div class="review-card reveal delay-2">
-        <div class="review-header">
-          <div class="review-avatar" style="background:#f97316;">R</div>
-          <div><div class="review-name">Raj Kumar</div><div class="review-loc">Delhi · ✓ Verified</div></div>
+        <div class="brand-cat-name">Adidas</div>
+        <div class="brand-cat-count">→ Shop Adidas</div>
+      </a>
+      <a href="shop.html?brand=mizuno" class="brand-cat-card reveal delay-2">
+        <div class="brand-cat-logo">
+          <img src="assets/images/mizuno_logo.png" alt="Mizuno" onerror="this.parentElement.innerHTML='MIZUNO'"/>
         </div>
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Nike Mercurial studs — quality is top class. COD made it super easy. Packed super well, arrived in 3 days. 100% recommend! ⚽"</div>
-        <div class="review-verified">✓ Verified Purchase · Nike Mercurial Vapor</div>
-      </div>
+        <div class="brand-cat-name">Mizuno</div>
+        <div class="brand-cat-count">→ Shop Mizuno</div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ============ INSTAGRAM GRID ============ -->
+
+<!-- ======= BEST SELLERS ======= -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="section-label reveal">Top Picks</div>
+        <h2 class="section-title reveal" style="margin-top:10px;">BEST<br/>SELLERS</h2>
+      </div>
+      <a href="shop.html" class="btn btn-outline reveal">View All →</a>
+    </div>
+    <div class="grid-products" id="featured-grid"></div>
+  </div>
+</section>
+
+<!-- ======= INSTAGRAM GRID ======= -->
 <section style="padding:0 0 80px;">
   <div class="container">
-    <div style="text-align:center;margin-bottom:24px;">
-      <div class="section-label reveal" style="justify-content:center;">Social</div>
-      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">@PRIMESHOEJERSEYHUB</h2>
-      <p style="color:var(--silver);font-size:14px;margin-top:8px;" class="reveal">Players of the Indian football team have also bought our products and given reviews.</p>
+    <div style="text-align:center;margin-bottom:20px;">
+      <div class="section-label reveal" style="justify-content:center;">Community</div>
+      <h2 class="section-title reveal" style="margin-top:8px;font-size:clamp(1.5rem,4vw,2.5rem);">OUR CUSTOMERS</h2>
+      <p style="color:var(--silver);font-size:13px;margin-top:8px;" class="reveal">Real people, real gear — tag us @primeshoejerseyhub</p>
     </div>
-    <div class="insta-grid reveal" ">
-      <div class="insta-tile">
-        <a href="https://www.instagram.com/p/DQ7el-Ek4El/"><img src="assets/images/reviews/review1.jpg" alt="insta"  loading="lazy" ></a>
-      </div>
-      <div class="insta-tile">
-        <a href="https://www.instagram.com/p/DQzXepXk_3G/"><img src="assets/images/reviews/review2.jpg" alt="insta" loading="lazy"></a>
+    <div class="insta-grid">
+      <a href="https://www.instagram.com/p/DQ7el-Ek4El/">
+        <div class="insta-tile reveal">
+          <img src="assets/images/reviews/review1.jpg" alt="customer" loading="lazy"/></div>
+      </a>
         
-      </div>
-      <div class="insta-tile"><img src="assets/images/reviews/review3.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile"><img src="assets/images/reviews/review4.jpg" alt="insta" loading="lazy"><div class="insta-overlay"><span style="color:var(--neon);font-family:var(--font-display);font-size:1.2rem;">View Post</span></div></div>
-      <div class="insta-tile">
-        <a href="https://www.instagram.com/p/DVHEFMhkx-S/"><img src="assets/images/reviews/review5.jpg" alt="insta" loading="lazy"></a></div>
-      <div class="insta-tile">
-        <a href="https://www.instagram.com/p/DVHM3LhE3uF/"><img src="assets/images/reviews/review6.jpg" alt="insta" loading="lazy"></a><div class="insta-overlay"></div>
-    </div>
-    <div style="text-align:center;margin-top:24px;">
-      <a href="https://www.instagram.com/primeshoejerseyhub/" target="_blank" class="btn btn-outline reveal">Follow on Instagram →</a>
-    </div>
+      <a href="https://www.instagram.com/p/DQzXepXk_3G/">
+        <div class="insta-tile reveal delay-1">
+          <img src="assets/images/reviews/review2.jpg" alt="insta" loading="lazy">
+        </div>
+      </a>
+
+      <div class="insta-tile reveal delay-2"><img src="assets/images/reviews/review3.jpg" alt="customer" loading="lazy"/><div class="insta-overlay"><span style="color:var(--blue);font-family:var(--font-display);font-size:1.1rem;">View</span></div></div>
+
+      <div class="insta-tile reveal delay-3"><img src="assets/images/reviews/review4.jpg" alt="customer" loading="lazy"/><div class="insta-overlay"><span style="color:var(--blue);font-family:var(--font-display);font-size:1.1rem;">View</span></div></div>
+
+      <a href="https://www.instagram.com/p/DVHEFMhkx-S/">
+        <div class="insta-tile reveal delay-4">
+          <img src="assets/images/reviews/review5.jpg" alt="insta" loading="lazy">
+        </div>
+      </a>
+    
+      <a href="https://www.instagram.com/p/DVHM3LhE3uF/">
+         <div class="insta-tile reveal">
+            <img src="assets/images/reviews/review6.jpg" alt="insta" loading="lazy">
+          </div>
+      </a>
   </div>
 </section>
 
-<!-- ============ PAYMENT ICONS ============ -->
-<section class="payment-section">
+<!-- ======= PAYMENT LOGOS ======= -->
+<section style="padding:40px 0;background:var(--dark-2);border-top:1px solid var(--border-solid);border-bottom:1px solid var(--border-solid);">
   <div class="container">
-    <div style="text-align:center;margin-bottom:28px;">
-      <div class="section-label reveal" style="justify-content:center;">Payments</div>
-      <h2 class="section-title reveal" style="margin-top:12px;font-size:clamp(1.5rem,4vw,2.5rem);">SAFE &amp; FLEXIBLE<br/>CHECKOUT</h2>
+    <div style="text-align:center;margin-bottom:24px;">
+      <div class="section-label reveal" style="justify-content:center;">Secure Payments</div>
     </div>
-
-    <div class="payment-logos-row reveal">
-      <div class="payment-logo-card">
-          <img src="assets/images/PhonePe-Logo.wine.png" alt="phonepe" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
-      </div>
-      <div class="payment-logo-card">
-        <img src="assets/images/UPI.png" alt="UPI" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
-      </div>
-      <div class="payment-logo-card">
-        <img src="assets/images/VISA.svg" alt="VISA" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
-      </div>
-      <div class="payment-logo-card">
-        <img src="assets/images/Google_Pay_Logo.svg.png" alt="Google Pay" style="width: 100px; height: min-content; border: 2px; border-radius: 10px;">
-      </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;" class="reveal">
+      <img src="assets/images/PhonePe-Logo.wine.png" alt="PhonePe" class="payment-logo" style="height:28px;"/>
+      <img src="assets/images/UPI.png" alt="UPI" class="payment-logo" style="height:28px;"/>
+      <img src="assets/images/Google_Pay_Logo.svg.png" alt="GPay" class="payment-logo" style="height:28px;"/>
+      <img src="assets/images/VISA.svg" alt="Visa" class="payment-logo" style="height:22px;"/>
+      <span style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;color:var(--silver);">+ MORE</span>
     </div>
   </div>
 </section>
 
-
-<!-- ============ FOOTER ============ -->
+<!-- ======= FOOTER ======= -->
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <!-- Brand -->
       <div>
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px;">
-          <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px;">
-             <img src="assets/images/logo.jpg" alt="logo"  viewBox="0 0 24 24" >
-          </div>
-          <div class="nav-logo-text"><span class="brand-top" style="font-size:15px;">Prime Shoe</span><span class="brand-sub" style="font-size:9px;">Jersey Hub</span></div>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <img src="assets/images/logo.png" alt="Logo" style="height:32px;width:32px;border-radius:8px;object-fit:cover;" onerror="this.style.display='none'"/>
+          <div class="nav-logo-text"><span class="brand-top" style="font-size:14px;">Prime Shoe</span><span class="brand-sub" style="font-size:8px;">Jersey Hub</span></div>
         </a>
+        <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear.</p>
       </div>
-      <!-- Policies -->
-      <div>
-        <div class="footer-col-title">Support</div>
+
+      <div class="footer-col-title">Support
         <div class="footer-links">
           <a href="#" class="footer-link">Privacy Policy</a>
           <a href="#" class="footer-link">Refund Policy</a>
@@ -394,47 +232,31 @@
           <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
         </div>
       </div>
-      <!-- Contact -->
+
       <div>
-        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-col-title">Contact</div>
         <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9bebe9f2f6fedbf1fee9e8fee2f3eef9b5f2f5">[email&#160;protected]</a></span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>Mumbai, Maharashtra, India</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm IST</span></div>
-        <div style="margin-top:16px;">
-          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-sm ripple-btn" style="background:var(--green);color:white;display:inline-flex;align-items:center;gap:6px;">
-            💬 Chat on WhatsApp
-          </a>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm</span></div>
+        <div style="margin-top:14px;">
+          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-green btn-sm" style="display:inline-flex;">💬 WhatsApp Us</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub. All rights reserved. | India's Trusted Football Store</div>
+      <div class="footer-copy">© 2025 Prime Shoe Jersey Hub · All rights reserved</div>
+
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
+<script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
-// Search toggle
-document.getElementById('search-toggle').addEventListener('click', () => {
-  const wrap = document.getElementById('nav-search-wrap');
-  wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
-  if (wrap.style.display === 'block') wrap.querySelector('input').focus();
-});
-
-// Render featured products after skeleton delay
 setTimeout(() => {
-  const grid = document.getElementById('featured-products-grid');
-  if (!grid) return;
-  // Get bestsellers: badge === 'bestseller' first, then top-rated
-  const bestsellers = PRODUCTS
-    .filter(p => p.badge === 'bestseller')
-    .concat(PRODUCTS.filter(p => p.badge !== 'bestseller').sort((a,b) => b.rating - a.rating))
-    .slice(0, 8);
-  grid.innerHTML = bestsellers.map(p => buildProductCard(p)).join('');
+  const grid = document.getElementById('featured-grid');
+  if (grid) grid.innerHTML = getFeaturedProducts().slice(0,8).map(p => buildProductCard(p)).join('');
 }, 300);
 </script>
 </body>
