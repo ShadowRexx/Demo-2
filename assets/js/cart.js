@@ -1,50 +1,33 @@
 // ============================================
-// PRIME SHOE JERSEY HUB — Cart System
+// PRIME SHOE JERSEY HUB — Cart v2
 // ============================================
 
-const CART_KEY = 'psjh_cart';
-
-// ---- State ----
+const CART_KEY = 'psjh_cart_v2';
 let cartItems = loadCart();
 
 function loadCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
   catch(e) { return []; }
 }
+function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cartItems)); }
 
-function saveCart() {
-  localStorage.setItem(CART_KEY, JSON.stringify(cartItems));
-}
-
-// ---- Core Operations ----
 function cartAdd(product, size, qty = 1) {
+  if (product.stock === 0) { showToast('This product is out of stock.', 'error'); return false; }
   const key = `${product.id}-${size}`;
   const existing = cartItems.find(i => i.key === key);
-  if (existing) {
-    existing.qty += qty;
-  } else {
-    cartItems.push({
-      key,
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.images[0],
-      size,
-      qty,
-      category: product.category,
-    });
+  if (existing) { existing.qty += qty; }
+  else {
+    cartItems.push({ key, productId: product.id, name: product.name, price: product.price,
+      image: product.images[0], size, qty, category: product.category });
   }
-  saveCart();
-  cartRefreshUI();
-  showToast(`${product.name.split(' ').slice(0,3).join(' ')} added to cart! 🛒`);
+  saveCart(); cartRefreshUI();
+  showToast(`${product.name.split(' ').slice(0,3).join(' ')} added to cart!`);
   return true;
 }
 
 function cartRemove(key) {
   cartItems = cartItems.filter(i => i.key !== key);
-  saveCart();
-  cartRefreshUI();
-  renderCartItems();
+  saveCart(); cartRefreshUI(); renderCartItems();
 }
 
 function cartUpdateQty(key, delta) {
@@ -55,24 +38,14 @@ function cartUpdateQty(key, delta) {
   else { saveCart(); cartRefreshUI(); renderCartItems(); }
 }
 
-function cartClear() {
-  cartItems = [];
-  saveCart();
-  cartRefreshUI();
-}
-
-function getCartTotal() {
-  return cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
-}
-
-function getCartCount() {
-  return cartItems.reduce((sum, i) => sum + i.qty, 0);
-}
+function cartClear() { cartItems = []; saveCart(); cartRefreshUI(); }
+function getCartTotal() { return cartItems.reduce((s, i) => s + i.price * i.qty, 0); }
+function getCartCount() { return cartItems.reduce((s, i) => s + i.qty, 0); }
 
 // ---- UI ----
 function cartRefreshUI() {
   const count = getCartCount();
-  document.querySelectorAll('.cart-count-badge, .cart-badge').forEach(el => {
+  document.querySelectorAll('.cart-badge').forEach(el => {
     el.textContent = count;
     el.style.display = count > 0 ? 'flex' : 'none';
   });
@@ -84,7 +57,6 @@ function openCart() {
   document.body.style.overflow = 'hidden';
   renderCartItems();
 }
-
 function closeCart() {
   document.getElementById('cart-overlay')?.classList.remove('open');
   document.getElementById('cart-sidebar')?.classList.remove('open');
@@ -94,82 +66,80 @@ function closeCart() {
 function renderCartItems() {
   const container = document.getElementById('cart-items');
   if (!container) return;
-
   if (cartItems.length === 0) {
     container.innerHTML = `
       <div class="cart-empty">
         <div class="cart-empty-icon">🛒</div>
         <div class="cart-empty-msg">Your cart is empty</div>
-        <p style="font-size:13px;color:var(--silver);margin-top:8px;">Add some gear and come back!</p>
-        <a href="shop.html" class="btn btn-neon btn-sm" style="margin-top:16px;" onclick="closeCart()">Browse Products</a>
+        <a href="shop.html" class="btn btn-outline btn-sm" style="margin-top:12px;" onclick="closeCart()">Browse Products</a>
       </div>`;
     return;
   }
-
-  const subtotal = getCartTotal();
   container.innerHTML = cartItems.map(item => `
     <div class="cart-item">
-      <img src="${item.image}" alt="${item.name}" class="cart-item-img" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=70'" />
+      <img src="${item.image}" alt="${item.name}" class="cart-item-img"
+        onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=60'" />
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-meta">Size: ${item.size} · ${item.category}</div>
+        <div class="cart-item-meta">Size: ${item.size}</div>
         <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;">
           <div class="cart-qty">
-            <button class="cart-qty-btn" onclick="cartUpdateQty('${item.key}', -1)">−</button>
+            <button class="cart-qty-btn" onclick="cartUpdateQty('${item.key}',-1)">−</button>
             <span class="cart-qty-val">${item.qty}</span>
-            <button class="cart-qty-btn" onclick="cartUpdateQty('${item.key}', 1)">+</button>
+            <button class="cart-qty-btn" onclick="cartUpdateQty('${item.key}',1)">+</button>
           </div>
           <button class="cart-remove" onclick="cartRemove('${item.key}')">Remove</button>
         </div>
       </div>
     </div>
   `).join('');
-
-  // Update footer total
   const totalEl = document.getElementById('cart-subtotal-val');
-  if (totalEl) totalEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
+  if (totalEl) totalEl.textContent = '₹' + getCartTotal().toLocaleString('en-IN');
 }
 
-// ---- Build Cart Sidebar HTML (called once on DOMContentLoaded) ----
 function buildCartSidebar() {
-  if (document.getElementById('cart-sidebar')) return; // already exists
-
+  if (document.getElementById('cart-sidebar')) return;
   const overlay = document.createElement('div');
   overlay.id = 'cart-overlay';
   overlay.onclick = closeCart;
-
   const sidebar = document.createElement('aside');
   sidebar.id = 'cart-sidebar';
   sidebar.innerHTML = `
     <div class="cart-header">
       <div>
         <div class="cart-title">Your Cart</div>
-        <div id="cart-item-count" style="font-size:12px;color:var(--silver);margin-top:2px;font-family:var(--font-cond);letter-spacing:0.05em;"></div>
       </div>
       <button class="cart-close" onclick="closeCart()">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
       </button>
     </div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
-      <div class="cart-cod-note">
-        <span>💳</span> Cash on Delivery Available
-      </div>
+      <div class="cart-upi-note">📱 Payment via UPI after order</div>
       <div class="cart-subtotal">
         <span class="cart-subtotal-label">Subtotal</span>
         <span class="cart-subtotal-val" id="cart-subtotal-val">₹0</span>
       </div>
-      <a href="checkout.html" class="btn btn-neon btn-full" style="margin-bottom:10px;">Proceed to Checkout →</a>
-      <button class="btn btn-dark btn-full btn-sm" onclick="closeCart()">Continue Shopping</button>
+      <a href="checkout.html" class="btn btn-blue btn-full" style="margin-bottom:8px;">Proceed to Checkout →</a>
+      <button class="btn btn-ghost btn-full btn-sm" onclick="closeCart()">Continue Shopping</button>
     </div>
   `;
-
   document.body.appendChild(overlay);
   document.body.appendChild(sidebar);
 }
 
-// ---- Toast Notification ----
+function quickAddToCart(productId) {
+  const product = getProductById(productId);
+  if (!product) return;
+  if (product.stock === 0) { showToast('Out of stock!', 'error'); return; }
+  const defaultSize = product.sizes[Math.min(1, product.sizes.length - 1)];
+  if (cartAdd(product, defaultSize, 1)) openCart();
+}
+
+// ---- Toast ----
 function showToast(msg, type = 'success') {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -183,29 +153,14 @@ function showToast(msg, type = 'success') {
     <div class="toast-icon ${type === 'error' ? 'error' : ''}">
       ${type === 'error' ? '✕' : '✓'}
     </div>
-    <span>${msg}</span>
-  `;
+    <span>${msg}</span>`;
   container.appendChild(toast);
-  setTimeout(() => {
-    toast.classList.add('removing');
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  setTimeout(() => { toast.classList.add('removing'); setTimeout(() => toast.remove(), 300); }, 3000);
 }
 
-// ---- Navbar Cart Button ----
-function buildNavCartBtn() {
-  const btns = document.querySelectorAll('[data-cart-trigger]');
-  btns.forEach(btn => { btn.onclick = openCart; });
-}
-
-// ---- Init ----
 document.addEventListener('DOMContentLoaded', () => {
   buildCartSidebar();
-  buildNavCartBtn();
+  document.querySelectorAll('[data-cart-trigger]').forEach(btn => { btn.onclick = openCart; });
   cartRefreshUI();
-
-  // Keyboard shortcut to close cart
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeCart();
-  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
 });
