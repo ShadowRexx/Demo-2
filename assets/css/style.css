@@ -767,6 +767,50 @@ select.form-input option { background: var(--dark-2); }
 .insta-tile:hover .insta-overlay { opacity: 1; }
 
 /* ============================================
+   PAYMENT SECTION
+   ============================================ */
+
+.payment-section {
+  padding: 0 0 80px;
+}
+
+.payment-logos-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.payment-logo-card {
+  min-width: 180px;
+  min-height: 78px;
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(10,10,10,0.98));
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.26);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), color var(--transition);
+  color: rgba(255,255,255,0.84);
+}
+
+.payment-logo-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(200,244,0,0.28);
+  box-shadow: 0 22px 40px rgba(0,0,0,0.34), 0 0 20px rgba(200,244,0,0.08);
+  color: var(--neon);
+}
+
+.payment-logo-svg {
+  width: auto;
+  height: 28px;
+  overflow: visible;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 footer {
