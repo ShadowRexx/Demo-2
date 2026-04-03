@@ -1,15 +1,15 @@
 /* ============================================
    PRIME SHOE JERSEY HUB — Global Styles
-   Design: Premium Dark + Neon Sports Brand
+   Design: Premium Dark + Sky Blue Sports Brand
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@300;400;500;600;700&display=swap');
 
 /* ---- CSS VARIABLES ---- */
 :root {
-  --neon: #C8F400;
-  --neon-dark: #a8cc00;
-  --neon-glow: rgba(200, 244, 0, 0.35);
+  --neon: #38BDF8;
+  --neon-dark: #0EA5E9;
+  --neon-glow: rgba(56, 189, 248, 0.35);
   --dark: #0A0A0A;
   --dark-2: #111111;
   --dark-3: #1A1A1A;
@@ -129,10 +129,10 @@ h1, h2, h3 { font-family: var(--font-cond); font-weight: 700; }
 .btn-neon {
   background: var(--neon);
   color: var(--dark);
-  box-shadow: 0 0 0 rgba(200,244,0,0);
+  box-shadow: 0 0 0 rgba(56,189,248,0);
 }
 .btn-neon:hover {
-  background: #d4ff0a;
+  background: #67D7F5;
   box-shadow: 0 0 24px var(--neon-glow), 0 4px 16px rgba(0,0,0,0.4);
   transform: translateY(-2px);
 }
@@ -185,7 +185,7 @@ h1, h2, h3 { font-family: var(--font-cond); font-weight: 700; }
 }
 .form-input:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 0 3px rgba(200,244,0,0.1);
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.1);
 }
 .form-input::placeholder { color: #555; }
 .form-label {
@@ -210,8 +210,8 @@ select.form-input option { background: var(--dark-2); }
 }
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,244,0,0.15);
-  border-color: rgba(200,244,0,0.15);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(56,189,248,0.15);
+  border-color: rgba(56,189,248,0.15);
 }
 
 /* ============================================
@@ -246,7 +246,7 @@ select.form-input option { background: var(--dark-2); }
 .toast {
   display: flex; align-items: center; gap: 12px;
   background: var(--dark-2);
-  border: 1px solid rgba(200,244,0,0.3);
+  border: 1px solid rgba(56,189,248,0.3);
   padding: 14px 20px; border-radius: 100px;
   box-shadow: 0 8px 40px rgba(0,0,0,0.6);
   font-family: var(--font-cond); font-weight: 700;
@@ -335,7 +335,7 @@ select.form-input option { background: var(--dark-2); }
 }
 .nav-search input:focus {
   border-color: var(--neon);
-  box-shadow: 0 0 0 3px rgba(200,244,0,0.08);
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.08);
 }
 .nav-search input::placeholder { color: #555; }
 .nav-search-icon {
@@ -559,8 +559,8 @@ select.form-input option { background: var(--dark-2); }
 }
 .product-card:hover {
   transform: translateY(-8px) scale(1.005);
-  box-shadow: 0 28px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,244,0,0.18);
-  border-color: rgba(200,244,0,0.15);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(56,189,248,0.18);
+  border-color: rgba(56,189,248,0.15);
 }
 .product-card-img {
   position: relative;
@@ -664,7 +664,7 @@ select.form-input option { background: var(--dark-2); }
   border: 1px solid transparent;
   transition: border-color var(--transition);
 }
-.category-card:hover .category-card-border { border-color: rgba(200,244,0,0.35); }
+.category-card:hover .category-card-border { border-color: rgba(56,189,248,0.35); }
 .category-name {
   font-family: var(--font-display);
   font-size: 2.2rem; color: var(--white); line-height: 1;
@@ -715,8 +715,8 @@ select.form-input option { background: var(--dark-2); }
 }
 .trust-icon {
   width: 48px; height: 48px;
-  background: rgba(200,244,0,0.1);
-  border: 1px solid rgba(200,244,0,0.2);
+  background: rgba(56,189,248,0.1);
+  border: 1px solid rgba(56,189,248,0.2);
   border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
   font-size: 20px;
@@ -733,7 +733,7 @@ select.form-input option { background: var(--dark-2); }
   border-radius: var(--radius-lg); padding: 24px;
   transition: border-color var(--transition);
 }
-.review-card:hover { border-color: rgba(200,244,0,0.2); }
+.review-card:hover { border-color: rgba(56,189,248,0.2); }
 .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .review-avatar {
   width: 44px; height: 44px; border-radius: 50%;
@@ -760,7 +760,7 @@ select.form-input option { background: var(--dark-2); }
 .insta-tile:hover img { transform: scale(1.1); }
 .insta-overlay {
   position: absolute; inset: 0;
-  background: rgba(200,244,0,0.15);
+  background: rgba(56,189,248,0.15);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity 0.3s;
 }
@@ -799,8 +799,8 @@ select.form-input option { background: var(--dark-2); }
 
 .payment-logo-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(200,244,0,0.28);
-  box-shadow: 0 22px 40px rgba(0,0,0,0.34), 0 0 20px rgba(200,244,0,0.08);
+  border-color: rgba(56,189,248,0.28);
+  box-shadow: 0 22px 40px rgba(0,0,0,0.34), 0 0 20px rgba(56,189,248,0.08);
   color: var(--neon);
 }
 
@@ -927,8 +927,8 @@ footer {
 .cart-subtotal-label { font-family: var(--font-cond); font-weight: 700; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); }
 .cart-subtotal-val { font-family: var(--font-display); font-size: 1.8rem; color: var(--white); }
 .cart-cod-note {
-  background: rgba(200,244,0,0.08);
-  border: 1px solid rgba(200,244,0,0.2);
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(56,189,248,0.2);
   border-radius: var(--radius-sm);
   padding: 10px 14px; font-size: 12px;
   font-family: var(--font-cond); font-weight: 700;
@@ -975,7 +975,7 @@ footer {
   transition: all var(--transition);
 }
 .filter-chip:hover, .filter-chip.active {
-  background: rgba(200,244,0,0.1);
+  background: rgba(56,189,248,0.1);
   border-color: var(--neon); color: var(--neon);
 }
 .price-range { display: flex; gap: 10px; align-items: center; }
@@ -1013,7 +1013,7 @@ footer {
   background: var(--dark-2);
 }
 .pdp-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.pdp-thumb.active { border-color: var(--neon); box-shadow: 0 0 12px rgba(200,244,0,0.3); }
+.pdp-thumb.active { border-color: var(--neon); box-shadow: 0 0 12px rgba(56,189,248,0.3); }
 .pdp-category {
   font-family: var(--font-cond); font-weight: 700;
   font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
@@ -1055,8 +1055,8 @@ footer {
   display: flex; align-items: center; justify-content: center;
   padding: 0 12px;
 }
-.size-btn:hover { border-color: rgba(200,244,0,0.5); color: var(--neon); }
-.size-btn.selected { background: var(--neon); border-color: var(--neon); color: var(--dark); box-shadow: 0 0 14px rgba(200,244,0,0.35); }
+.size-btn:hover { border-color: rgba(56,189,248,0.5); color: var(--neon); }
+.size-btn.selected { background: var(--neon); border-color: var(--neon); color: var(--dark); box-shadow: 0 0 14px rgba(56,189,248,0.35); }
 .size-btn.out { opacity: 0.35; pointer-events: none; text-decoration: line-through; }
 .pdp-qty { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
 .pdp-qty-btn {
@@ -1121,7 +1121,7 @@ footer {
   border-right: 1px solid var(--border);
 }
 .checkout-step:last-child { border-right: none; }
-.checkout-step.active { background: rgba(200,244,0,0.08); color: var(--neon); }
+.checkout-step.active { background: rgba(56,189,248,0.08); color: var(--neon); }
 .checkout-step.done { color: var(--green); }
 .checkout-step-num {
   width: 22px; height: 22px; border-radius: 50%;
@@ -1136,8 +1136,8 @@ footer {
   display: flex; align-items: center; gap: 14px;
   cursor: pointer; transition: all var(--transition);
 }
-.payment-option:hover { border-color: rgba(200,244,0,0.4); }
-.payment-option.selected { border-color: var(--neon); background: rgba(200,244,0,0.05); }
+.payment-option:hover { border-color: rgba(56,189,248,0.4); }
+.payment-option.selected { border-color: var(--neon); background: rgba(56,189,248,0.05); }
 .payment-option input { accent-color: var(--neon); }
 .order-summary-card { background: var(--dark-2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; position: sticky; top: calc(var(--nav-h) + 24px); }
 .order-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
@@ -1191,7 +1191,7 @@ footer {
   font-size: 16px; flex-shrink: 0; transition: all 0.4s;
 }
 .track-dot.done { background: var(--neon); border-color: var(--neon); color: var(--dark); }
-.track-dot.active { border-color: var(--neon); background: rgba(200,244,0,0.1); color: var(--neon); animation: heroDot 2s infinite; }
+.track-dot.active { border-color: var(--neon); background: rgba(56,189,248,0.1); color: var(--neon); animation: heroDot 2s infinite; }
 .track-info {}
 .track-label { font-family: var(--font-cond); font-weight: 700; font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; }
 .track-date { font-size: 13px; color: var(--silver); margin-top: 2px; }
@@ -1211,7 +1211,7 @@ footer {
   transition: all var(--transition); border: 1px solid transparent;
 }
 .admin-nav-item:hover { background: var(--dark-3); color: var(--white); }
-.admin-nav-item.active { background: rgba(200,244,0,0.1); color: var(--neon); border-color: rgba(200,244,0,0.2); }
+.admin-nav-item.active { background: rgba(56,189,248,0.1); color: var(--neon); border-color: rgba(56,189,248,0.2); }
 .admin-content { padding: 32px; }
 .admin-section { display: none; }
 .admin-section.active { display: block; }
@@ -1225,7 +1225,7 @@ footer {
 .status-badge { font-family: var(--font-cond); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
 .status-pending { background: rgba(255,193,7,0.15); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
 .status-shipped { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
-.status-delivered { background: rgba(200,244,0,0.15); color: var(--neon); border: 1px solid rgba(200,244,0,0.3); }
+.status-delivered { background: rgba(56,189,248,0.15); color: var(--neon); border: 1px solid rgba(56,189,248,0.3); }
 
 /* ============================================
    PAGE TRANSITIONS
