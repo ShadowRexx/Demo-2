@@ -5,7 +5,7 @@
 // ---- CONFIG (edit these) ----
 const STORE_CONFIG = {
   upiId: 'primeshoejerseyh@upi',
-  whatsappNumber: '919876543210',
+  whatsappNumber: '919239394022',
   storeName: 'Prime Shoe Jersey Hub',
 };
 
