@@ -444,7 +444,10 @@ textarea.form-input{resize:vertical;min-height:80px}
 .product-card-name{
   font-family:var(--font-cond);font-size:15px;font-weight:700;
   line-height:1.25;margin-bottom:6px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+   line-clamp: 2;
+  -webkit-box-orient:vertical;overflow:hidden;
 }
 .product-card-rating{display:flex;align-items:center;gap:4px;margin-bottom:8px}
 .product-card-rating .stars{font-size:11px;color:var(--orange);letter-spacing:1px}
@@ -1134,7 +1137,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-solid);margin-
 .admin-topbar{
   height:var(--nav-h);background:var(--dark-2);border-bottom:1px solid var(--border-solid);
   display:flex;align-items:center;justify-content:space-between;padding:0 24px;
-  position:sticky;top:0;z-index:100;
+  position:sticky;top:0;z-index:210;
 }
 .admin-shell{display:flex;min-height:calc(100vh - var(--nav-h))}
 .admin-sidebar{
@@ -1232,6 +1235,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-solid);margin-
   .container{padding:0 14px}
   .section-pad{padding:56px 0}
   #nav-search-input{display:none}
+  .nav-search{display:none}
   .grid-products{grid-template-columns:1fr 1fr}
   .review-grid{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr}
@@ -1383,3 +1387,128 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-solid);margin-
   .ipl-thumb{width:52px;height:52px;}
   .ipl-counter{font-size:10px;letter-spacing:0.12em;}
 }
+
+/* ============================================================
+   MOBILE SEARCH OVERLAY — v4 Fix
+   ============================================================ */
+#mobile-search-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(8,12,16,0.95);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  align-items:flex-start;justify-content:center;
+}
+#mobile-search-overlay.open{display:flex;}
+#mobile-search-box{
+  width:100%;max-width:600px;
+  background:var(--dark-2);
+  border-bottom:1px solid var(--border-solid);
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  animation:msoSlideDown 0.22s var(--spring) both;
+}
+@keyframes msoSlideDown{from{transform:translateY(-16px);opacity:0}to{transform:translateY(0);opacity:1}}
+#mobile-search-dropdown{max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+#mobile-search-dropdown .search-result-item{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;cursor:pointer;
+  border-bottom:1px solid var(--border-solid);
+  transition:background 0.15s;touch-action:manipulation;
+}
+#mobile-search-dropdown .search-result-item:active,
+#mobile-search-dropdown .search-result-item:hover{background:var(--dark-3);}
+#mobile-search-dropdown .search-result-item img{
+  width:48px;height:48px;object-fit:cover;border-radius:6px;flex-shrink:0;
+}
+#mobile-search-dropdown .search-result-item .name{
+  font-weight:600;font-size:13px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+#mobile-search-dropdown .search-result-item .price{
+  font-family:var(--font-display);font-size:0.95rem;color:var(--blue);
+}
+/* Also fix: dropdown on desktop */
+#search-results-dropdown .search-result-item{touch-action:manipulation;}
+/* Mobile search button - hidden on desktop, visible on mobile */
+.mobile-search-trigger{
+  display:none;
+}
+@media(max-width:480px){
+  .mobile-search-trigger{
+    display:flex!important;
+    align-items:center;
+    justify-content:center;
+  }
+}
+
+/* ============================================================
+   SIZE CHART — v4
+   ============================================================ */
+.size-chart-wrap{
+  position:relative;cursor:zoom-in;
+  border:1px solid var(--border-solid);border-radius:var(--radius);
+  overflow:hidden;background:var(--dark-3);transition:border-color 0.2s;
+}
+.size-chart-wrap:hover{border-color:var(--blue);}
+.size-chart-img{width:100%;height:auto;display:block;transition:transform 0.2s;}
+.size-chart-zoom-hint{
+  position:absolute;bottom:8px;right:10px;
+  font-family:var(--font-cond);font-size:10px;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  background:rgba(8,12,16,0.75);color:var(--blue);
+  padding:3px 8px;border-radius:100px;pointer-events:none;
+}
+#size-chart-modal{
+  display:none;position:fixed;inset:0;z-index:3100;
+  background:rgba(0,0,0,0.92);
+  align-items:center;justify-content:center;padding:20px;
+}
+#size-chart-modal.open{display:flex;}
+#size-chart-modal img{
+  max-width:100%;max-height:90vh;
+  border-radius:var(--radius-lg);
+  box-shadow:0 8px 48px rgba(0,0,0,0.8);
+}
+#size-chart-modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--dark-3);border:1px solid var(--border-solid);
+  color:var(--white);width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:16px;z-index:1;
+  transition:background 0.15s;
+}
+#size-chart-modal-close:hover{background:var(--dark-4);}
+
+/* ============================================================
+   ADMIN MOBILE SIDEBAR — v4 Fix
+   ============================================================ */
+/* These rules are in admin.html <style> block but ensure global too */
+@media(max-width:900px){
+  .admin-sidebar{
+    display:block!important;
+    position:fixed!important;left:0;top:0;bottom:0;z-index:200;
+    transform:translateX(-110%);
+    transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+    width:260px!important;padding-top:60px!important;
+    box-shadow:4px 0 24px rgba(0,0,0,0.4);
+    overflow-y:auto;
+  }
+  .admin-sidebar.open{transform:translateX(0)!important;}
+}
+
+/* ============================================================
+   LOADING SKELETONS / SPINNERS — v4
+   ============================================================ */
+.spinner{
+  display:inline-block;width:24px;height:24px;
+  border:3px solid var(--border-solid);
+  border-top-color:var(--blue);border-radius:50%;
+  animation:spinnerSpin 0.8s linear infinite;
+}
+@keyframes spinnerSpin{to{transform:rotate(360deg)}}
+
+/* Lazy load image fade-in */
+img[loading="lazy"]{opacity:0;transition:opacity 0.4s;}
+img[loading="lazy"].loaded{opacity:1;}
+
+/* Button active feedback */
+.btn:active:not(:disabled){transform:scale(0.97);}
