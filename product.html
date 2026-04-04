@@ -166,24 +166,43 @@
         <p class="footer-brand-desc">India's trusted destination for premium football jerseys, studs & gear.</p>
       </div>
 
-      <div class="footer-col-title">Support
+    <div>  
+      <div class="footer-col-title">Useful links</div>
         <div class="footer-links">
-          <a href="#" class="footer-link">Privacy Policy</a>
-          <a href="#" class="footer-link">Refund Policy</a>
-          <a href="#" class="footer-link">Terms of Service</a>
-          <a href="#" class="footer-link">About Us</a>
-          <a href="#" class="footer-link">Shipping policy</a>
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+          <a href="terms.html" class="footer-link">Terms of Service</a>
+          <a href="shipping.html" class="footer-link">Shipping Policy</a>
+
+        </div>
+      </div>
+
+      <div>  
+      <div class="footer-col-title">GET TO KNOW US</div>
+        <div class="footer-links">
+         
+          <a href="contact.html" class="footer-link">Contact Us</a>
+          <a href="about.html" class="footer-link">About Us</a>
+          <a href="how-it-works.html" class="footer-link">How It Works</a>
           <a href="admin.html" class="footer-link" style="color:var(--silver);font-size:12px;">⚙️ Admin Panel</a>
         </div>
       </div>
 
+
       <div>
         <div class="footer-col-title">Contact</div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 98765 43210</span></div>
-        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>prime@jerseyhub.in</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📱</span><span>+91 92393 94022</span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📧</span><span>primeshoejerseyhub24@gmail.com
+          </span></div>
+        <div class="footer-contact-item"><span class="footer-contact-icon">📍</span><span>
+Kolkata, West Bengal, India
+          </span></div>
         <div class="footer-contact-item"><span class="footer-contact-icon">⏰</span><span>Mon–Sat, 10am–8pm</span></div>
         <div style="margin-top:14px;">
-          <a href="https://wa.me/919876543210" target="_blank" class="btn btn-green btn-sm" style="display:inline-flex;">💬 WhatsApp Us</a>
+          <a href="https://wa.me/919239394022" target="_blank" class="btn btn-green btn-sm" style="display:inline-flex;">💬 WhatsApp</a>
+        </div>
+        <div style="margin-top:14px;">
+          <a href="https://www.instagram.com/primeshoejerseyhub/" target="_blank" class="btn btn-pink btn-sm" style="display:inline-flex;">💬 Instagram</a>
         </div>
       </div>
     </div>
@@ -194,7 +213,30 @@
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
+<!-- ======= IMAGE PREVIEW LIGHTBOX ======= -->
+<div id="img-preview-overlay" role="dialog" aria-modal="true" aria-label="Image Preview">
+
+  <!-- Top bar: counter + close -->
+  <div class="ipl-topbar">
+    <div class="ipl-counter" id="ipl-counter">IMAGE 1 OF 1</div>
+    <button class="ipl-close" id="ipl-close" aria-label="Close">&#10005;</button>
+  </div>
+
+  <!-- Main image area -->
+  <div class="ipl-main">
+    <button class="ipl-arrow ipl-prev" id="ipl-prev" aria-label="Previous">&#8249;</button>
+    <div class="ipl-img-wrap" id="ipl-img-wrap">
+      <img id="ipl-main-img" src="" alt="Product preview" draggable="false"/>
+    </div>
+    <button class="ipl-arrow ipl-next" id="ipl-next" aria-label="Next">&#8250;</button>
+  </div>
+
+  <!-- Bottom thumbnail strip -->
+  <div class="ipl-thumbstrip" id="ipl-thumbstrip"></div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script src="assets/js/app.js"></script>
 <script>
@@ -222,6 +264,8 @@ function renderProduct(product) {
           <button class="gallery-arrow next" onclick="nextImg()">›</button>
         ` : ''}
         <img id="pdp-main-img" src="${product.images[0]}" alt="${product.name}"
+          style="cursor:zoom-in;"
+          onclick="openProductPreview(currentProduct.images, window._imgIdx||0)"
           onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=70'" />
       </div>
       <div class="pdp-thumbs">
@@ -477,11 +521,167 @@ if (productId) {
     else document.getElementById('pdp-layout').innerHTML = `
       <div style="text-align:center;padding:80px;grid-column:span 2;">
         <div style="font-size:3rem;margin-bottom:12px;">😕</div>
-        <h2 style="font-family:var(--font-cond);font-size:1.4rem;text-transform:uppercase;margin-bottom:12px;">Product Not Found</h2>
-        <a href="shop.html" class="btn btn-blue">Browse Shop</a>
+        <h2 style="font-family:var(--font-cond);font-size:1.4rem;text-transform:uppercase;">Product not found</h2>
+        <p style="color:var(--silver);margin-top:8px;">The product you're looking for doesn't exist.</p>
+        <a href="shop.html" class="btn btn-blue" style="margin-top:20px;">Browse Shop</a>
       </div>`;
-  }, 300);
-} else { window.location.href = 'shop.html'; }
+  }, 400);
+}
+</script>
+
+<!-- ======= PRODUCT PREVIEW SYSTEM ======= -->
+<script>
+/* ──────────────────────────────────────────────────────────
+   Image Preview Lightbox — opens when user clicks product image
+   ────────────────────────────────────────────────────────── */
+(function () {
+  var _images = [];
+  var _idx    = 0;
+  var _zoomScale = 1;
+
+  var overlay    = document.getElementById('img-preview-overlay');
+  var mainImg    = document.getElementById('ipl-main-img');
+  var counter    = document.getElementById('ipl-counter');
+  var thumbstrip = document.getElementById('ipl-thumbstrip');
+  var imgWrap    = document.getElementById('ipl-img-wrap');
+  var btnClose   = document.getElementById('ipl-close');
+  var btnPrev    = document.getElementById('ipl-prev');
+  var btnNext    = document.getElementById('ipl-next');
+
+  /* ── Open lightbox ── */
+  function openPreview(imgs, startIdx) {
+    _images = (imgs && imgs.length) ? imgs : [];
+    if (!_images.length) return;
+    _idx = startIdx || 0;
+    _buildThumbs();
+    _setImage(_idx, false);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* ── Close lightbox ── */
+  function closePreview() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    _resetZoom();
+  }
+
+  /* ── Navigate to image i ── */
+  function _setImage(i, animate) {
+    var n = _images.length;
+    _idx = ((i % n) + n) % n;
+
+    if (animate) {
+      mainImg.style.opacity = '0';
+      mainImg.style.transform = 'scale(0.96)';
+      setTimeout(function () {
+        mainImg.src = _images[_idx];
+        mainImg.style.opacity = '1';
+        mainImg.style.transform = 'scale(1)';
+      }, 130);
+    } else {
+      mainImg.src = _images[_idx];
+    }
+
+    /* counter */
+    counter.textContent = 'IMAGE ' + (_idx + 1) + ' OF ' + n + (n > 1 ? ' — TAP ARROWS TO NAVIGATE' : '');
+
+    /* active thumb */
+    Array.prototype.forEach.call(
+      thumbstrip.querySelectorAll('.ipl-thumb'),
+      function (t, ti) { t.classList.toggle('ipl-thumb-active', ti === _idx); }
+    );
+
+    /* arrows visibility */
+    btnPrev.style.visibility = n > 1 ? 'visible' : 'hidden';
+    btnNext.style.visibility = n > 1 ? 'visible' : 'hidden';
+  }
+
+  /* ── Build bottom thumbnail strip ── */
+  function _buildThumbs() {
+    thumbstrip.innerHTML = '';
+    _images.forEach(function (src, i) {
+      var d = document.createElement('div');
+      d.className = 'ipl-thumb' + (i === _idx ? ' ipl-thumb-active' : '');
+      var im = document.createElement('img');
+      im.src = src;
+      im.loading = 'lazy';
+      im.onerror = function () {
+        this.src = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&q=60';
+      };
+      d.appendChild(im);
+      d.addEventListener('click', function () { _resetZoom(); _setImage(i, true); });
+      thumbstrip.appendChild(d);
+    });
+  }
+
+  /* ── Zoom helpers ── */
+  function _resetZoom() {
+    _zoomScale = 1;
+    mainImg.style.transform = 'scale(1)';
+    mainImg.style.transformOrigin = 'center center';
+    imgWrap && imgWrap.classList.remove('zoomed');
+  }
+
+  function _applyZoom(scale, ox, oy) {
+    _zoomScale = Math.max(1, Math.min(4, scale));
+    mainImg.style.transformOrigin = (ox || 50) + '% ' + (oy || 50) + '%';
+    mainImg.style.transform = 'scale(' + _zoomScale + ')';
+    if (imgWrap) imgWrap.classList.toggle('zoomed', _zoomScale > 1);
+  }
+
+  /* Click to toggle zoom */
+  imgWrap && imgWrap.addEventListener('click', function (e) {
+    var rect = imgWrap.getBoundingClientRect();
+    var ox = ((e.clientX - rect.left) / rect.width) * 100;
+    var oy = ((e.clientY - rect.top)  / rect.height) * 100;
+    if (_zoomScale > 1) { _resetZoom(); } else { _applyZoom(2.4, ox, oy); }
+  });
+
+  /* Scroll to zoom */
+  imgWrap && imgWrap.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var rect = imgWrap.getBoundingClientRect();
+    var ox = ((e.clientX - rect.left) / rect.width) * 100;
+    var oy = ((e.clientY - rect.top)  / rect.height) * 100;
+    _applyZoom(_zoomScale - e.deltaY * 0.006, ox, oy);
+  }, { passive: false });
+
+  /* ── Button / keyboard / swipe events ── */
+  btnClose && btnClose.addEventListener('click', closePreview);
+
+  btnPrev && btnPrev.addEventListener('click', function (e) {
+    e.stopPropagation(); _resetZoom(); _setImage(_idx - 1, true);
+  });
+  btnNext && btnNext.addEventListener('click', function (e) {
+    e.stopPropagation(); _resetZoom(); _setImage(_idx + 1, true);
+  });
+
+  overlay && overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closePreview();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!overlay.classList.contains('open')) return;
+    if (e.key === 'Escape')     closePreview();
+    if (e.key === 'ArrowLeft')  { _resetZoom(); _setImage(_idx - 1, true); }
+    if (e.key === 'ArrowRight') { _resetZoom(); _setImage(_idx + 1, true); }
+  });
+
+  /* Touch swipe */
+  var _tx = 0;
+  overlay && overlay.addEventListener('touchstart', function (e) {
+    _tx = e.touches[0].clientX;
+  }, { passive: true });
+  overlay && overlay.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - _tx;
+    if (Math.abs(dx) > 50) { _resetZoom(); _setImage(dx < 0 ? _idx + 1 : _idx - 1, true); }
+  });
+
+  /* ── Expose globally so the img onclick= attribute can call it ── */
+  window.openProductPreview = openPreview;
+
+})();
 </script>
 </body>
 </html>
