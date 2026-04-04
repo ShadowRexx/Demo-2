@@ -7,6 +7,140 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/style.css"/>
+  <style>
+    /* Mobile search overlay */
+    #mobile-search-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(12px);
+      align-items: flex-start;
+      justify-content: center;
+    }
+    #mobile-search-overlay.open {
+      display: flex;
+    }
+    #mobile-search-box {
+      width: 100%;
+      max-width: 600px;
+      background: var(--dark-2);
+      border-bottom: 1px solid var(--border-solid);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #mobile-search-dropdown {
+      max-height: 60vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #mobile-search-dropdown .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-solid);
+      transition: background 0.15s;
+      touch-action: manipulation;
+    }
+    #mobile-search-dropdown .search-result-item:active,
+    #mobile-search-dropdown .search-result-item:hover {
+      background: var(--dark-3);
+    }
+    #mobile-search-dropdown .search-result-item img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    #mobile-search-dropdown .search-result-item .name {
+      font-weight: 600;
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #mobile-search-dropdown .search-result-item .price {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--blue);
+    }
+    /* Show mobile search btn only on mobile */
+    @media (max-width: 480px) {
+      .mobile-search-trigger { display: flex !important; }
+    }
+    /* Size chart */
+    .size-chart-wrap {
+      position: relative;
+      cursor: zoom-in;
+      border: 1px solid var(--border-solid);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--dark-3);
+      transition: border-color 0.2s;
+    }
+    .size-chart-wrap:hover { border-color: var(--blue); }
+    .size-chart-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.2s;
+    }
+    .size-chart-zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-family: var(--font-cond);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(8,12,16,0.75);
+      color: var(--blue);
+      padding: 3px 8px;
+      border-radius: 100px;
+      pointer-events: none;
+    }
+    /* Size chart modal */
+    #size-chart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3100;
+      background: rgba(0,0,0,0.92);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #size-chart-modal.open { display: flex; }
+    #size-chart-modal img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.8);
+    }
+    #size-chart-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--dark-3);
+      border: 1px solid var(--border-solid);
+      color: var(--white);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1;
+    }
+    /* Review spin animation */
+    @keyframes reviewSpin { to { transform: rotate(360deg); } }
+  </style>
 </head>
 <body style="padding-left: 10px; padding-right: 8px;">
 
@@ -41,6 +175,12 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
+      <!-- Mobile search icon (shown on mobile only) -->
+      <button id="mobile-search-btn" class="nav-icon-btn mobile-search-trigger" aria-label="Search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </button>
       <button class="nav-icon-btn" data-cart-trigger aria-label="Cart">
         <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -58,6 +198,21 @@
     <a href="shop.html" class="mobile-nav-link">🛍️ Shop</a>
     <a href="about.html" class="mobile-nav-link">ℹ️ About</a>
     <a href="contact.html" class="mobile-nav-link">📞 Contact</a>
+  </div>
+</div>
+
+<!-- MOBILE SEARCH OVERLAY -->
+<div id="mobile-search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+  <div id="mobile-search-box">
+    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border-solid);">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18" style="color:var(--silver);flex-shrink:0;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input type="search" id="mobile-search-input" placeholder="Search jerseys, studs, shoes..." autocomplete="off"
+        style="flex:1;background:transparent;border:none;outline:none;font-size:16px;color:var(--white);font-family:var(--font-body);"/>
+      <button id="mobile-search-close" style="background:none;border:none;color:var(--silver);cursor:pointer;padding:4px;font-size:20px;line-height:1;touch-action:manipulation;">✕</button>
+    </div>
+    <div id="mobile-search-dropdown"></div>
   </div>
 </div>
 
@@ -236,9 +391,15 @@ Kolkata, West Bengal, India
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/products.js"></script>
-<script src="assets/js/cart.js"></script>
-<script src="assets/js/app.js"></script>
+<!-- Size Chart Modal -->
+<div id="size-chart-modal" role="dialog" aria-modal="true" aria-label="Size Chart">
+  <button id="size-chart-modal-close" onclick="closeSizeChart()" aria-label="Close">✕</button>
+  <img id="size-chart-modal-img" src="" alt="Size Chart"/>
+</div>
+
+<script type="module" src="assets/js/products.js"></script>
+<script type="module" src="assets/js/cart.js"></script>
+<script type="module" src="assets/js/app.js"></script>
 <script>
 let currentProduct = null, selectedSize = null, qty = 1, selectedRating = 0;
 
@@ -369,12 +530,31 @@ function renderProduct(product) {
           <div class="accordion-body">
             <div class="accordion-content">
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                ${Object.entries(product.specs).map(([k,v]) => `
+                ${Object.entries(product.specs || {}).map(([k,v]) => `
                   <div style="background:var(--dark-3);border-radius:var(--radius-sm);padding:8px 12px;">
                     <div style="font-size:10px;font-family:var(--font-cond);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);margin-bottom:2px;">${k}</div>
                     <div style="font-size:13px;font-weight:600;">${v}</div>
                   </div>`).join('')}
               </div>
+              ${(function(){
+                const cat = (product.category || '').toLowerCase();
+                const isShoes = cat === 'shoes' || cat === 'studs' || cat.includes('shoe');
+                const isJersey = cat === 'jersey' || cat.includes('jersey');
+                if (!isShoes && !isJersey) return '';
+                const chartSrc = isShoes
+                  ? 'assets/images/size_chart/shoes_size_chart.svg'
+                  : 'assets/images/size_chart/jersey_size_chart.svg';
+                const chartAlt = isShoes ? 'Shoes Size Chart' : 'Jersey Size Chart';
+                return `
+                  <div style="margin-top:18px;">
+                    <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">📏 SIZE CHART</div>
+                    <div class="size-chart-wrap" onclick="openSizeChart('${chartSrc}','${chartAlt}')" title="Click to expand">
+                      <img src="${chartSrc}" alt="${chartAlt}" class="size-chart-img" loading="lazy"
+                        onerror="this.closest('.size-chart-wrap').style.display='none'"/>
+                      <div class="size-chart-zoom-hint">🔍 Tap to expand</div>
+                    </div>
+                  </div>`;
+              })()}
             </div>
           </div>
         </div>
@@ -408,7 +588,7 @@ function renderProduct(product) {
     document.getElementById('mob-buy').onclick = buyNowPDP;
   }
 
-  renderReviews(product);
+  renderReviews(product); // async - loads from Firestore
 
   const related = getRelatedProducts(product);
   document.getElementById('related-grid').innerHTML = related.length
@@ -418,32 +598,54 @@ function renderProduct(product) {
   document.getElementById('reviews-section').style.display = 'block';
 }
 
-function renderReviews(product) {
-  const saved = getReviews(product.id);
-  const all = [...saved];
-  const totalRating = all.length ? (all.reduce((s, r) => s + r.rating, 0) / all.length).toFixed(1) : product.rating;
-  const totalCount = all.length + product.reviews;
+async function renderReviews(product) {
+  const grid = document.getElementById('reviews-grid');
+  if (grid) grid.innerHTML = '<div style="color:var(--silver);font-size:13px;grid-column:1/-1;text-align:center;padding:20px 0;"><div style="width:24px;height:24px;border:2px solid var(--border-solid);border-top-color:var(--blue);border-radius:50%;animation:reviewSpin 0.8s linear infinite;margin:0 auto 8px;"></div>Loading reviews...</div>';
 
-  document.getElementById('reviews-summary').innerHTML = `
-    <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--blue);line-height:1;">${totalRating}</div>
+  // Try Firestore first, fallback to localStorage
+  let all = [];
+  if (typeof window.getReviewsFromFirestore === 'function') {
+    try { all = await window.getReviewsFromFirestore(product.id); } catch(e) {}
+  }
+  // Merge any localStorage-only reviews not yet in Firestore
+  const local = (typeof window.getReviewsLocal === 'function') ? window.getReviewsLocal(product.id) : [];
+  local.forEach(lr => {
+    if (!all.find(r => (r.text || r.comment) === (lr.text || lr.comment) && r.name === lr.name)) {
+      all.push(lr);
+    }
+  });
+
+  const avgRating = all.length ? (all.reduce((s, r) => s + (r.rating || 5), 0) / all.length).toFixed(1) : product.rating;
+  const totalCount = all.length + (product.reviews || 0);
+
+  const summaryEl = document.getElementById('reviews-summary');
+  if (summaryEl) summaryEl.innerHTML = `
+    <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--blue);line-height:1;">${avgRating}</div>
     <div style="color:var(--orange);font-size:1rem;letter-spacing:2px;">★★★★★</div>
     <div style="color:var(--silver);font-size:12px;margin-top:2px;">${totalCount} reviews</div>`;
 
-  const grid = document.getElementById('reviews-grid');
+  if (!grid) return;
   if (!all.length) {
     grid.innerHTML = `<div style="color:var(--silver);font-size:14px;grid-column:1/-1;">No reviews yet — be the first to review!</div>`;
     return;
   }
-  grid.innerHTML = all.map(r => `
+  const colors = ['var(--blue)','#60a5fa','#f97316','#a78bfa'];
+  grid.innerHTML = all.map(r => {
+    const nm = r.name || r.author || 'Anonymous';
+    const txt = r.text || r.comment || '';
+    const rt = Math.max(1, Math.min(5, r.rating || 5));
+    const dt = r.date || (r.createdAt && r.createdAt.toDate ? r.createdAt.toDate().toLocaleDateString('en-IN') : 'Recently');
+    return `
     <div class="review-card">
       <div class="review-header">
-        <div class="review-avatar" style="background:${['var(--blue)','#60a5fa','#f97316','#a78bfa'][r.rating%4]};color:var(--dark);">${(r.name||'A').charAt(0).toUpperCase()}</div>
-        <div><div class="review-name">${r.name}</div><div class="review-loc">${r.date || 'Recently'}</div></div>
+        <div class="review-avatar" style="background:${colors[rt%4]};color:var(--dark);">${nm.charAt(0).toUpperCase()}</div>
+        <div><div class="review-name">${nm}</div><div class="review-loc">${dt}</div></div>
       </div>
-      <div class="review-stars">${'★'.repeat(r.rating)}</div>
-      <div class="review-text">"${r.text}"</div>
+      <div class="review-stars">${'★'.repeat(rt)}</div>
+      <div class="review-text">"${txt}"</div>
       <div class="review-verified">✓ Verified Purchase</div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function setRating(val) {
@@ -455,7 +657,7 @@ function setRating(val) {
   });
 }
 
-function submitReview() {
+async function submitReview() {
   if (!currentProduct) return;
   const name = document.getElementById('review-name').value.trim();
   const text = document.getElementById('review-text').value.trim();
@@ -463,14 +665,43 @@ function submitReview() {
   if (!selectedRating) { showToast('Please select a star rating', 'error'); return; }
   if (!text || text.length < 10) { showToast('Please write at least 10 characters', 'error'); return; }
 
-  const review = { name, rating: selectedRating, text, date: 'Just now', productId: currentProduct.id };
-  saveReview(currentProduct.id, review);
+  const submitBtn = document.querySelector('#review-form-section .btn');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '⏳ Submitting...'; }
 
-  document.getElementById('review-name').value = '';
-  document.getElementById('review-text').value = '';
-  setRating(0);
+  const review = {
+    name,
+    rating: selectedRating,
+    text,
+    date: new Date().toLocaleDateString('en-IN'),
+    productId: currentProduct.id
+  };
+
+  let saved = false;
+  try {
+    if (typeof window.saveReviewToFirestore === 'function') {
+      await window.saveReviewToFirestore(currentProduct.id, review);
+      saved = true;
+    } else {
+      window.saveReview(currentProduct.id, review);
+      saved = true;
+    }
+  } catch (err) {
+    console.error('[Review Submit] Error:', err);
+    // Firestore failed - save to localStorage as fallback
+    window.saveReviewLocal && window.saveReviewLocal(currentProduct.id, review);
+    showToast('Review saved locally. Will sync when connection is restored.', 'success');
+    saved = true;
+  }
+
+  if (saved) {
+    document.getElementById('review-name').value = '';
+    document.getElementById('review-text').value = '';
+    setRating(0);
+    showToast('Review submitted! Thank you 🙌');
+  }
+
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Review →'; }
   renderReviews(currentProduct);
-  showToast('Review submitted! Thank you 🙌');
 }
 
 function switchImg(idx) {
@@ -512,21 +743,32 @@ function toggleAccordion(header) {
   if (!isOpen) { body.classList.add('open'); icon.textContent = '▴'; }
 }
 
-const params = new URLSearchParams(window.location.search);
-const productId = params.get('id');
-if (productId) {
-  setTimeout(() => {
-    const p = getProductById(productId);
-    if (p) renderProduct(p);
-    else document.getElementById('pdp-layout').innerHTML = `
-      <div style="text-align:center;padding:80px;grid-column:span 2;">
-        <div style="font-size:3rem;margin-bottom:12px;">😕</div>
-        <h2 style="font-family:var(--font-cond);font-size:1.4rem;text-transform:uppercase;">Product not found</h2>
-        <p style="color:var(--silver);margin-top:8px;">The product you're looking for doesn't exist.</p>
-        <a href="shop.html" class="btn btn-blue" style="margin-top:20px;">Browse Shop</a>
-      </div>`;
-  }, 400);
+// Expose renderProduct globally so app.js can call it after Firebase loads
+window.renderProduct = renderProduct;
+// app.js calls renderProductPage() → window.renderProduct(product) after products are fetched
+
+// Size chart modal
+function openSizeChart(src, alt) {
+  const modal = document.getElementById('size-chart-modal');
+  const img = document.getElementById('size-chart-modal-img');
+  if (!modal || !img) return;
+  img.src = src;
+  img.alt = alt || 'Size Chart';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
+function closeSizeChart() {
+  document.getElementById('size-chart-modal')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+window.openSizeChart = openSizeChart;
+window.closeSizeChart = closeSizeChart;
+document.getElementById('size-chart-modal')?.addEventListener('click', function(e) {
+  if (e.target === this) closeSizeChart();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSizeChart();
+});
 </script>
 
 <!-- ======= PRODUCT PREVIEW SYSTEM ======= -->

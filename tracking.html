@@ -209,6 +209,58 @@
       .oig-cell.full { grid-column: span 1; }
     }
   </style>
+  <style>
+    /* Mobile search overlay */
+    #mobile-search-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(8,12,16,0.92);
+      backdrop-filter: blur(12px);
+      align-items: flex-start;
+      justify-content: center;
+    }
+    #mobile-search-overlay.open { display: flex; }
+    #mobile-search-box {
+      width: 100%;
+      max-width: 600px;
+      background: var(--dark-2);
+      border-bottom: 1px solid var(--border-solid);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #mobile-search-dropdown {
+      max-height: 60vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #mobile-search-dropdown .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border-solid);
+      transition: background 0.15s;
+      touch-action: manipulation;
+    }
+    #mobile-search-dropdown .search-result-item:active,
+    #mobile-search-dropdown .search-result-item:hover { background: var(--dark-3); }
+    #mobile-search-dropdown .search-result-item img {
+      width: 48px; height: 48px; object-fit: cover;
+      border-radius: 6px; flex-shrink: 0;
+    }
+    #mobile-search-dropdown .search-result-item .name {
+      font-weight: 600; font-size: 13px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    #mobile-search-dropdown .search-result-item .price {
+      font-family: var(--font-display); font-size: 0.95rem; color: var(--blue);
+    }
+    @media (max-width: 480px) {
+      .mobile-search-trigger { display: flex !important; }
+    }
+  </style>
 </head>
 <body>
 
@@ -230,6 +282,12 @@
         <a href="about.html" class="nav-link">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
+            <!-- Mobile search icon (shown on mobile only) -->
+      <button id="mobile-search-btn" class="nav-icon-btn mobile-search-trigger" aria-label="Search">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </button>
       <button class="nav-icon-btn" data-cart-trigger>
         <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
         <span class="cart-badge" style="display:none;">0</span>
@@ -250,6 +308,21 @@
     <div class="section-label reveal" style="justify-content:center;">Delivery Status</div>
     <h1 class="section-title reveal" style="margin-top:10px;font-size:clamp(2.5rem,8vw,5.5rem);">TRACK YOUR<br/>ORDER</h1>
     <p style="color:var(--silver);font-size:14px;margin-top:12px;max-width:420px;margin-left:auto;margin-right:auto;" class="reveal">Enter your Order ID to get real-time delivery updates</p>
+  </div>
+</div>
+
+<!-- MOBILE SEARCH OVERLAY -->
+<div id="mobile-search-overlay" role="dialog" aria-modal="true" aria-label="Search">
+  <div id="mobile-search-box">
+    <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border-solid);">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18" style="color:var(--silver);flex-shrink:0;">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+      </svg>
+      <input type="search" id="mobile-search-input" placeholder="Search jerseys, studs, shoes..." autocomplete="off"
+        style="flex:1;background:transparent;border:none;outline:none;font-size:16px;color:var(--white);font-family:var(--font-body);"/>
+      <button id="mobile-search-close" style="background:none;border:none;color:var(--silver);cursor:pointer;padding:4px;font-size:20px;line-height:1;touch-action:manipulation;">&#10005;</button>
+    </div>
+    <div id="mobile-search-dropdown"></div>
   </div>
 </div>
 
@@ -364,9 +437,9 @@
   </div>
 </footer>
 
-<script src="assets/js/products.js"></script>
-<script src="assets/js/cart.js"></script>
-<script src="assets/js/app.js"></script>
+<script type="module" src="assets/js/products.js"></script>
+<script type="module" src="assets/js/cart.js"></script>
+<script type="module" src="assets/js/app.js"></script>
 <script>
 const STAGES = [
   { key:'pending',          icon:'📋', name:'Order Placed',     desc:'We received your order and are verifying payment.', eta:'3–5 Working Days' },
@@ -394,9 +467,12 @@ const DEMO_ORDERS = [
   { id:'ORDER-44278', name:'Sneha Patel',  phone:'+91 65432 10987', address:'Navrangpura, Ahmedabad - 380009', amount:1199, items:'Barcelona Away Jersey (S)', date:'03 Apr 2025, 6:00 PM', status:'packed', stage:2 },
 ];
 
+// ---- getAllOrders: try Firestore first, fall back to demo ----
+// Firestore tracking is done asynchronously in trackById()
 function getAllOrders() {
-  const saved = JSON.parse(localStorage.getItem('psjh_orders') || '[]');
-  return [...saved, ...DEMO_ORDERS];
+  // Only returns demo orders for the chips display.
+  // Real Firestore lookup happens in trackById() below.
+  return [...DEMO_ORDERS];
 }
 
 function loadDemoChips() {
@@ -413,18 +489,104 @@ function trackOrder() {
   trackById(val);
 }
 
-function trackById(id) {
-  document.getElementById('track-input').value = id;
+async function trackById(id) {
+  const cleanId = id.trim().toUpperCase();
+  document.getElementById('track-input').value = cleanId;
   hideAll();
   document.getElementById('demo-section').style.display = 'none';
   document.getElementById('track-loading').classList.add('visible');
+  console.log('[Tracking] Looking up order:', cleanId);
 
-  setTimeout(() => {
-    const order = getAllOrders().find(o => o.id.toUpperCase() === id.toUpperCase());
+  try {
+    // Import Firebase modules
+    const { db } = await import('./assets/js/firebase.js');
+    const { collection, getDocs, query, where } =
+      await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+
+    let order = null;
+
+    // 1. Query Firestore by orderId field (exact match, case-sensitive as stored)
+    try {
+      // Try exact match first (most orders use PSJH-xxx format)
+      const qExact = query(collection(db, 'orders'), where('orderId', '==', cleanId));
+      const snapExact = await getDocs(qExact);
+      console.log('[Tracking] Exact orderId query results:', snapExact.size);
+
+      if (!snapExact.empty) {
+        order = { id: snapExact.docs[0].id, ...snapExact.docs[0].data() };
+        console.log('[Tracking] Found by orderId field:', order.orderId);
+      }
+    } catch (queryErr) {
+      console.warn('[Tracking] where() query failed, falling back to full scan:', queryErr.message);
+    }
+
+    // 2. If not found by orderId field, do full collection scan as fallback
+    if (!order) {
+      console.log('[Tracking] Trying full collection scan...');
+      const snap = await getDocs(collection(db, 'orders'));
+      console.log('[Tracking] Total orders in Firestore:', snap.size);
+
+      snap.docs.forEach(d => {
+        const data = d.data();
+        console.log('[Tracking] Checking doc:', d.id, '| orderId field:', data.orderId);
+      });
+
+      const firestoreOrders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+      // Match by orderId field (case-insensitive) OR document ID
+      order = firestoreOrders.find(o =>
+        (o.orderId || '').toUpperCase() === cleanId ||
+        o.id.toUpperCase() === cleanId
+      );
+
+      if (order) {
+        console.log('[Tracking] Found by full scan:', order.orderId || order.id);
+      } else {
+        console.log('[Tracking] Not found in Firestore. Trying demo orders...');
+      }
+    }
+
+    // 3. If not in Firestore, check demo orders
+    if (!order) {
+      order = DEMO_ORDERS.find(o => o.id.toUpperCase() === cleanId);
+      if (order) console.log('[Tracking] Found in demo orders:', order.id);
+    }
+
+    // 4. Normalise stage from status string
+    if (order && order.status && order.stage === undefined) {
+      const STAGE_KEYS = ['Paid', 'confirmed', 'packed', 'shipped', 'out_for_delivery', 'delivered'];
+      // "Paid" = stage 0 = confirmed (same as order placed)
+      const statusLower = (order.status || 'Paid').toLowerCase();
+      const stageIdx = STAGE_KEYS.findIndex(k => k.toLowerCase() === statusLower);
+      order.stage = stageIdx >= 0 ? stageIdx : 0;
+      console.log('[Tracking] Normalised stage:', order.stage, 'for status:', order.status);
+    }
+
+    // 5. Format date for display
+    if (order && order.createdAt?.toDate) {
+      order.date = order.createdAt.toDate().toLocaleString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
     document.getElementById('track-loading').classList.remove('visible');
-    if (!order) { document.getElementById('not-found').classList.add('visible'); }
-    else { renderResult(order); }
-  }, 800);
+
+    if (!order) {
+      console.log('[Tracking] Order not found for ID:', cleanId);
+      document.getElementById('not-found').classList.add('visible');
+    } else {
+      console.log('[Tracking] Rendering result for order:', order.orderId || order.id);
+      renderResult(order);
+    }
+  } catch (err) {
+    console.error('[Tracking] Firestore error:', err);
+    // Fallback to demo only
+    const order = DEMO_ORDERS.find(o => o.id.toUpperCase() === cleanId);
+    document.getElementById('track-loading').classList.remove('visible');
+    if (!order) document.getElementById('not-found').classList.add('visible');
+    else renderResult(order);
+  }
 }
 
 function hideAll() {
@@ -440,7 +602,7 @@ function renderResult(order) {
   const chip = STATUS_CHIPS[order.status] || STATUS_CHIPS.pending;
 
   // Banner
-  document.getElementById('r-order-id').textContent = order.id;
+  document.getElementById('r-order-id').textContent = order.orderId || order.id;
   document.getElementById('r-order-date').textContent = `Placed on ${order.date || '—'}`;
   const chipEl = document.getElementById('r-status-chip');
   chipEl.style.background = chip.bg;
@@ -505,10 +667,23 @@ function renderResult(order) {
   document.getElementById('r-order-info').innerHTML = `
     <div class="oig-cell"><div class="oig-label">Customer</div><div class="oig-val">${order.name}</div></div>
     <div class="oig-cell"><div class="oig-label">Phone</div><div class="oig-val">${order.phone || '—'}</div></div>
-    <div class="oig-cell"><div class="oig-label">Total</div><div class="oig-val" style="color:var(--blue);font-family:var(--font-display);font-size:1.2rem;">₹${(order.amount||0).toLocaleString('en-IN')}</div></div>
-    <div class="oig-cell"><div class="oig-label">Payment</div><div class="oig-val">UPI</div></div>
+    <div class="oig-cell"><div class="oig-label">Total Amount</div><div class="oig-val" style="color:var(--blue);font-family:var(--font-display);font-size:1.2rem;">₹${(order.amount||0).toLocaleString('en-IN')}</div></div>
+    <div class="oig-cell"><div class="oig-label">Payment Status</div><div class="oig-val" style="color:var(--green);font-weight:700;">✓ Paid</div></div>
+    <div class="oig-cell"><div class="oig-label">Order Date</div><div class="oig-val" style="font-size:13px;">${order.date || '—'}</div></div>
+    <div class="oig-cell"><div class="oig-label">Order Status</div><div class="oig-val"><span style="color:var(--blue);font-weight:700;">${order.status || 'Confirmed'}</span></div></div>
     <div class="oig-cell full"><div class="oig-label">Delivery Address</div><div class="oig-val">${order.address || '—'}</div></div>
-    <div class="oig-cell full"><div class="oig-label">Items</div><div class="oig-val" style="font-size:13px;color:var(--silver);">${order.items || '—'}</div></div>`;
+    <div class="oig-cell full"><div class="oig-label">Items</div><div class="oig-val" style="font-size:13px;color:var(--silver);">${Array.isArray(order.items) ? order.items.map(i => i.name + ' (' + i.size + ')').join(', ') : (order.items || '—')}</div></div>
+    ${order.screenshot ? `<div class="oig-cell full">
+      <div class="oig-label">Payment Screenshot</div>
+      <div class="oig-val" style="margin-top:8px;">
+        <a href="${order.screenshot}" target="_blank" rel="noopener">
+          <img src="${order.screenshot}" alt="Payment proof"
+            style="max-width:220px;max-height:140px;object-fit:cover;border-radius:var(--radius-sm);border:1px solid var(--border-solid);display:block;margin-bottom:6px;"
+            onerror="this.style.display='none'"/>
+          <span style="color:var(--blue);font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;">View Full Screenshot ↗</span>
+        </a>
+      </div>
+    </div>` : ''}`;
 
   document.getElementById('track-result').classList.add('visible');
   setTimeout(() => document.getElementById('track-result').scrollIntoView({ behavior:'smooth', block:'start' }), 100);
