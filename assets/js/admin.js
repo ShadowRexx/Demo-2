@@ -422,9 +422,14 @@ window.renderAdminProducts = function () {
     const disc = p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
     const stockCls = p.stock === 0 ? "no-stock" : p.stock <= 5 ? "low-stock" : "in-stock";
     const stockText = p.stock === 0 ? "Out of Stock" : p.stock <= 5 ? `Only ${p.stock} left` : `In Stock (${p.stock})`;
-    const imgSrc = (p.images || [])[0] || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60";
+    const imgSrc = (p.images && p.images.length > 0 && p.images[0])
+      ? p.images[0]
+      : (p.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60");
+    const fallbackImg = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60";
     return `<div class="prod-admin-card">
-      <img src="${imgSrc}" alt="${p.name}" class="prod-admin-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60'"/>
+      <img src="${imgSrc}" alt="${p.name}" class="prod-admin-img" loading="lazy"
+        onerror="this.onerror=null;this.src='${fallbackImg}'"
+        onload="this.style.opacity='1'" style="opacity:0;transition:opacity 0.3s;"/>
       <div class="prod-admin-body">
         <div class="prod-admin-cat">${p.brand || "—"} · ${p.category || "—"}</div>
         <div class="prod-admin-name">${p.name || "Unnamed"}</div>
