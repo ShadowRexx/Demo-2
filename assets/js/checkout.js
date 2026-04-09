@@ -13,6 +13,7 @@ import {
 
 // ---- CONFIG ----
 const UPI_ID = "8210647493@kotak811";
+const STORE_NAME = "Prime Shoe Jersey Hub";
 const WA_NUMBER = "919239394022";
 
 // Pending order data stored before screenshot upload
@@ -25,6 +26,67 @@ function fmt(n) {
 
 function generateOrderId() {
   return "PSJH-" + Date.now().toString(36).toUpperCase() + "-" + Math.floor(1000 + Math.random() * 9000);
+}
+
+// ---- NEW: Generate UPI Deep Link ----
+function generateUpiLink(amount, orderId) {
+  const note = encodeURIComponent("Order ID: " + orderId);
+  const name = encodeURIComponent(STORE_NAME);
+  return `upi://pay?pa=${UPI_ID}&pn=${name}&am=${amount}&cu=INR&tn=${note}`;
+}
+
+// ---- NEW: Handle UPI button tap ----
+window.payViaUpi = function() {
+  if (!_pendingOrderMeta) return;
+  const { orderId, total } = _pendingOrderMeta;
+  const upiLink = generateUpiLink(total, orderId);
+  const btn = document.getElementById("upi-pay-btn");
+
+  // Try to open UPI app
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  document.body.appendChild(iframe);
+
+  let appOpened = false;
+
+  // Detect if app opened (visibility change = app switched)
+  const handleVisibility = () => {
+    if (document.hidden) appOpened = true;
+  };
+  document.addEventListener("visibilitychange", handleVisibility);
+
+  // Fallback timeout — if no app opens in 1.5s, show QR message
+  const fallbackTimer = setTimeout(() => {
+    document.removeEventListener("visibilitychange", handleVisibility);
+    if (!appOpened) {
+      showUpiNotFoundMessage();
+    }
+  }, 1500);
+
+  document.addEventListener("visibilitychange", function cleanup() {
+    if (document.hidden) {
+      clearTimeout(fallbackTimer);
+      document.removeEventListener("visibilitychange", cleanup);
+    }
+  });
+
+  // Trigger UPI deep link
+  window.location.href = upiLink;
+
+  // Animate button
+  if (btn) {
+    const origHTML = btn.innerHTML;
+    btn.innerHTML = `<span style="display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;"></span> Opening UPI App...`;
+    setTimeout(() => { btn.innerHTML = origHTML; }, 2500);
+  }
+};
+
+function showUpiNotFoundMessage() {
+  const el = document.getElementById("upi-fallback-msg");
+  if (el) {
+    el.style.display = "block";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
 }
 
 // ---- RENDER ORDER SUMMARY ----
@@ -135,6 +197,18 @@ function showPaymentScreen({ orderId, name, total }) {
   if (upiDisplay) upiDisplay.textContent = UPI_ID;
 
   safeHref("track-btn", `tracking.html?id=${orderId}`);
+
+  // ---- NEW: Wire up UPI Pay button with dynamic deep link ----
+  const upiPayBtn = document.getElementById("upi-pay-btn");
+  if (upiPayBtn) {
+    const upiLink = generateUpiLink(total, orderId);
+    // Set href for native anchor behavior on mobile
+    upiPayBtn.setAttribute("data-upi-link", upiLink);
+  }
+
+  // Hide fallback message initially
+  const fallbackMsg = document.getElementById("upi-fallback-msg");
+  if (fallbackMsg) fallbackMsg.style.display = "none";
 
   const waMsg = encodeURIComponent(
     `Hi, I placed an order on Prime Shoe Jersey Hub.\n\nOrder ID: ${orderId}\nName: ${name}\nAmount: ${fmt(total)}\n\nI am sending my payment screenshot.`
