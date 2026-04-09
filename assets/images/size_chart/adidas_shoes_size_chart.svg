@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#080C10"/>
+
+  <!-- Top blue accent bar -->
+  <rect x="0" y="0" width="800" height="3" fill="#38BDF8"/>
+
+  <!-- Header background -->
+  <rect x="0" y="3" width="800" height="88" fill="#0D1117"/>
+
+  <!-- Title -->
+  <text x="400" y="44" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="26" fill="#F0F6FC" letter-spacing="4">SIZE CHART</text>
+
+  <!-- Brand badge -->
+  <rect x="313" y="54" width="174" height="26" rx="4" fill="rgba(56,189,248,0.1)" stroke="#38BDF8" stroke-width="1"/>
+  <text x="400" y="72" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#38BDF8" letter-spacing="5">ADIDAS</text>
+
+  <!-- Divider line -->
+  <rect x="40" y="94" width="720" height="1.5" fill="#38BDF8" opacity="0.4"/>
+
+  <!-- Header row -->
+  <rect x="40" y="96" width="720" height="42" fill="#161B22"/>
+  <rect x="40" y="96" width="3" height="42" fill="#38BDF8"/>
+  <text x="140" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="12" fill="#38BDF8" letter-spacing="2">UK</text>
+  <text x="300" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="12" fill="#38BDF8" letter-spacing="2">US</text>
+  <text x="460" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="12" fill="#38BDF8" letter-spacing="2">EU</text>
+  <text x="630" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="12" fill="#38BDF8" letter-spacing="2">CM</text>
+  <rect x="40" y="138" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="139" width="720" height="38" fill="#0D1117"/>
+  <text x="140" y="164" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">5</text>
+  <text x="300" y="164" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">5.5</text>
+  <text x="460" y="164" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">38</text>
+  <text x="630" y="164" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">24</text>
+  <rect x="40" y="177" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 2 -->
+  <rect x="40" y="178" width="720" height="38" fill="#161B22"/>
+  <text x="140" y="203" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">6</text>
+  <text x="300" y="203" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">6.5</text>
+  <text x="460" y="203" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">39</text>
+  <text x="630" y="203" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">24.5</text>
+  <rect x="40" y="216" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 3 -->
+  <rect x="40" y="217" width="720" height="38" fill="#0D1117"/>
+  <text x="140" y="242" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">6.5</text>
+  <text x="300" y="242" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">7</text>
+  <text x="460" y="242" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">40</text>
+  <text x="630" y="242" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">25</text>
+  <rect x="40" y="255" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 4 -->
+  <rect x="40" y="256" width="720" height="38" fill="#161B22"/>
+  <text x="140" y="281" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">7.5</text>
+  <text x="300" y="281" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">8</text>
+  <text x="460" y="281" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">41</text>
+  <text x="630" y="281" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">26</text>
+  <rect x="40" y="294" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 5 -->
+  <rect x="40" y="295" width="720" height="38" fill="#0D1117"/>
+  <text x="140" y="320" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">8</text>
+  <text x="300" y="320" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">8.5</text>
+  <text x="460" y="320" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">42</text>
+  <text x="630" y="320" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">26.5</text>
+  <rect x="40" y="333" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 6 -->
+  <rect x="40" y="334" width="720" height="38" fill="#161B22"/>
+  <text x="140" y="359" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">9</text>
+  <text x="300" y="359" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">9.5</text>
+  <text x="460" y="359" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">43</text>
+  <text x="630" y="359" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">27.5</text>
+  <rect x="40" y="372" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 7 -->
+  <rect x="40" y="373" width="720" height="38" fill="#0D1117"/>
+  <text x="140" y="398" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">9.5</text>
+  <text x="300" y="398" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">10</text>
+  <text x="460" y="398" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">44</text>
+  <text x="630" y="398" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">28</text>
+  <rect x="40" y="411" width="720" height="1" fill="#1C2128"/>
+
+  <!-- Row 8 -->
+  <rect x="40" y="412" width="720" height="38" fill="#161B22"/>
+  <text x="140" y="437" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">10.5</text>
+  <text x="300" y="437" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">11</text>
+  <text x="460" y="437" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">45</text>
+  <text x="630" y="437" text-anchor="middle" font-family="Arial" font-size="14" fill="#F0F6FC">29</text>
+
+  <!-- Bottom border -->
+  <rect x="40" y="450" width="720" height="1.5" fill="#38BDF8" opacity="0.3"/>
+
+  <!-- Footer tip -->
+  <text x="400" y="475" text-anchor="middle" font-family="Arial" font-size="11" fill="#8B949E">💡 If between sizes, go UP one size for comfort</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="497" width="800" height="3" fill="#38BDF8" opacity="0.35"/>
+</svg>
