@@ -181,19 +181,80 @@
 
     <!-- UPI Payment Block -->
     <div class="upi-block">
-      <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);margin-bottom:4px;">Pay via UPI</div>
-      <div class="upi-id-display" id="upi-id-display">8210647493@kotak811</div>
-      <button class="upi-copy-btn" onclick="copyUPI()">📋 Copy UPI ID</button>
-      <div class="upi-qr-wrap">
-        <div style="text-align:center;">
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">QR CODE</div>
-          <div style="font-size:9px;color:#666;">Scan with any UPI app</div>
-          <div style="font-size:9px;color:#888;margin-top:4px;">
-            <img src="assets/images/qr.png" alt="QR">
+      <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--silver);margin-bottom:12px;">Choose Payment Method</div>
+
+      <!-- ===== OPTION 1: UPI DIRECT BUTTON (NEW) ===== -->
+      <div style="background:linear-gradient(135deg,rgba(56,189,248,0.12) 0%,rgba(99,102,241,0.12) 100%);border:1.5px solid rgba(56,189,248,0.45);border-radius:14px;padding:18px 16px 14px;margin-bottom:14px;width:100%;box-sizing:border-box;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+          <span style="background:var(--blue);color:#000;font-family:var(--font-cond);font-size:10px;font-weight:900;letter-spacing:0.1em;padding:2px 8px;border-radius:20px;text-transform:uppercase;">⭐ Recommended</span>
+          <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(240,246,252,0.7);">Option 1 · 1-Click Pay</span>
+        </div>
+
+        <!-- UPI App Icons -->
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;">
+          <img src="assets/images/PhonePe-Logo.wine.png" alt="PhonePe" style="height:28px;object-fit:contain;border-radius:6px;background:#fff;padding:2px 6px;"/>
+          <img src="assets/images/Google_Pay_Logo.svg.png" alt="GPay" style="height:28px;object-fit:contain;border-radius:6px;background:#fff;padding:2px 6px;"/>
+          <img src="assets/images/paytm-icon.svg" alt="Paytm" style="height:28px;object-fit:contain;border-radius:6px;background:#fff;padding:2px 6px;"/>
+          <span style="font-family:var(--font-cond);font-size:10px;color:var(--silver);font-weight:700;">+ Any UPI App</span>
+        </div>
+
+        <!-- The Big UPI Button -->
+        <button id="upi-pay-btn" onclick="payViaUpi()" style="
+          display:flex;align-items:center;justify-content:center;gap:10px;
+          width:100%;padding:15px 20px;
+          background:linear-gradient(135deg,#38bdf8 0%,#6366f1 100%);
+          color:#fff;font-family:var(--font-cond);font-size:17px;font-weight:900;
+          letter-spacing:0.08em;text-transform:uppercase;
+          border:none;border-radius:12px;cursor:pointer;
+          box-shadow:0 4px 20px rgba(56,189,248,0.35),0 0 0 1px rgba(56,189,248,0.2);
+          transition:transform 0.15s,box-shadow 0.15s;
+          -webkit-tap-highlight-color:transparent;
+        "
+        onmousedown="this.style.transform='scale(0.97)'"
+        onmouseup="this.style.transform='scale(1)'"
+        ontouchstart="this.style.transform='scale(0.97)'"
+        ontouchend="this.style.transform='scale(1)'">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+          </svg>
+          Pay Now via UPI
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+
+        <p style="font-size:11px;color:var(--silver);text-align:center;margin:8px 0 0;line-height:1.5;">
+          Tap to auto-open PhonePe / GPay / Paytm with amount pre-filled
+        </p>
+
+        <!-- Fallback message (hidden by default, shown if no UPI app found) -->
+        <div id="upi-fallback-msg" style="display:none;margin-top:10px;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.35);border-radius:8px;padding:10px 12px;font-size:12px;color:#fbbf24;text-align:center;line-height:1.5;">
+          ⚠️ No UPI app found on this device. Please use the QR code method below.
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+        <div style="flex:1;height:1px;background:var(--border-solid);"></div>
+        <span style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--silver);text-transform:uppercase;">Or</span>
+        <div style="flex:1;height:1px;background:var(--border-solid);"></div>
+      </div>
+
+      <!-- ===== OPTION 2: MANUAL QR / UPI ID (EXISTING) ===== -->
+      <div style="background:var(--dark-3);border:1px solid var(--border-solid);border-radius:14px;padding:16px 14px;width:100%;box-sizing:border-box;">
+        <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--silver);margin-bottom:8px;">Option 2 · Scan QR or Copy UPI ID</div>
+        <div class="upi-id-display" id="upi-id-display">8210647493@kotak811</div>
+        <button class="upi-copy-btn" onclick="copyUPI()">📋 Copy UPI ID</button>
+        <div class="upi-qr-wrap">
+          <div style="text-align:center;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:0.05em;margin-bottom:4px;">QR CODE</div>
+            <div style="font-size:9px;color:#666;">Scan with any UPI app</div>
+            <div style="font-size:9px;color:#888;margin-top:4px;">
+              <img src="assets/images/qr.png" alt="QR">
+            </div>
           </div>
         </div>
       </div>
-      <div style="font-size:12px;color:var(--silver);">GPay · PhonePe · Paytm · BHIM</div>
+
+      <div style="font-size:12px;color:var(--silver);margin-top:10px;">GPay · PhonePe · Paytm · BHIM</div>
     </div>
 
     <!-- Payment Instructions -->
