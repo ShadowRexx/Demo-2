@@ -42,42 +42,48 @@ window.payViaUpi = function() {
   const upiLink = generateUpiLink(total, orderId);
   const btn = document.getElementById("upi-pay-btn");
 
-  // Try to open UPI app
-  const iframe = document.createElement("iframe");
-  iframe.style.display = "none";
-  document.body.appendChild(iframe);
-
   let appOpened = false;
 
-  // Detect if app opened (visibility change = app switched)
-  const handleVisibility = () => {
-    if (document.hidden) appOpened = true;
-  };
-  document.addEventListener("visibilitychange", handleVisibility);
-
-  // Fallback timeout — if no app opens in 1.5s, show QR message
-  const fallbackTimer = setTimeout(() => {
-    document.removeEventListener("visibilitychange", handleVisibility);
-    if (!appOpened) {
-      showUpiNotFoundMessage();
+  // Phase 1: detect if UPI app opened (page goes hidden)
+  const onHidden = () => {
+    if (document.hidden) {
+      appOpened = true;
+      clearTimeout(noAppTimer);
+      document.removeEventListener("visibilitychange", onHidden);
+      // Phase 2: when user switches BACK, show the nudge
+      document.addEventListener("visibilitychange", onReturn);
     }
+  };
+
+  // Phase 2: user returned from UPI app to our page
+  const onReturn = () => {
+    if (!document.hidden) {
+      document.removeEventListener("visibilitychange", onReturn);
+      showSwitchBackNudge();
+      // Turn button green to signal "payment done, now upload"
+      if (btn) {
+        btn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Payment Done? Upload Screenshot ↓`;
+        btn.style.background = "linear-gradient(135deg,#22c55e 0%,#16a34a 100%)";
+        btn.style.boxShadow = "0 4px 20px rgba(34,197,94,0.35)";
+        btn.style.fontSize = "14px";
+      }
+    }
+  };
+
+  // If page never goes hidden within 1.5s — no UPI app installed
+  const noAppTimer = setTimeout(() => {
+    document.removeEventListener("visibilitychange", onHidden);
+    if (!appOpened) showUpiNotFoundMessage();
   }, 1500);
 
-  document.addEventListener("visibilitychange", function cleanup() {
-    if (document.hidden) {
-      clearTimeout(fallbackTimer);
-      document.removeEventListener("visibilitychange", cleanup);
-    }
-  });
+  document.addEventListener("visibilitychange", onHidden);
 
   // Trigger UPI deep link
   window.location.href = upiLink;
 
-  // Animate button
+  // Animate button to "opening" state
   if (btn) {
-    const origHTML = btn.innerHTML;
     btn.innerHTML = `<span style="display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:8px;"></span> Opening UPI App...`;
-    setTimeout(() => { btn.innerHTML = origHTML; }, 2500);
   }
 };
 
@@ -87,6 +93,23 @@ function showUpiNotFoundMessage() {
     el.style.display = "block";
     el.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
+}
+
+function showSwitchBackNudge() {
+  // Hide no-app fallback if visible
+  const fallback = document.getElementById("upi-fallback-msg");
+  if (fallback) fallback.style.display = "none";
+
+  const nudge = document.getElementById("upi-switchback-nudge");
+  if (nudge) {
+    nudge.style.display = "flex";
+    nudge.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  // Auto-scroll to screenshot upload after a short delay
+  setTimeout(() => {
+    document.getElementById("screenshot-file-input")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, 900);
 }
 
 // ---- RENDER ORDER SUMMARY ----
