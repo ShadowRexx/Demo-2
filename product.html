@@ -540,13 +540,23 @@ function renderProduct(product) {
               </div>
               ${(function(){
                 const cat = (product.category || '').toLowerCase();
+                const brand = (product.brand || '').toLowerCase();
                 const isShoes = cat === 'shoes' || cat === 'studs' || cat.includes('shoe');
                 const isJersey = cat === 'jersey' || cat.includes('jersey');
                 if (!isShoes && !isJersey) return '';
-                const chartSrc = isShoes
-                  ? 'assets/images/size_chart/shoes_size_chart.svg'
-                  : 'assets/images/size_chart/jersey_size_chart.svg';
-                const chartAlt = isShoes ? 'Shoes Size Chart' : 'Jersey Size Chart';
+                let chartSrc, chartAlt;
+                if (isShoes) {
+                  if (brand.includes('adidas')) {
+                    chartSrc = 'assets/images/size_chart/adidas_shoes_size_chart.svg';
+                    chartAlt = 'Adidas Shoes Size Chart';
+                  } else {
+                    chartSrc = 'assets/images/size_chart/nike_shoes_size_chart.svg';
+                    chartAlt = 'Nike Shoes Size Chart';
+                  }
+                } else {
+                  chartSrc = 'assets/images/size_chart/jersey_size_chart.svg';
+                  chartAlt = 'Jersey Size Chart';
+                }
                 return `
                   <div style="margin-top:18px;">
                     <div style="font-family:var(--font-cond);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">📏 SIZE CHART</div>
