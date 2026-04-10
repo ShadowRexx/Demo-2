@@ -170,9 +170,9 @@ textarea.form-input{resize:vertical;min-height:80px}
 /* Center: logo */
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;justify-content:center}
 
-.nav-logo-img{width:36px;height:36px;border-radius:8px;object-fit:cover;border:1px solid var(--border)}
+.nav-logo-img{width:50px;height:50px;border-radius:8px;object-fit:cover;border:1px solid var(--border)}
 
-.nav-logo-text .brand-top{font-family:var(--font-display);font-size:1.15rem;letter-spacing:0.04em;color:var(--white);display:block;line-height:1}
+.nav-logo-text .brand-top{font-family:var(--font-cond);font-size:1.15rem;letter-spacing:0.04em;color:var(--white);text-transform:uppercase;display:block;line-height:1;font-weight:600}
 
 .nav-logo-text .brand-sub{font-family:var(--font-cond);font-size:1.15rem;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--blue);display:block}
 
@@ -1227,6 +1227,9 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-solid);margin-
   .category-grid{grid-template-columns:1fr}
   .category-card:first-child{aspect-ratio:3/4}
   .pdp-trust{grid-template-columns:1fr}
+  .pdp-info-col{display:flex;flex-direction:column}
+  .pdp-accordion-block{order:1;margin-top:20px}
+  .pdp-trust-block{order:2;margin-top:16px}
   .pdp-ctas{flex-direction:column}
   .checkout-layout{grid-template-columns:1fr}
   .legal-card,.support-panel,.story-card,.step-card,.proof-card,.stat-card-premium{padding:22px}
