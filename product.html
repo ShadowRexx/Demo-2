@@ -440,7 +440,7 @@ function renderProduct(product) {
     </div>
 
     <!-- Info -->
-    <div>
+    <div class="pdp-info-col">
       <div class="pdp-category">${product.brand} · ${product.category.toUpperCase()}</div>
       <h1 class="pdp-name">${product.name}</h1>
       <div class="pdp-rating">
@@ -476,7 +476,6 @@ function renderProduct(product) {
           <span style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;">
             Select Size <span id="selected-size-display" style="color:var(--blue);"></span>
           </span>
-          <span class="pdp-size-guide" onclick="showToast('Size guide: S=36-38cm, M=38-40cm, L=40-42cm, XL=42-44cm')">Size Guide →</span>
         </div>
         <div class="size-grid">
           ${product.sizes.map(s => `<button class="size-btn${isOOS ? '" disabled' : '"'} onclick="selectSize('${s}',this)">${s}</button>`).join('')}
@@ -504,14 +503,14 @@ function renderProduct(product) {
       </div>` : ''}
 
       <!-- Trust -->
-      <div class="pdp-trust">
+      <div class="pdp-trust pdp-trust-block">
         <div class="pdp-trust-item"><div class="pdp-trust-icon">📱</div><div class="pdp-trust-label">UPI Payment</div><div class="pdp-trust-sub">GPay · PhonePe</div></div>
         <div class="pdp-trust-item"><div class="pdp-trust-icon">🚀</div><div class="pdp-trust-label">Fast Delivery</div><div class="pdp-trust-sub">4–6 working days</div></div>
         <div class="pdp-trust-item"><div class="pdp-trust-icon">↩️</div><div class="pdp-trust-label">Easy Returns</div><div class="pdp-trust-sub">7-day policy</div></div>
       </div>
 
       <!-- Accordions -->
-      <div style="margin-top:20px;">
+      <div class="pdp-accordion-block" style="margin-top:20px;">
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
             <span>Product Description</span><span class="accordion-icon">▾</span>
@@ -527,7 +526,7 @@ function renderProduct(product) {
         </div>
         <div class="accordion-item">
           <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span>Specifications</span><span class="accordion-icon">▾</span>
+            <span>Size Chart and Guide</span><span class="accordion-icon">▾</span>
           </div>
           <div class="accordion-body">
             <div class="accordion-content">
