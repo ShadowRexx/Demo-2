@@ -9,7 +9,7 @@
   <text x="400" y="44" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="26" fill="#F0F6FC" letter-spacing="4">SIZE CHART</text>
   <!-- Brand badge -->
   <rect x="313" y="54" width="174" height="26" rx="4" fill="rgba(56,189,248,0.1)" stroke="#38BDF8" stroke-width="1"/>
-  <text x="400" y="72" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#38BDF8" letter-spacing="5">ADIDAS</text>
+  <text x="400" y="72" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#38BDF8" letter-spacing="5">MIZUNO</text>
   <!-- Divider line -->
   <rect x="40" y="94" width="720" height="1.5" fill="#38BDF8" opacity="0.4"/>
   <!-- Header row -->
@@ -19,7 +19,7 @@
   <text x="400" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#38BDF8" letter-spacing="3">EU</text>
   <text x="610" y="123" text-anchor="middle" font-family="Arial Black, Arial" font-weight="900" font-size="13" fill="#38BDF8" letter-spacing="3">CM</text>
   <rect x="40" y="138" width="720" height="1" fill="#1C2128"/>
-  <!-- Row 1: UK 4 -->
+  <!-- Row 1: UK 4 (added) -->
   <rect x="40" y="139" width="720" height="38" fill="#0D1117"/>
   <text x="200" y="164" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">4</text>
   <text x="400" y="164" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">37</text>
@@ -29,7 +29,7 @@
   <rect x="40" y="178" width="720" height="38" fill="#161B22"/>
   <text x="200" y="203" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">5</text>
   <text x="400" y="203" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">38</text>
-  <text x="610" y="203" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">24</text>
+  <text x="610" y="203" text-anchor="middle" font-family="Arial" font-size="15" fill="#F0F6FC">23.5</text>
   <rect x="40" y="216" width="720" height="1" fill="#1C2128"/>
   <!-- Row 3: UK 6 -->
   <rect x="40" y="217" width="720" height="38" fill="#0D1117"/>
